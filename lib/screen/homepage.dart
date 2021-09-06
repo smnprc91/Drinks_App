@@ -30,13 +30,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: items(),
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(child: pippo()),
+          ],
+        ),
       ),
     );
   }
-}
 
-items() {
-  return Container(color: Colors.amber);
+  pippo() {
+    return ListView.builder(
+      itemCount: _items.length,
+      itemBuilder: (context, index) {
+        return Card(
+          margin: EdgeInsets.all(10),
+          child: ListTile(
+            leading: Text(_items[index]["id"]),
+            title: Text(_items[index]["name"]),
+            subtitle: Text(_items[index]["description"]),
+          ),
+        );
+      },
+    );
+  }
 }

@@ -2,17 +2,17 @@
     "items": [
       {
         "id": "p1",
-        "name": "Item 1",
+        "name": "tipo drink 1",
         "description": "Description 1"
       },
       {
         "id": "p2",
-        "name": "Item 2",
+        "name": "tipo drink 2",
         "description": "Description 2"
       },
       {
         "id": "p3",
-        "name": "Item 3",
+        "name": "tipo drink 3",
         "description": "Description 3"
       }
     ]
