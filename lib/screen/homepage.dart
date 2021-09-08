@@ -33,26 +33,30 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            Expanded(child: pippo()),
+            Expanded(child: listview()),
           ],
         ),
       ),
     );
   }
 
-  pippo() {
+  listview() {
     return ListView.builder(
       itemCount: _items.length,
       itemBuilder: (context, index) {
-        return Card(
-          margin: EdgeInsets.all(10),
-          child: ListTile(
-            leading: Text(_items[index]["id"]),
-            title: Text(_items[index]["name"]),
-            subtitle: Text(_items[index]["description"]),
-          ),
-        );
+        return listtile(index);
       },
+    );
+  }
+
+  listtile(index) {
+    return Card(
+      margin: EdgeInsets.all(10),
+      child: ListTile(
+        leading: Text(_items[index]["id"]),
+        title: Text(_items[index]["name"]),
+        subtitle: Text(_items[index]["description"]),
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:progdrinks/screen/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstStartingPage extends StatefulWidget {
   const FirstStartingPage({ Key? key }) : super(key: key);
@@ -14,6 +15,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
    final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
+     _storeOnboardInfo();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => HomePage()),
     );
@@ -21,7 +23,13 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
 
  
 
- 
+  _storeOnboardInfo() async {
+    print("Shared pref called");
+    int isViewed = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onBoard', isViewed);
+    print(prefs.getInt('onBoard'));
+  }
 
   @override
   Widget build(BuildContext context) {
