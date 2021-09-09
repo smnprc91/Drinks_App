@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,6 +8,7 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
   'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -22,75 +24,151 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+      extendBodyBehindAppBar: true,
+      appBar: buildAppBar(),
+      body: buildBodyStyle(),
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+        centerTitle: true,
+     title: 
+     
+ Container(
+   height: 60,
+   width: 60,
+      decoration: new BoxDecoration(
+               color: Colors.transparent.withOpacity(0.4),
+              borderRadius: new BorderRadius.all(Radius.circular(20))
+               
+              
+            ),
+   
+   alignment: Alignment.center,
+   child: IconButton(
+            icon: const Icon(Icons.person,color: Colors.amber,size: 30,),
+          
+            onPressed: () {
+           
+            },
+          ),
+ ),
+      
+    );
+  }
+
+  buildBodyStyle() {
+    return Container(
+        decoration: BoxDecoration(
+          color: Color(0xff003366),
+          backgroundBlendMode: BlendMode.srcOver,
+        ),
+        child: PlasmaRenderer(
+            type: PlasmaType.infinity,
+            particles: 10,
+            color: Color(0x44e45a23),
+            blur: 0.4,
+            size: 1,
+            speed: 1,
+            offset: 0,
+            blendMode: BlendMode.plus,
+            particleType: ParticleType.atlas,
+            variation1: 0,
+            variation2: 0,
+            variation3: 0,
+            rotation: 0,
+            child: bodyMainContent()));
+  }
+
+  bodyMainContent() {
+    return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                print('hai cliccato');
-                setState(() {
-                  colorebello = !colorebello;
-                  zio = !zio;
-                });
-              },
-              child: Container(
-                alignment: Alignment.center,
-                height: 300,
-                width: MediaQuery.of(context).size.width,
-                color: colorebello ? Colors.amber : Colors.black,
-                child: Center(
-                    child: Text(
-                  zio ? 'AH MI HAI CLICCATO' : '',
-                  style: TextStyle(fontSize: 40),
-                )),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                print('hai cliccato giu');
-              },
-              child: Container(
-                color: Colors.green,
-                child: CarouselSlider(
-                  
-        options: CarouselOptions(
-          autoPlay: false,
-            aspectRatio: 2.0,
-            enlargeCenterPage: true,
-        ),
-        items: imgList
-            .map((item) =>
-            
-            
-             Stack(
+          primaSezioneBody(),
+         secondaSezioneBody(),
+        ],
+      ),
+    );
+  }
 
-                  children: [
-                    Center(
-                      
-                      child:
-                          Image.network(item, fit: BoxFit.cover, width: 1000)),
-                          Positioned(
-                            
+  primaSezioneBody() {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {},
+        child: Container(
+          alignment: Alignment.center,
+          height: 300,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.transparent,
+          child: Center(
+              child: Text(
+            'doooooooooooooooooooooooooooooooooooggy',
+            style: TextStyle(fontSize: 40),
+          )),
+        ),
+      ),
+    );
+  }
+
+  secondaSezioneBody() {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          print('hai cliccato giu');
+        },
+        child: Container(
+            color: Colors.transparent,
+            child: CarouselSlider(
+              options: CarouselOptions(
+                autoPlay: false,
+                aspectRatio: 2.0,
+                enlargeCenterPage: true,
+              ),
+              items: imgList
+                  .map((item) => Stack(children: [
+                        Center(
+                            child: Image.network(item,
+                                fit: BoxFit.cover, width: 1000)),
+                        Positioned(
                             bottom: 40,
                             left: 50,
                             right: 0,
-                            
-                            child: Text('nome categorie ',style: TextStyle(fontSize: 30,color: Colors.white),))
-                  ]
-                ))
-            .toList(),
-      )),
-              ),
-            ),
-          
-        ],
+                            child: Text(
+                              'nome categorie ',
+                              style:
+                                  TextStyle(fontSize: 30, color: Colors.white),
+                            ))
+                      ]))
+                  .toList(),
+            )),
       ),
-    ));
+    );
   }
 }
 
