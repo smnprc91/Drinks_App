@@ -1,19 +1,46 @@
 {
-    "items": [
-      {
-        "id": "p1",
-        "name": "tipo drink 1",
-        "description": "Description 1"
-      },
-      {
-        "id": "p2",
-        "name": "tipo drink 2",
-        "description": "Description 2"
-      },
-      {
-        "id": "p3",
-        "name": "tipo drink 3",
-        "description": "Description 3"
-      }
-    ]
-  }
+  "categorie": [
+    {
+      "id": 1,
+      "name": "Long Drinks",
+      "drinks": [
+        {
+          "id": 11,
+          "drinkName": "pollo"
+        },
+        {
+          "id": 31,
+          "drinkName": "pollissimo"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Short Drinks",
+      "drinks": [
+        {
+          "id": 11,
+          "drinkName": "forte"
+        },
+        {
+          "id": 31,
+          "drinkName": "fortissimo"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Medium Drinks",
+      "drinks": [
+        {
+          "id": 11,
+          "drinkName": "cazz"
+        },
+        {
+          "id": 31,
+          "drinkName": "cazzzzzzzzzzzzzzz"
+        }
+      ]
+    }
+  ]
+}

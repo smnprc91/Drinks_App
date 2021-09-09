@@ -5,23 +5,21 @@ import 'package:progdrinks/screen/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstStartingPage extends StatefulWidget {
-  const FirstStartingPage({ Key? key }) : super(key: key);
+  const FirstStartingPage({Key? key}) : super(key: key);
 
   @override
   _FirstStartingPageState createState() => _FirstStartingPageState();
 }
 
 class _FirstStartingPageState extends State<FirstStartingPage> {
-   final introKey = GlobalKey<IntroductionScreenState>();
+  final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-     _storeOnboardInfo();
+    // _storeOnboardInfo();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => HomePage()),
     );
   }
-
- 
 
   _storeOnboardInfo() async {
     print("Shared pref called");
@@ -48,87 +46,38 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
       globalBackgroundColor: Colors.white,
       globalHeader: Align(
         alignment: Alignment.topRight,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 16, right: 16),
-            
-          ),
-        ),
       ),
-  
+
       pages: [
         PageViewModel(
-          title: "Fractional shares",
-          body:
-              "Instead of having to buy an entire share, invest any amount you want.",
-        
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Learn as you go",
-          body:
-              "Download the Stockpile app and master the market with our mini-lesson.",
-         
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Kids and teens",
-          body:
-              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-         
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Full Screen Page",
-          body:
-              "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-       
-          decoration: pageDecoration.copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            fullScreen: true,
-            bodyFlex: 2,
-            imageFlex: 3,
-          ),
-        ),
-        PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-         
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
+          title: 'pagina 1',
+          bodyWidget: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Image.network(
+                    'https://icare-cro.com/blog/wp-content/uploads/2017/07/benvenuto.jpg'),
+                Text('benvenuto')
+              ],
             ),
           ),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Title of last page - reversed",
-          bodyWidget: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
-            ],
+          title: "pagina 2",
+          bodyWidget: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Image.network(
+                    'https://icare-cro.com/blog/wp-content/uploads/2017/07/benvenuto.jpg'),
+                Text('impara e ocndividi')
+              ],
+            ),
           ),
-          decoration: pageDecoration.copyWith(
-            bodyFlex: 2,
-            imageFlex: 4,
-            bodyAlignment: Alignment.bottomCenter,
-            imageAlignment: Alignment.topCenter,
-          ),
-      
-          reverse: true,
+          decoration: pageDecoration,
         ),
       ],
       onDone: () => _onIntroEnd(context),
@@ -162,4 +111,3 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
     );
   }
 }
-
