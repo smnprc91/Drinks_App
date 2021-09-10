@@ -27,8 +27,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     drawer: Theme(
+      data: Theme.of(context).copyWith(
+       // Set the transparency here
+       canvasColor: Colors.transparent, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
+      ),
+       child: Drawer(
+         child: Container(
+           color: Colors.transparent,
+         ),
+       ),
+     ),
       extendBodyBehindAppBar: true,
-      
       appBar: buildAppBar(),
       body: buildBodyStyle(),
     );
@@ -40,28 +50,27 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
-      
-      title: Container(
-        height: 60,
-        width: 60,
-        decoration: new BoxDecoration(
-            color: Colors.transparent.withOpacity(0.4),
-            borderRadius: new BorderRadius.all(Radius.circular(20))),
-        alignment: Alignment.center,
-        child: IconButton(
-          icon: const Icon(
-            Icons.person,
-            color: Colors.amber,
-            size: 30,
-          ),
-          onPressed: () {
-            setState(() {
-              
-           
-               
-            });
-          },
-        ),
+      title: Builder(
+        builder: (context) {
+          return Container(
+            height: 60,
+            width: 60,
+            decoration: new BoxDecoration(
+                color: Colors.transparent.withOpacity(0.4),
+                borderRadius: new BorderRadius.all(Radius.circular(20))),
+            alignment: Alignment.center,
+            child: IconButton(
+              icon: const Icon(
+                Icons.person,
+                color: Colors.amber,
+                size: 30,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
+          );
+        },
       ),
     );
   }
@@ -111,6 +120,68 @@ class _HomePageState extends State<HomePage> {
               height: 300,
               width: MediaQuery.of(context).size.width,
               color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 100),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: Colors.blue,
+                              height: 102,
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: Colors.blue,
+                              height: 102,
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: Colors.blue,
+                              height: 102,
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: Colors.blue,
+                              height: 102,
+                              width: 100,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             )));
   }
 
