@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:progdrinks/screen/cocktails.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,63 +22,47 @@ final List<String> imgList = [
 class _HomePageState extends State<HomePage> {
   var colorebello = false;
   var zio = false;
+  int _current = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      
       appBar: buildAppBar(),
       body: buildBodyStyle(),
     );
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
-        centerTitle: true,
-     title: 
-     
- Container(
-   height: 60,
-   width: 60,
-      decoration: new BoxDecoration(
-               color: Colors.transparent.withOpacity(0.4),
-              borderRadius: new BorderRadius.all(Radius.circular(20))
-               
-              
-            ),
-   
-   alignment: Alignment.center,
-   child: IconButton(
-            icon: const Icon(Icons.person,color: Colors.amber,size: 30,),
-          
-            onPressed: () {
-           
-            },
-          ),
- ),
+      centerTitle: true,
       
+      title: Container(
+        height: 60,
+        width: 60,
+        decoration: new BoxDecoration(
+            color: Colors.transparent.withOpacity(0.4),
+            borderRadius: new BorderRadius.all(Radius.circular(20))),
+        alignment: Alignment.center,
+        child: IconButton(
+          icon: const Icon(
+            Icons.person,
+            color: Colors.amber,
+            size: 30,
+          ),
+          onPressed: () {
+            setState(() {
+              
+           
+               
+            });
+          },
+        ),
+      ),
     );
   }
 
@@ -110,198 +95,95 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          primaSezioneBody(),
-         secondaSezioneBody(),
+          firstSectionBody(),
+          secondSectionBody(),
         ],
       ),
     );
   }
 
-  primaSezioneBody() {
+  firstSectionBody() {
     return Expanded(
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          alignment: Alignment.center,
-          height: 300,
-          width: MediaQuery.of(context).size.width,
+        child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              alignment: Alignment.center,
+              height: 300,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.transparent,
+            )));
+  }
+
+  secondSectionBody() {
+    return Expanded(
+      child: Container(
           color: Colors.transparent,
-          child: Center(
-              child: Text(
-            'doooooooooooooooooooooooooooooooooooggy',
-            style: TextStyle(fontSize: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              firstColumnSection(),
+              secondColumnSection(),
+            ],
           )),
-        ),
-      ),
     );
   }
 
-  secondaSezioneBody() {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          print('hai cliccato giu');
+  firstColumnSection() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        onPageChanged: (index, reason) {
+          setState(() {
+            _current = index;
+          });
         },
-        child: Container(
-            color: Colors.transparent,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: false,
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
-              ),
-              items: imgList
-                  .map((item) => Stack(children: [
-                        Center(
-                            child: Image.network(item,
-                                fit: BoxFit.cover, width: 1000)),
-                        Positioned(
-                            bottom: 40,
-                            left: 50,
-                            right: 0,
-                            child: Text(
-                              'nome categorie ',
-                              style:
-                                  TextStyle(fontSize: 30, color: Colors.white),
-                            ))
-                      ]))
-                  .toList(),
-            )),
+        autoPlay: true,
+        aspectRatio: 2.0,
+        enlargeCenterPage: true,
       ),
-    );
-  }
-}
-
-
-
-
-
-/*class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-Size displaySize(BuildContext context) {
-  return MediaQuery.of(context).size;
-}
-
-double displayHeight(BuildContext context) {
-  return displaySize(context).height;
-}
-
-double displayWidth(BuildContext context) {
-  return displaySize(context).width;
-}
-
-class _HomePageState extends State<HomePage> {
-  List _categorie = [];
-
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/test.json');
-    final data = await json.decode(response);
-    setState(() {
-      _categorie = data["categorie"];
-    });
-  }
-
-  @override
-  void initState() {
-  
-    readJson();
-    super.initState();
-  }
-
-  var _color = Colors.amberAccent;
-  double _height = 100;
-  var _color2 = Colors.amberAccent;
-  double _height2 = 0;
-  var _color3 = Colors.transparent;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(child: listview()),
-          ],
-        ),
-      ),
-    );
-  }
-
-  listview() {
-    return ListView.builder(
-      itemCount: _categorie.length,
-      itemBuilder: (context, index) {
-        return listtile(index);
-      },
-    );
-  }
-
-  listtile(index) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            print('object');
-            setState(() {
-              _color = Colors.greenAccent;
-              _height = displayHeight(context) * 0.2;
-              _color2 = Colors.greenAccent;
-              _height2 = displayHeight(context) * 0.2;
-              _color3 = Colors.black;
-            });
-          },
-          child: AnimatedContainer(
-              height: _height,
-              width: displayWidth(context),
-              decoration: BoxDecoration(
-                color: _color,
-              ),
-              duration: const Duration(seconds: 1),
-              margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: Text('qui va passata l immagine')),
-        ),
-        AnimatedContainer(
-          width: displayWidth(context),
-          height: _height2,
-          decoration: BoxDecoration(
-            color: _color2,
-          ),
-          duration: const Duration(seconds: 1),
-          margin: EdgeInsets.only(left: 10, right: 10),
-          child: ListTile(
-    
-            title: Text(_categorie[index]["name"]),
-           
-          ),
-        ),
-        AnimatedContainer(
-            width: displayWidth(context),
-            height: _height2,
-            decoration: BoxDecoration(
-              color: _color2,
-            ),
-            duration: const Duration(seconds: 1),
-            margin: EdgeInsets.only(left: 10, right: 10),
-            child: IconButton(
-                icon: Icon(
-                  Icons.arrow_upward,
-                  color: _color3,
+      items: imgList
+          .map((item) => Stack(children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CockTailsPage()));
+                  },
+                  child: Center(
+                      child:
+                          Image.network(item, fit: BoxFit.cover, width: 1000)),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _color = Colors.amberAccent;
-                    _height = 100;
-                    _color2 = Colors.amberAccent;
-                    _height2 = 0;
-                    _color3 = Colors.transparent;
-                  });
-                })),
-      ],
+                Positioned(
+                    bottom: 40,
+                    left: 50,
+                    right: 0,
+                    child: Text(
+                      'nome categorie ',
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ))
+              ]))
+          .toList(),
+    );
+  }
+
+  secondColumnSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: imgList.asMap().entries.map((entry) {
+        return GestureDetector(
+          child: Container(
+            width: 12.0,
+            height: 12.0,
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: (Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.amber)
+                    .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+          ),
+        );
+      }).toList(),
     );
   }
 }
- */
