@@ -27,17 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     drawer: Theme(
-      data: Theme.of(context).copyWith(
-       // Set the transparency here
-       canvasColor: Colors.transparent, //or any other color you want. e.g Colors.blue.withOpacity(0.5)
-      ),
-       child: Drawer(
-         child: Container(
-           color: Colors.transparent,
-         ),
-       ),
-     ),
+      drawer: drawer(),
       extendBodyBehindAppBar: true,
       appBar: buildAppBar(),
       body: buildBodyStyle(),
@@ -73,6 +63,69 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+  drawer(){
+    return Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent.withOpacity(0.5),
+        ),
+        child: Drawer(
+          child: Container(
+            color: Colors.red,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+ Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ), Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ),
+              ],
+            ),
+          ),
+        ),
+      );
   }
 
   buildBodyStyle() {
@@ -113,46 +166,22 @@ class _HomePageState extends State<HomePage> {
 
   firstSectionBody() {
     return Expanded(
-        child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.center,
-              height: 300,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.blue,
-                              height: 102,
-                              width: 100,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.blue,
-                              height: 102,
-                              width: 100,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
+      child: Column(
+        children: [
+                   
+
+                   Expanded(child: Padding(
+                     padding: const EdgeInsets.only(top:98.0),
+                     child: Container(
+                       width: MediaQuery.of(context).size.width,
+                       color: Colors.amber,
+                       alignment: Alignment.center,
+                       child: (Text('Most voted drink',style: TextStyle(fontSize: 30),)),
+                     ),
+                   )),
+
+               
+                       Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -161,9 +190,17 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              color: Colors.blue,
-                              height: 102,
+                              decoration: new BoxDecoration(
+                                  color: Colors.transparent.withOpacity(0.4),
+                                  borderRadius: new BorderRadius.all(
+                                      Radius.circular(20))),
+                              height: 75,
                               width: 100,
+                              child: Icon(
+                                Icons.search_sharp,
+                                size: 50,
+                                color: Colors.amber,
+                              ),
                             ),
                           ),
                         ),
@@ -171,9 +208,17 @@ class _HomePageState extends State<HomePage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              color: Colors.blue,
-                              height: 102,
+                              decoration: new BoxDecoration(
+                                  color: Colors.transparent.withOpacity(0.4),
+                                  borderRadius: new BorderRadius.all(
+                                      Radius.circular(20))),
+                              height: 75,
                               width: 100,
+                              child: Icon(
+                                Icons.favorite,
+                                size: 50,
+                                color: Colors.amber,
+                              ),
                             ),
                           ),
                         ),
@@ -181,8 +226,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ],
-              ),
-            )));
+      ),
+        );
   }
 
   secondSectionBody() {
