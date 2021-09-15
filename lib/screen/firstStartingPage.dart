@@ -15,7 +15,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    _storeOnboardInfo();
+    //_storeOnboardInfo();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => HomePage()),
     );

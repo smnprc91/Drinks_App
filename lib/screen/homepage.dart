@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/cocktails.dart';
+import 'package:progdrinks/screen/drawer.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: drawer(),
+      drawer: Drawers(),
       extendBodyBehindAppBar: true,
       appBar: buildAppBar(),
       body: buildBodyStyle(),
@@ -64,69 +65,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  drawer(){
-    return Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.transparent.withOpacity(0.5),
-        ),
-        child: Drawer(
-          child: Container(
-            color: Colors.red,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
- Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ), Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ),
-              ],
-            ),
-          ),
-        ),
-      );
-  }
+ 
 
   buildBodyStyle() {
     return Container(
@@ -165,18 +104,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   firstSectionBody() {
-    return Expanded(
+    return Container(
+      height: MediaQuery.of(context).size.height*0.6,
       child: Column(
         children: [
                    
 
                    Expanded(child: Padding(
-                     padding: const EdgeInsets.only(top:98.0),
+                     padding: const EdgeInsets.only(top:100.0),
                      child: Container(
                        width: MediaQuery.of(context).size.width,
                        color: Colors.amber,
                        alignment: Alignment.center,
-                       child: (Text('Most voted drink',style: TextStyle(fontSize: 30),)),
+                       child: (Text('Newest Drink',style: TextStyle(fontSize: 30),)),
                      ),
                    )),
 
@@ -235,7 +175,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
           color: Colors.transparent,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               firstColumnSection(),
               secondColumnSection(),
@@ -267,8 +207,8 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Center(
                       child:
-                          Image.network(item, fit: BoxFit.cover, width: 1000)),
-                ),
+                          Image.network(item, fit: BoxFit.cover, width: MediaQuery.of(context).size.width))),
+                
                 Positioned(
                     bottom: 40,
                     left: 50,
