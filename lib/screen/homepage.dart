@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             height: 60,
             width: 60,
             decoration: new BoxDecoration(
-                color: Colors.transparent.withOpacity(0.4),
+                color: Colors.blueGrey.withOpacity(0.4),
                 borderRadius: new BorderRadius.all(Radius.circular(20))),
             alignment: Alignment.center,
             child: IconButton(
@@ -65,12 +65,11 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
- 
 
   buildBodyStyle() {
     return Container(
         decoration: BoxDecoration(
-          color: Color(0xff003366),
+          color: Colors.black,
           backgroundBlendMode: BlendMode.srcOver,
         ),
         child: PlasmaRenderer(
@@ -78,7 +77,7 @@ class _HomePageState extends State<HomePage> {
             particles: 10,
             color: Color(0x44e45a23),
             blur: 0.4,
-            size: 1,
+            size: 0.20,
             speed: 1,
             offset: 0,
             blendMode: BlendMode.plus,
@@ -105,69 +104,77 @@ class _HomePageState extends State<HomePage> {
 
   firstSectionBody() {
     return Container(
-      height: MediaQuery.of(context).size.height*0.6,
+      height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
-                   
-
-                   Expanded(child: Padding(
-                     padding: const EdgeInsets.only(top:100.0),
-                     child: Container(
-                       width: MediaQuery.of(context).size.width,
-                       color: Colors.amber,
-                       alignment: Alignment.center,
-                       child: (Text('Newest Drink',style: TextStyle(fontSize: 30),)),
-                     ),
-                   )),
-
-               
-                       Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: new BoxDecoration(
-                                  color: Colors.transparent.withOpacity(0.4),
-                                  borderRadius: new BorderRadius.all(
-                                      Radius.circular(20))),
-                              height: 75,
-                              width: 100,
-                              child: Icon(
-                                Icons.search_sharp,
-                                size: 50,
-                                color: Colors.amber,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: new BoxDecoration(
-                                  color: Colors.transparent.withOpacity(0.4),
-                                  borderRadius: new BorderRadius.all(
-                                      Radius.circular(20))),
-                              height: 75,
-                              width: 100,
-                              child: Icon(
-                                Icons.favorite,
-                                size: 50,
-                                color: Colors.amber,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.only(top: 100.0),
+            child: Stack(children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                color: Colors.amber,
+                alignment: Alignment.center,
+                child: Image.network(
+                    'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width),
+              ),
+              Container(
+                  color: Colors.transparent.withOpacity(0.5),
+                  child: Center(
+                    child: Text('Drinks of the Week',
+                        style: TextStyle(color: Colors.amber, fontSize: 30)),
+                  ))
+            ]),
+          )),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.blueGrey.withOpacity(0.4),
+                          borderRadius:
+                              new BorderRadius.all(Radius.circular(20))),
+                      height: 75,
+                      width: 100,
+                      child: Icon(
+                        Icons.search_sharp,
+                        size: 50,
+                        color: Colors.amber,
+                      ),
                     ),
                   ),
-                ],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.blueGrey.withOpacity(0.4),
+                          borderRadius:
+                              new BorderRadius.all(Radius.circular(20))),
+                      height: 75,
+                      width: 100,
+                      child: Icon(
+                        Icons.favorite,
+                        size: 50,
+                        color: Colors.amber,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-        );
+    );
   }
 
   secondSectionBody() {
@@ -197,27 +204,27 @@ class _HomePageState extends State<HomePage> {
         enlargeCenterPage: true,
       ),
       items: imgList
-          .map((item) => Stack(children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CockTailsPage()));
-                  },
+          .map((item) => GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>CockTailsPage()));
+                },
+                child: Stack(children: [
+                  Center(
+                      child: Image.network(item,
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width)),
+                Container(
+                  color: Colors.transparent.withOpacity(0.5),
                   child: Center(
-                      child:
-                          Image.network(item, fit: BoxFit.cover, width: MediaQuery.of(context).size.width))),
-                
-                Positioned(
-                    bottom: 40,
-                    left: 50,
-                    right: 0,
                     child: Text(
-                      'nome categorie ',
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    ))
-              ]))
+                          'Nome Categorie ',
+                          style: TextStyle(fontSize: 30, color: Colors.amber),
+                        ),
+                  ),
+                )
+                ]),
+              ))
           .toList(),
     );
   }
