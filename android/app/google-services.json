@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "16254919133",
+    "project_id": "myapp-8994b",
+    "storage_bucket": "myapp-8994b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16254919133:android:85050038b8220631dad634",
+        "android_client_info": {
+          "package_name": "com.example.progdrinks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16254919133-ott696p22csrtd6attabfpjul87fhitn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpuYhr5GD_-fPveouZGstpHnmX0HtwkGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16254919133-ott696p22csrtd6attabfpjul87fhitn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

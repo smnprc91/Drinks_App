@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                 size: 30,
               ),
               onPressed: () {
+                print('cazzo vuoi');
                 Scaffold.of(context).openDrawer();
               },
             ),
@@ -113,12 +114,14 @@ class _HomePageState extends State<HomePage> {
             child: Stack(children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                color: Colors.amber,
+                color: Colors.transparent,
                 alignment: Alignment.center,
                 child: Image.network(
-                    'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width),
+                  'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
+                  fit: BoxFit.fitHeight,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                ),
               ),
               Container(
                   color: Colors.transparent.withOpacity(0.5),
@@ -207,22 +210,22 @@ class _HomePageState extends State<HomePage> {
           .map((item) => GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>CockTailsPage()));
+                      MaterialPageRoute(builder: (context) => CockTailsPage()));
                 },
                 child: Stack(children: [
                   Center(
                       child: Image.network(item,
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width)),
-                Container(
-                  color: Colors.transparent.withOpacity(0.5),
-                  child: Center(
-                    child: Text(
-                          'Nome Categorie ',
-                          style: TextStyle(fontSize: 30, color: Colors.amber),
-                        ),
-                  ),
-                )
+                  Container(
+                    color: Colors.transparent.withOpacity(0.5),
+                    child: Center(
+                      child: Text(
+                        'Nome Categorie ',
+                        style: TextStyle(fontSize: 30, color: Colors.amber),
+                      ),
+                    ),
+                  )
                 ]),
               ))
           .toList(),
