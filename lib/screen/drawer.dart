@@ -28,6 +28,7 @@ class Drawers extends StatelessWidget {
                   style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => EmailSender()));
                 },
