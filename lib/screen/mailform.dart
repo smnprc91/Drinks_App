@@ -92,7 +92,7 @@ class _EmailSenderState extends State<EmailSender> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Color(0xff000029),
           backgroundBlendMode: BlendMode.srcOver,
         ),
         child: PlasmaRenderer(

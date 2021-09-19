@@ -71,14 +71,14 @@ class _HomePageState extends State<HomePage> {
   buildBodyStyle() {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Color(0xff000029),
           backgroundBlendMode: BlendMode.srcOver,
         ),
         child: PlasmaRenderer(
             type: PlasmaType.infinity,
             particles: 10,
             color: Color(0x44e45a23),
-            blur: 0.4,
+            blur: 0.2,
             size: 0.30,
             speed: 2,
             offset: 0,
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                  color: Colors.transparent.withOpacity(0.5),
+                  color: Colors.transparent.withOpacity(0.3),
                   child: Center(
                     child: Text('Drinks of the Week',
                         style: TextStyle(color: Colors.amber, fontSize: 30)),
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width)),
                   Container(
-                    color: Colors.transparent.withOpacity(0.5),
+                    color: Colors.transparent.withOpacity(0.3),
                     child: Center(
                       child: Text(
                         'Nome Categorie ',

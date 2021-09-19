@@ -17,6 +17,21 @@ class Drawers extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+                TextButton.icon(
+                icon: Icon(
+                  Icons.home,
+                  size: 30,
+                  color: Colors.amber,
+                ),
+                label: Text(
+                  'Home',
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+               
+                },
+              ),
               TextButton.icon(
                 icon: Icon(
                   Icons.send,
@@ -33,6 +48,7 @@ class Drawers extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => EmailSender()));
                 },
               ),
+              
             ],
           ),
         ),
