@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:progdrinks/load.dart';
+
+
 import 'package:progdrinks/screen/firstStartingPage.dart';
-import 'package:progdrinks/screen/homepage.dart';
+
+
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isviewed;
@@ -12,9 +17,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+ 
+
+ 
+
 
   @override
   Widget build(BuildContext context) {
+  
     return MaterialApp(
       
       debugShowCheckedModeBanner: false,
@@ -23,7 +33,11 @@ class MyApp extends StatelessWidget {
       
         primarySwatch: Colors.blue,
       ),
-      home: isviewed != 0 ? FirstStartingPage() : HomePage(),
+      home: isviewed != 0 ? FirstStartingPage() : Load()
+      
+      
+      
+      
     );
   }
 }

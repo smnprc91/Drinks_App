@@ -1,11 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:progdrinks/Models/categoria.dart';
+import 'package:progdrinks/Models/drink.dart';
+
+
 import 'package:progdrinks/screen/cocktails.dart';
 import 'package:progdrinks/screen/drawer.dart';
+
 import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({required this.categorie, required this.drinks});
+
+  final List<Categoria> categorie;
+  final List<Drink> drinks;
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -28,13 +37,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawers(),
-      extendBodyBehindAppBar: true,
-      appBar: buildAppBar(),
-      body: buildBodyStyle(),
-    );
+        drawer: Drawers(),
+        extendBodyBehindAppBar: true,
+        appBar: buildAppBar(),
+        body: buildBodyStyle());
   }
 
+  /*StreamBuilder(
+            stream: bloc.streamCategoria,
+            builder: (context, risultatoDelloStream) {
+              if (risultatoDelloStream.hasData) {
+                List<Categoria> categorie = risultatoDelloStream.data;
+                var luoghi = categorie
+                    .map((Categoria c) => c.luoghi)
+                    .toList()
+                    .expand((e) => e)
+                    .toList();
+                return */
+//buildBodyStyle(),
   buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
@@ -57,8 +77,6 @@ class _HomePageState extends State<HomePage> {
                 size: 30,
               ),
               onPressed: () {
-                
-                print('cazzo vuoi scemo');
                 Scaffold.of(context).openDrawer();
               },
             ),
@@ -127,7 +145,10 @@ class _HomePageState extends State<HomePage> {
               Container(
                   color: Colors.transparent.withOpacity(0.3),
                   child: Center(
-                    child: Text('Drinks of the Week',
+
+                    //funnnzioooooooooooooooooooooooooona porco di un dio
+                    
+                    child: Text(widget.categorie[0].titolo,
                         style: TextStyle(color: Colors.amber, fontSize: 30)),
                   ))
             ]),
