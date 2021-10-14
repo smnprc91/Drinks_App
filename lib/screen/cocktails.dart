@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/bloc/block.dart';
+import 'package:progdrinks/screen/details.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class CockTailsPage extends StatefulWidget {
@@ -42,61 +44,75 @@ class _CockTailsPageState extends State<CockTailsPage> {
 
   list() {
     return Container(
-        color: Colors.cyan,
         child: SingleChildScrollView(
-          child: Column(
-              children: buildcard(
-            context,
-          )),
-        ));
+      child: Column(
+          children: buildcard(
+        context,
+      )),
+    ));
   }
 
   List<Widget> buildcard(
     BuildContext context,
   ) {
     return widget.drinks.map((Drink drink) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: Column(
-            children: [
-              Container(
-                child: Image.network(drink.img,
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width),
-              ),
-              Container(
-                height: 20,
-                color: Colors.brown,
-                child: Text(
-                  drink.titolo,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-              Container(
-                height: 20,
-                color: Colors.brown,
-                child: Text(
-                  drink.difficolta,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: buildTags(context, drink),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: buidIngredienti(context, drink),
-                ),
-              ),
+      var index = widget.drinks.indexOf(drink).toString();
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Details(
+                        drink: widget.drinks,
+                        index: index,
+                      )));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Column(
+              children: [
                 Container(
-                child: Column(
-                  children: buidSteps(context, drink),
+                  child: Hero(
+                    tag: index,
+                    child: Image.network(drink.img,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width),
+                  ),
                 ),
-              )
-            ],
+                Container(
+                  height: 20,
+                  color: Colors.brown,
+                  child: Text(
+                    drink.titolo,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                Container(
+                  height: 20,
+                  color: Colors.brown,
+                  child: Text(
+                    drink.difficolta,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: buildTags(context, drink),
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: buidIngredienti(context, drink),
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    children: buidSteps(context, drink),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -105,25 +121,21 @@ class _CockTailsPageState extends State<CockTailsPage> {
 
   List<Widget> buildTags(BuildContext context, Drink drink) {
     return drink.tags.map((tag) {
-      return Container(
-        child : Text(tag)
-      );
+      return Container(child: Text(tag));
     }).toList();
   }
 
-List<Widget> buidIngredienti(BuildContext context, Drink drink) {
+  List<Widget> buidIngredienti(BuildContext context, Drink drink) {
     return drink.ingredienti.map((ingrediente) {
-      return Container(
-        child : Text(ingrediente)
-      );
+      return Container(child: Text(ingrediente));
     }).toList();
   }
+
   List<Widget> buidSteps(BuildContext context, Drink drink) {
     return drink.steps.map((step) {
-      return Container(
-        child : Text(step)
-      );
+      return Container(child: Text(step));
     }).toList();
   }
-
 }
+
+

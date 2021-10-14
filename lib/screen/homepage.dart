@@ -220,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.width,
-                      color: Colors.black,
+                      color: Colors.black.withOpacity(0.5),
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Text(
