@@ -105,10 +105,18 @@ class _HomePageState extends State<HomePage> {
           Expanded(
               child: Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Stack(children: [
+            child: Stack(
+              children: [
               Container(
+                    decoration: BoxDecoration(
+                 color: Colors.transparent,
+                border: Border.all( 
+                 color: Colors.blueGrey,
+                  width: 1,
+                ),
+            ),
                 width: MediaQuery.of(context).size.width,
-                color: Colors.transparent,
+              
                 alignment: Alignment.center,
                 child: Image.network(
                   'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
@@ -208,29 +216,38 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CockTailsPage( drinks: widget.categorie[index].drinks,)));
             },
-            child: Stack(children: [
-              Center(
-                  child: Image.network(widget.categorie[index].img,
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width)),
-              Container(
-                  color: Colors.transparent.withOpacity(0.3),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width,
-                      color: Colors.black.withOpacity(0.5),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          widget.categorie[index].titolo,
-                          style: TextStyle(fontSize: 30, color: Colors.amber),
+            child: Container(
+                decoration: BoxDecoration(
+                 color: Colors.black.withOpacity(0.3),
+                border: Border.all( 
+                 color: Colors.blueGrey,
+                  width: 1,
+                ),
+            ),
+              child: Stack(children: [
+                Center(
+                    child: Image.network(widget.categorie[index].img,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width)),
+                Container(
+                    color: Colors.transparent.withOpacity(0.3),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.black.withOpacity(0.5),
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            widget.categorie[index].titolo,
+                            style: TextStyle(fontSize: 30, color: Colors.amber),
+                          ),
                         ),
                       ),
-                    ),
-                  ))
-            ]),
+                    ))
+              ]),
+            ),
           );
         });
   }
