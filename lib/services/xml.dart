@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/intro.dart';
+import 'package:progdrinks/Models/news.dart';
 import 'package:xml/xml.dart' as xml;
 import 'dart:async' show Future;
 
@@ -28,21 +28,19 @@ class XmlFetchService {
         .toList();
   }
 
-  static Future<Intro?> fetchIntroXml() async {
-    var lingua = 'intro-it.xml';
-
+  static Future<News?> fetchNoteXml() async {
+    var lingua = 'note.xml';
     try {
-      return XmlFetchService.convertToIntro(
+      return XmlFetchService.convertToNote(
           (await http.get(Uri.parse(XmlFetchService.baseUrl + lingua))).body);
     } on Exception catch (_) {
-      print('non connesso!');
+      print("Non Connesso!");
       return null;
     }
   }
 
-  static Intro convertToIntro(String node) {
+  static News convertToNote(String node) {
     var document = xml.XmlDocument.parse(node);
-
-    return Intro.createFromXml(document.findAllElements('intro').first);
+    return News.createFromXml(document.findAllElements('news').first);
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:progdrinks/load.dart';
-
+import 'package:progdrinks/services/dati/load.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstStartingPage extends StatefulWidget {
@@ -16,7 +15,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-     _storeOnboardInfo();
+    _storeOnboardInfo();
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => Load()),
     );

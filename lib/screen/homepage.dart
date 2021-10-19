@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/screen/cocktails.dart';
-import 'package:progdrinks/screen/drawer.dart';
+import 'package:progdrinks/screen/doW.dart';
+import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/screen/search.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,9 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var colorebello = false;
-  var zio = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +28,6 @@ class _HomePageState extends State<HomePage> {
         body: buildBodyStyle());
   }
 
- 
   buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
@@ -98,88 +96,102 @@ class _HomePageState extends State<HomePage> {
   }
 
   firstSectionBody() {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
-      child: Column(
-        children: [
-          Expanded(
-              child: Padding(
-            padding: const EdgeInsets.only(top: 100.0),
-            child: Stack(
-              children: [
-              Container(
-                    decoration: BoxDecoration(
-                 color: Colors.transparent,
-                border: Border.all( 
-                 color: Colors.blueGrey,
-                  width: 1,
-                ),
-            ),
-                width: MediaQuery.of(context).size.width,
-              
-                alignment: Alignment.center,
-                child: Image.network(
-                  'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-                  fit: BoxFit.fitHeight,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DoW()));
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.6,
+        child: Column(
+          children: [
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.only(top: 100.0),
+              child: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: Colors.blueGrey,
+                      width: 1,
+                    ),
+                  ),
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  alignment: Alignment.center,
+                  child: Image.network(
+                    'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
+                    fit: BoxFit.fitHeight,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.4,
+                  ),
                 ),
-              ),
-              Container(
-                  color: Colors.transparent.withOpacity(0.3),
-                  child: Center(
-                    //funnnzioooooooooooooooooooooooooona porco di un dio
+                Container(
+                    color: Colors.transparent.withOpacity(0.3),
+                    child: Center(
+                      //funnnzioooooooooooooooooooooooooona porco di un dio
 
-                    child: Text('roba bella',
-                        style: TextStyle(color: Colors.amber, fontSize: 30)),
-                  ))
-            ]),
-          )),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: new BoxDecoration(
-                          color: Colors.blueGrey.withOpacity(0.4),
-                          borderRadius:
-                              new BorderRadius.all(Radius.circular(20))),
-                      height: 75,
-                      width: 100,
-                      child: Icon(
-                        Icons.search_sharp,
-                        size: 50,
-                        color: Colors.amber,
+                      child: Text('Drink of the day',
+                          style: TextStyle(color: Colors.amber, fontSize: 30)),
+                    ))
+              ]),
+            )),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Search(
+                                        categorie: widget.categorie,
+                                        drinks: widget.drinks,
+                                      )));
+                        },
+                        child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.blueGrey.withOpacity(0.4),
+                              borderRadius:
+                                  new BorderRadius.all(Radius.circular(20))),
+                          height: 75,
+                          width: 100,
+                          child: Icon(
+                            Icons.search_sharp,
+                            size: 50,
+                            color: Colors.amber,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: new BoxDecoration(
-                          color: Colors.blueGrey.withOpacity(0.4),
-                          borderRadius:
-                              new BorderRadius.all(Radius.circular(20))),
-                      height: 75,
-                      width: 100,
-                      child: Icon(
-                        Icons.favorite,
-                        size: 50,
-                        color: Colors.amber,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: new BoxDecoration(
+                            color: Colors.blueGrey.withOpacity(0.4),
+                            borderRadius:
+                                new BorderRadius.all(Radius.circular(20))),
+                        height: 75,
+                        width: 100,
+                        child: Icon(
+                          Icons.favorite,
+                          size: 50,
+                          color: Colors.amber,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -201,7 +213,6 @@ class _HomePageState extends State<HomePage> {
     return CarouselSlider.builder(
         itemCount: widget.categorie.length,
         options: CarouselOptions(
-        
           autoPlay: true,
           aspectRatio: 2.0,
           enlargeCenterPage: true,
@@ -213,17 +224,21 @@ class _HomePageState extends State<HomePage> {
         ) {
           return GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CockTailsPage( drinks: widget.categorie[index].drinks,)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CockTailsPage(
+                            drinks: widget.categorie[index].drinks,
+                          )));
             },
             child: Container(
-                decoration: BoxDecoration(
-                 color: Colors.black.withOpacity(0.3),
-                border: Border.all( 
-                 color: Colors.blueGrey,
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.3),
+                border: Border.all(
+                  color: Colors.blueGrey,
                   width: 1,
                 ),
-            ),
+              ),
               child: Stack(children: [
                 Center(
                     child: Image.network(widget.categorie[index].img,

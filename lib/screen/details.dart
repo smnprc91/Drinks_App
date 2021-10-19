@@ -18,54 +18,30 @@ class _DetailsState extends State<Details> {
         stream: Bloc().streamDrinkSelezionato,
         builder: (context, AsyncSnapshot<Drink> risultatoStream) {
           if (risultatoStream.hasData) {
-
-
-
-
-
-
-              var vazzoTags =
-                risultatoStream.data!.tags.map((tag) {
-              return Container(child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(tag,style: TextStyle(color: Colors.white ,fontSize: 50)),
-              ),);
-            }).toList();
-
-
-             var vazzoIngredienti =
+            var vazzoIngredienti =
                 risultatoStream.data!.ingredienti.map((ingrediente) {
-              return Container(child: Padding(
+              return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(ingrediente,style: TextStyle(color: Colors.white ,fontSize: 50),),
-              ),);
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    ingrediente,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              );
             }).toList();
 
-
-
-               var vazzoSteps =
-                risultatoStream.data!.steps.map((step) {
-              return Container(child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(step,style: TextStyle(color: Colors.white ,fontSize: 50)),
-              ),);
+            var vazzoSteps = risultatoStream.data!.steps.map((step) {
+              return Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(step,
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                ),
+              );
             }).toList();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
             return Scaffold(
                 body: Container(
                     decoration: BoxDecoration(
@@ -86,17 +62,70 @@ class _DetailsState extends State<Details> {
                       variation2: 0,
                       variation3: 0,
                       rotation: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height *
-                                      0.036),
-                              child: Container(
+                      child: SingleChildScrollView(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.036),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    border: Border.all(
+                                      color: Colors.blueGrey,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Hero(
+                                      tag: widget.index.toString(),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Image.network(
+                                          risultatoStream.data!.img,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  risultatoStream.data!.titolo,
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.amber),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Difficoltà : ' +
+                                      risultatoStream.data!.difficolta,
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.blueGrey),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                color: Colors.black.withOpacity(0.3),
+                                child: Center(
+                                    child: Text(
+                                  'Ingredienti',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.amber),
+                                )),
+                              ),
+                              Container(
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
                                   border: Border.all(
@@ -104,25 +133,37 @@ class _DetailsState extends State<Details> {
                                     width: 1,
                                   ),
                                 ),
-                                child: Hero(
-                                    tag: widget.index.toString(),
-                                    child: Image.network(
-                                        risultatoStream.data!.img)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: vazzoIngredienti,
+                                ),
                               ),
-                            ),
-                            Text(
-                              risultatoStream.data!.titolo,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                               Text(
-                              risultatoStream.data!.difficolta,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                                Row(children: vazzoTags,),
-                              Row(children: vazzoIngredienti,),
-                               Row(children: vazzoSteps,)
-
-                          ],
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                color: Colors.black.withOpacity(0.3),
+                                child: Center(
+                                    child: Text(
+                                  'Procedimento',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.amber),
+                                )),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  border: Border.all(
+                                    color: Colors.blueGrey,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  children: vazzoSteps,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     )));
@@ -131,7 +172,5 @@ class _DetailsState extends State<Details> {
           }
         });
   }
-    
- 
 }
 /** */

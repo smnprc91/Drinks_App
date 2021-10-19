@@ -36,12 +36,12 @@ class Drink {
           .findElements('ingrediente')
           .map((ingrediente) => ingrediente.text)
           .toList(),
-       node
+      node
           .findElements('steps')
           .first
           .findElements('step')
-          .map((step) =>step.text)
-          .toList(),    
+          .map((step) => step.text)
+          .toList(),
     );
   }
 }

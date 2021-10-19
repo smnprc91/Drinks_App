@@ -19,7 +19,7 @@ class Bloc {
   Sink<List<Drink>> get sinkDrinks => _drinks.sink;
   Stream<List<Drink>> get streamDrinks => _drinks.stream;
   Sink<Drink> get sinkDrinkSelezionato => _drinkSelezionato.sink;
-  Stream<Drink>  get streamDrinkSelezionato => _drinkSelezionato.stream;
+  Stream<Drink> get streamDrinkSelezionato => _drinkSelezionato.stream;
 
   Sink<List<Categoria>> get sinkCategoria => _categoria.sink;
   Stream<List<Categoria>> get streamCategoria => _categoria.stream;

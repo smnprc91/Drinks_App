@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
-
+import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/screen/details.dart';
+
+
 import 'package:simple_animations/simple_animations.dart';
 
 class CockTailsPage extends StatefulWidget {
@@ -84,15 +86,16 @@ class _CockTailsPageState extends State<CockTailsPage> {
     BuildContext context,
   ) {
     return widget.drinks.map((Drink drink) {
-      var index = widget.drinks.indexOf(drink).toString();
+      var index = widget.drinks.indexOf(drink);
       return GestureDetector(
         onTap: () {
+          Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => Details(
                         drink: widget.drinks,
-                        index: index,
+                        index: index.toString(),
                       )));
         },
         child: Padding(
@@ -108,7 +111,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
             child: Column(
               children: [
                 Hero(
-                  tag: index,
+                  tag: index.toString(),
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     child: Image.network(drink.img,
@@ -117,16 +120,17 @@ class _CockTailsPageState extends State<CockTailsPage> {
                   ),
                 ),
                 Container(
-                   decoration: BoxDecoration(
-                 color: Colors.black.withOpacity(0.3),
-                border: Border(top: 
-                  BorderSide(color: Colors.blueGrey,
-                  width: 1,
-                ),),
-            ),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.blueGrey,
+                        width: 1,
+                      ),
+                    ),
+                  ),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.05,
-               
                   child: Center(
                     child: Text(
                       drink.titolo,
@@ -135,22 +139,29 @@ class _CockTailsPageState extends State<CockTailsPage> {
                   ),
                 ),
                 Container(
-                  
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.05,
                   color: Colors.black.withOpacity(0.3),
                   child: Center(
-                    child: Text(
+                    child: Text('Difficoltà : ' +
                       drink.difficolta,
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),
                 Container(
+                   width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.black.withOpacity(0.3),
+                  
+                  child: Center(child: Text(' Caratteristiche :', style: TextStyle(fontSize: 20, color: Colors.white))),
+                ),
+                Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.05,
                   color: Colors.black.withOpacity(0.3),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: buildTags(context, drink),
                   ),
                 ),
