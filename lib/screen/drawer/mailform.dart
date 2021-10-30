@@ -16,10 +16,10 @@ class _EmailSenderState extends State<EmailSender> {
     text: 'emailtestperapp@gmail.com',
   );
 
-  final _subjectController = TextEditingController(text: 'The subject');
+  final _subjectController = TextEditingController(text: ' ');
 
   final _bodyController = TextEditingController(
-    text: 'Mail body.',
+    text: '  ',
   );
 
   Future<void> send() async {
@@ -116,7 +116,7 @@ class _EmailSenderState extends State<EmailSender> {
     return ListView(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 2,
+          height: MediaQuery.of(context).size.height * 1,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +143,7 @@ class _EmailSenderState extends State<EmailSender> {
                         borderSide:
                             const BorderSide(color: Colors.blueGrey, width: 2),
                       ),
-                      labelText: 'Recipient',
+                      labelText: 'Destinatario',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
                 ),
               ),
@@ -157,17 +157,17 @@ class _EmailSenderState extends State<EmailSender> {
                         borderSide:
                             const BorderSide(color: Colors.blueGrey, width: 2),
                       ),
-                      labelText: 'Subject',
+                      labelText: 'Il tuo nome e cognome',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * 0.35,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
                     style: TextStyle(color: Colors.white, fontSize: 20),
-                    controller: _bodyController,
+                   controller: _bodyController,
                     maxLines: null,
                     expands: true,
                     textAlignVertical: TextAlignVertical.top,
@@ -176,9 +176,10 @@ class _EmailSenderState extends State<EmailSender> {
                           borderSide: const BorderSide(
                               color: Colors.blueGrey, width: 2),
                         ),
-                        labelText: 'Body',
-                        labelStyle:
-                            TextStyle(color: Colors.amber, fontSize: 30)),
+                       labelText: "Dici cosa ne pensi!",
+                   
+                      hintStyle:TextStyle(color: Colors.amber, fontSize: 20) ,
+                      labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
                   ),
                 ),
               ),

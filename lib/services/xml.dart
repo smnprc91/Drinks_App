@@ -10,7 +10,7 @@ class XmlFetchService {
   static String baseUrl = 'https://sidajo.xyz/bo/';
 
   static Future<List<Categoria>?> fetchCatXml() async {
-    var lingua = 'app-it.xml';
+    var lingua = 'drink-it.xml';
     try {
       return XmlFetchService.convertToCategories(
           (await http.get(Uri.parse(XmlFetchService.baseUrl + lingua))).body);

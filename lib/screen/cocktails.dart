@@ -3,7 +3,6 @@ import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/screen/details.dart';
 
-
 import 'package:simple_animations/simple_animations.dart';
 
 class CockTailsPage extends StatefulWidget {
@@ -67,6 +66,115 @@ class _CockTailsPageState extends State<CockTailsPage> {
   }
 
   list(context) {
+    return Container(
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          itemCount: widget.drinks.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Details(
+                              drink: widget.drinks,
+                              index: index.toString(),
+                            )));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: Colors.blueGrey,
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Hero(
+                        tag: index.toString(),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: Image.network(widget.drinks[index].img,
+                              fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.3),
+                          border: Border(
+                            top: BorderSide(
+                              color: Colors.blueGrey,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        child: Center(
+                          child: Text(
+                            widget.drinks[index].titolo,
+                            style: TextStyle(fontSize: 30, color: Colors.amber),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Center(
+                          child: Text(
+                            'Difficoltà : ' + widget.drinks[index].difficolta,
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Center(
+                            child: Text(' Caratteristiche :',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white))),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: buildTags(context,widget.drinks[index]),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }),
+    );
+  }
+   List<Widget> buildTags(BuildContext context, Drink drink) {
+    return drink.tags.map((tag) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+            child:
+                Text(tag, style: TextStyle(fontSize: 20, color: Colors.white))),
+      );
+    }).toList();
+  }
+}
+
+
+
+
+  /* list(context) {
     return Container(
         child: SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -143,7 +251,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                   height: MediaQuery.of(context).size.height * 0.05,
                   color: Colors.black.withOpacity(0.3),
                   child: Center(
-                    child: Text('Difficoltà : ' +
+                    child: Text('Difficoltà : ' + 
                       drink.difficolta,
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
@@ -182,5 +290,5 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 Text(tag, style: TextStyle(fontSize: 20, color: Colors.white))),
       );
     }).toList();
-  }
-}
+  }*/
+
