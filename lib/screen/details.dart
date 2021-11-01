@@ -18,7 +18,7 @@ class _DetailsState extends State<Details> {
         stream: Bloc().streamDrinkSelezionato,
         builder: (context, AsyncSnapshot<Drink> risultatoStream) {
           if (risultatoStream.hasData) {
-            var vazzoIngredienti =
+            var listaIngredienti =
                 risultatoStream.data!.ingredienti.map((ingrediente) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -32,7 +32,7 @@ class _DetailsState extends State<Details> {
               );
             }).toList();
 
-            var vazzoSteps = risultatoStream.data!.steps.map((step) {
+            var listaSteps = risultatoStream.data!.steps.map((step) {
               return Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -135,7 +135,7 @@ class _DetailsState extends State<Details> {
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: vazzoIngredienti,
+                                  children: listaIngredienti,
                                 ),
                               ),
                               Container(
@@ -159,7 +159,7 @@ class _DetailsState extends State<Details> {
                                   ),
                                 ),
                                 child: Column(
-                                  children: vazzoSteps,
+                                  children: listaSteps,
                                 ),
                               )
                             ],

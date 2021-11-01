@@ -25,10 +25,10 @@ class _LoadState extends State<Load> {
         stream: bloc.streamCategoria,
         builder: (context, risultatoDelloStream) {
           if (risultatoDelloStream.hasData) {
-            List<Categoria>? categorie =
-                risultatoDelloStream.data as List<Categoria>?;
+            List<Categoria> categorie =
+                risultatoDelloStream.data as List<Categoria>;
           
-            var drinks = categorie!
+            var drinks = categorie
                 .map((Categoria c) => c.drinks)
                 .toList()
                 .expand((e) => e)

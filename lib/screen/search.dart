@@ -17,8 +17,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-
-  String searchString = "";
+  String drinkcercato = "";
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +58,11 @@ class _SearchState extends State<Search> {
               left: 10,
               right: 10),
           child: TextField(
-
-              onChanged: (value) {
-          setState(() {
-            searchString = value.toLowerCase();
-          });
-        },
+            onChanged: (risultatoricerca) {
+              setState(() {
+                drinkcercato = risultatoricerca.toLowerCase();
+              });
+            },
             style: TextStyle(color: Colors.white, fontSize: 20),
             decoration: InputDecoration(
                 enabledBorder: const OutlineInputBorder(
@@ -78,35 +76,34 @@ class _SearchState extends State<Search> {
           ),
         ),
         Expanded(
-          child: ListView.builder(
-              itemCount: widget.drinks.length,
-              itemBuilder: (context, index) {
-              return widget.drinks[index].titolo
-          .toLowerCase()
-          .contains(searchString)
-      ? GestureDetector(
-        onTap: (){
-            Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Details(
-                              drink: widget.drinks,
-                              index: index.toString(),
-                            )));
-        },
-        child: ListTile(
-                    title: Center(
-                        child: Text(
-                      widget.drinks[index].titolo,
-                      style: TextStyle(color: Colors.white),
-                    )),
-                  ),
-      )
-      : Container( );
-},
-
-          ))
+            child: ListView.builder(
+          itemCount: widget.drinks.length,
+          itemBuilder: (context, index) {
+            return widget.drinks[index].titolo
+                    .toLowerCase()
+                    .contains(drinkcercato)
+                ? GestureDetector(
+                    onTap: () {
+                      Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Details(
+                                    drink: widget.drinks,
+                                    index: index.toString(),
+                                  )));
+                    },
+                    child: ListTile(
+                      title: Center(
+                          child: Text(
+                        widget.drinks[index].titolo,
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
+                  )
+                : Container();
+          },
+        ))
       ],
     ));
   }
