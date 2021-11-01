@@ -76,7 +76,9 @@ class _SearchState extends State<Search> {
           ),
         ),
         Expanded(
-            child: ListView.builder(
+            child: ListView.buil
+            der(
+       padding: EdgeInsets.zero,
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
             return widget.drinks[index].titolo
