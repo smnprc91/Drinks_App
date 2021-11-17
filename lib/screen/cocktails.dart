@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/block.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
+import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+
 import 'package:progdrinks/screen/details.dart';
 
-import 'package:simple_animations/simple_animations.dart';
+
 
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks});
@@ -34,141 +37,124 @@ class _CockTailsPageState extends State<CockTailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: MyAppBar(),
       body: bodyStyle(context),
     );
   }
 
   bodyStyle(context) {
-    return Container(
-        decoration: BoxDecoration(
-          color: Color(0xff000029),
-          backgroundBlendMode: BlendMode.srcOver,
-        ),
-        child: PlasmaRenderer(
-            type: PlasmaType.infinity,
-            particles: 10,
-            color: Color(0x44e45a23),
-            blur: 0.2,
-            size: 0.30,
-            speed: 2,
-            offset: 0,
-            blendMode: BlendMode.plus,
-            particleType: ParticleType.atlas,
-            variation1: 0,
-            variation2: 0,
-            variation3: 0,
-            rotation: 0,
-            child: list(context)));
+    return MyBodyStyle(child: list(context));
   }
 
   list(context) {
-    return Padding(
-      padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.08),
-      child: Container(
-        child: ListView.builder(
+    return Container(
+      child: ListView.builder(
           padding: EdgeInsets.zero,
-          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            itemCount: widget.drinks.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Details(
-                                drink: widget.drinks,
-                                index: index.toString(),
-                              )));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(
-                        color: Colors.blueGrey,
-                        width: 1,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Hero(
-                          tag: index.toString(),
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Image.network(widget.drinks[index].img,
-                                fit: BoxFit.cover,
-                                width: MediaQuery.of(context).size.width),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.3),
-                            border: Border(
-                              top: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 1,
-                              ),
-                            ),
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          child: Center(
-                            child: Text(
-                              widget.drinks[index].titolo,
-                              style: TextStyle(fontSize: 30, color: Colors.amber),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          color: Colors.black.withOpacity(0.3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Difficoltà : ',
-                                style: TextStyle(fontSize: 20, color: Colors.white),
-                              ),
-                              Text( widget.drinks[index].difficolta, style: TextStyle(fontSize: 18, color: Colors.white),)
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          color: Colors.black.withOpacity(0.3),
-                          child: Center(
-                              child: Text(' Caratteristiche :',
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white))),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.06,
-                          color: Colors.black.withOpacity(0.3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: buildTags(context,widget.drinks[index]),
-                          ),
-                        ),
-                      ],
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          itemCount: widget.drinks.length,
+          itemBuilder: (context, index) {
+            return lista(index);
+          }),
+    );
+  }
+
+   
+   lista (index) {
+   return GestureDetector(
+      onTap: () {
+        Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Details(
+                      drink: widget.drinks,
+                      index: index.toString(),
+                    )));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            border: Border.all(
+              color: Colors.blueGrey,
+              width: 1,
+            ),
+          ),
+          child: Column(
+            children: [
+              Hero(
+                tag: index.toString(),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: Image.network(widget.drinks[index].img,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.blueGrey,
+                      width: 1,
                     ),
                   ),
                 ),
-              );
-            }),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.05,
+                child: Center(
+                  child: Text(
+                    widget.drinks[index].titolo,
+                    style: TextStyle(fontSize: 30, color: Colors.amber),
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.05,
+                color: Colors.black.withOpacity(0.3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Difficoltà : ',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    Text(
+                      widget.drinks[index].difficolta,
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.05,
+                color: Colors.black.withOpacity(0.3),
+                child: Center(
+                    child: Text(' Caratteristiche :',
+                        style: TextStyle(fontSize: 20, color: Colors.white))),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.06,
+                color: Colors.black.withOpacity(0.3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: buildTags(context, widget.drinks[index]),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
-   List<Widget> buildTags(BuildContext context, Drink drink) {
+
+  List<Widget> buildTags(BuildContext context, Drink drink) {
     return drink.tags.map((tag) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -179,125 +165,3 @@ class _CockTailsPageState extends State<CockTailsPage> {
     }).toList();
   }
 }
-
-
-
-
-  /* list(context) {
-    return Container(
-        child: SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Padding(
-        padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
-        child: Column(
-          children: buildcard(
-            context,
-          ),
-        ),
-      ),
-    ));
-  }
-
-  List<Widget> buildcard(
-    BuildContext context,
-  ) {
-    return widget.drinks.map((Drink drink) {
-      var index = widget.drinks.indexOf(drink);
-      return GestureDetector(
-        onTap: () {
-          Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Details(
-                        drink: widget.drinks,
-                        index: index.toString(),
-                      )));
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(
-                color: Colors.blueGrey,
-                width: 1,
-              ),
-            ),
-            child: Column(
-              children: [
-                Hero(
-                  tag: index.toString(),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: Image.network(drink.img,
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    border: Border(
-                      top: BorderSide(
-                        color: Colors.blueGrey,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  child: Center(
-                    child: Text(
-                      drink.titolo,
-                      style: TextStyle(fontSize: 30, color: Colors.amber),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  color: Colors.black.withOpacity(0.3),
-                  child: Center(
-                    child: Text('Difficoltà : ' + 
-                      drink.difficolta,
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                  ),
-                ),
-                Container(
-                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  color: Colors.black.withOpacity(0.3),
-                  
-                  child: Center(child: Text(' Caratteristiche :', style: TextStyle(fontSize: 20, color: Colors.white))),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  color: Colors.black.withOpacity(0.3),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: buildTags(context, drink),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }).toList();
-  }
-
-  List<Widget> buildTags(BuildContext context, Drink drink) {
-    return drink.tags.map((tag) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-            child:
-                Text(tag, style: TextStyle(fontSize: 20, color: Colors.white))),
-      );
-    }).toList();
-  }*/
-

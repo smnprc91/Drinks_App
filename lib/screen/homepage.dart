@@ -2,11 +2,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
+import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+import 'package:progdrinks/raccoltaWidget/MyDrinkOfDaySection.dart';
+import 'package:progdrinks/raccoltaWidget/MyFavButton.dart';
+import 'package:progdrinks/raccoltaWidget/MySearchButton.dart';
 import 'package:progdrinks/screen/cocktails.dart';
 
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/screen/search.dart';
-import 'package:simple_animations/simple_animations.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({required this.categorie, required this.drinks});
@@ -24,63 +29,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         drawer: Drawers(),
         extendBodyBehindAppBar: true,
-        appBar: buildAppBar(),
-        body: buildBodyStyle());
+        appBar: MyAppBarHome(),
+        body:MyBodyStyle(child:  bodyMainContent()));
   }
 
-  buildAppBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      centerTitle: true,
-      title: Builder(
-        builder: (context) {
-          return Container(
-            height: 60,
-            width: 60,
-            decoration: new BoxDecoration(
-                color: Colors.blueGrey.withOpacity(0.4),
-                borderRadius: new BorderRadius.all(Radius.circular(20))),
-            alignment: Alignment.center,
-            child: IconButton(
-              icon: const Icon(
-                Icons.person,
-                color: Colors.amber,
-                size: 30,
-              ),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  buildBodyStyle() {
-    return Container(
-        decoration: BoxDecoration(
-          color: Color(0xff000029),
-          backgroundBlendMode: BlendMode.srcOver,
-        ),
-        child: PlasmaRenderer(
-            type: PlasmaType.infinity,
-            particles: 10,
-            color: Color(0x44e45a23),
-            blur: 0.2,
-            size: 0.30,
-            speed: 2,
-            offset: 0,
-            blendMode: BlendMode.plus,
-            particleType: ParticleType.atlas,
-            variation1: 0,
-            variation2: 0,
-            variation3: 0,
-            rotation: 0,
-            child: bodyMainContent()));
-  }
+ 
 
   bodyMainContent() {
     return Container(
@@ -100,59 +53,14 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
-          drinkOfDay(),
+         MyDrinkOfDay(),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Search(
-                                      categorie: widget.categorie,
-                                      drinks: widget.drinks,
-                                    )));
-                      },
-                      child: Container(
-                        decoration: new BoxDecoration(
-                            color: Colors.blueGrey.withOpacity(0.4),
-                            borderRadius:
-                                new BorderRadius.all(Radius.circular(20))),
-                        height: 75,
-                        width: 100,
-                        child: Icon(
-                          Icons.search_sharp,
-                          size: 50,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: new BoxDecoration(
-                          color: Colors.blueGrey.withOpacity(0.4),
-                          borderRadius:
-                              new BorderRadius.all(Radius.circular(20))),
-                      height: 75,
-                      width: 100,
-                      child: Icon(
-                        Icons.favorite,
-                        size: 50,
-                        color: Colors.amber,
-                      ),
-                    ),
-                  ),
-                ),
+             MySearchButton(categorie:widget.categorie, drinks:widget.drinks),
+            MyFavButton(),
               ],
             ),
           ),
@@ -161,40 +69,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  drinkOfDay() {
-    return Expanded(
-        child: Padding(
-      padding: const EdgeInsets.only(top: 100.0),
-      child: Stack(children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              color: Colors.blueGrey,
-              width: 1,
-            ),
-          ),
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          child: Image.network(
-            'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-            fit: BoxFit.fitHeight,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.4,
-          ),
-        ),
-        Container(
-            color: Colors.transparent.withOpacity(0.3),
-            child: Center(
-              //funnnzioooooooooooooooooooooooooona porco di un dio
-
-              child: Text('Drink of the day',
-                  style: TextStyle(color: Colors.amber, fontSize: 30)),
-            ))
-      ]),
-    ));
-  }
-
+ 
   secondSectionBody() {
     return Expanded(
       child: Container(

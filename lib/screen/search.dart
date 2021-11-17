@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/block.dart';
-import 'package:simple_animations/simple_animations.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
+import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+
 
 import 'details.dart';
 
@@ -23,28 +25,8 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent),
-      body: Container(
-          decoration: BoxDecoration(
-            color: Color(0xff000029),
-            backgroundBlendMode: BlendMode.srcOver,
-          ),
-          child: PlasmaRenderer(
-            type: PlasmaType.infinity,
-            particles: 10,
-            color: Color(0x44e45a23),
-            blur: 0.2,
-            size: 0.30,
-            speed: 2,
-            offset: 0,
-            blendMode: BlendMode.plus,
-            particleType: ParticleType.atlas,
-            variation1: 0,
-            variation2: 0,
-            variation3: 0,
-            rotation: 0,
-            child: buildbodystyle(),
-          )),
+      appBar: MyAppBar(),
+      body: MyBodyStyle(child: buildbodystyle(),)
     );
   }
 
@@ -76,8 +58,7 @@ class _SearchState extends State<Search> {
           ),
         ),
         Expanded(
-            child: ListView.buil
-            der(
+            child: ListView.builder(
        padding: EdgeInsets.zero,
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {

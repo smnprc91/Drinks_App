@@ -13,8 +13,7 @@ class Bloc {
   Bloc._internal();
   BehaviorSubject<Drink> _drinkSelezionato = BehaviorSubject<Drink>();
   BehaviorSubject<List<Drink>> _drinks = BehaviorSubject<List<Drink>>();
-  BehaviorSubject<List<Categoria>> _categoria =
-      BehaviorSubject<List<Categoria>>();
+  BehaviorSubject<List<Categoria>> _categoria = BehaviorSubject<List<Categoria>>();
 
   Sink<List<Drink>> get sinkDrinks => _drinks.sink;
   Stream<List<Drink>> get streamDrinks => _drinks.stream;
