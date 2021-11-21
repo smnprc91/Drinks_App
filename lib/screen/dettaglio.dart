@@ -1,64 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:simple_animations/simple_animations.dart';
 
-class Details extends StatefulWidget {
-  const Details({required this.drink, required this.index});
-  final List<Drink> drink;
+class Dettaglio extends StatefulWidget {
+  const Dettaglio({required this.index, required this.drink});
+  final Drink drink;
   final String index;
+
   @override
-  _DetailsState createState() => _DetailsState();
+  _DettaglioState createState() => _DettaglioState();
 }
 
-class _DetailsState extends State<Details> {
+class _DettaglioState extends State<Dettaglio> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: Bloc().streamDrinkSelezionato,
-        builder: (context, AsyncSnapshot<Drink> risultatoStream) {
-          if (risultatoStream.hasData) {
-            var listaIngredienti =
-                risultatoStream.data!.ingredienti.map((ingrediente) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    ingrediente,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              );
-            }).toList();
+    
 
-            var listaSteps = risultatoStream.data!.steps.map((step) {
-              return Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(step,
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                ),
-              );
-            }).toList();
-
-            return Scaffold(
-                body: MyBodyStyle(
-              child: piro(risultatoStream, listaIngredienti, listaSteps),
-            ));
-          } else {
-            return Container();
-          }
-        });
-  }
-
-  piro(
-    AsyncSnapshot<Drink> risultatoStream,
-    List<Padding> listaIngredienti,
-    List<Container> listaSteps,
-  ) {
-    return SingleChildScrollView(
+    var listaSteps = widget.drink.steps.map((step) {
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Text(step, style: TextStyle(color: Colors.white, fontSize: 20)),
+        ),
+      );
+    }).toList();
+    return Scaffold(
+        body: MyBodyStyle(
+            child: SingleChildScrollView(
       child: GestureDetector(
         onTap: () {
           Navigator.pop(context);
@@ -76,29 +45,27 @@ class _DetailsState extends State<Details> {
                     width: 1,
                   ),
                 ),
-                child: Hero(
-                    tag: widget.index.toString(),
-                    child: Container(
+                child: Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width,
                       child: Image.network(
-                        risultatoStream.data!.img,
+                        widget.drink.img,
                         fit: BoxFit.cover,
                       ),
-                    )),
+                    )
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                risultatoStream.data!.titolo,
+                widget.drink.titolo,
                 style: TextStyle(fontSize: 30, color: Colors.amber),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Difficoltà : ' + risultatoStream.data!.difficolta,
+                'Difficoltà : ' + widget.drink.difficolta,
                 style: TextStyle(fontSize: 20, color: Colors.blueGrey),
               ),
             ),
@@ -122,7 +89,7 @@ class _DetailsState extends State<Details> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: listaIngredienti,
+                children: listaingredienti(),
               ),
             ),
             Container(
@@ -150,7 +117,21 @@ class _DetailsState extends State<Details> {
           ],
         ),
       ),
-    );
+    )));
+  }
+
+  List<Widget> listaingredienti(){
+  return  widget.drink.ingredienti.map((ingrediente) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Text(
+            ingrediente,
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      );
+    }).toList();
   }
 }
-/** */

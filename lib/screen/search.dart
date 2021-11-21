@@ -4,9 +4,7 @@ import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-
-
-import 'details.dart';
+import 'package:progdrinks/screen/dettaglio.dart';
 
 class Search extends StatefulWidget {
   Search({required this.categorie, required this.drinks});
@@ -24,10 +22,11 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: MyAppBar(),
-      body: MyBodyStyle(child: buildbodystyle(),)
-    );
+        extendBodyBehindAppBar: true,
+        appBar: MyAppBar(),
+        body: MyBodyStyle(
+          child: buildbodystyle(),
+        ));
   }
 
   buildbodystyle() {
@@ -59,7 +58,7 @@ class _SearchState extends State<Search> {
         ),
         Expanded(
             child: ListView.builder(
-       padding: EdgeInsets.zero,
+          padding: EdgeInsets.zero,
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
             return widget.drinks[index].titolo
@@ -67,13 +66,12 @@ class _SearchState extends State<Search> {
                     .contains(drinkcercato)
                 ? GestureDetector(
                     onTap: () {
-                      Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Details(
-                                    drink: widget.drinks,
+                              builder: (context) => Dettaglio(
                                     index: index.toString(),
+                                    drink: widget.drinks[index],
                                   )));
                     },
                     child: ListTile(

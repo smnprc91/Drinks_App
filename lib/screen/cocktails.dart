@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-
-import 'package:progdrinks/screen/details.dart';
-
-
+import 'package:progdrinks/screen/dettaglio.dart';
 
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks});
@@ -59,21 +55,21 @@ class _CockTailsPageState extends State<CockTailsPage> {
     );
   }
 
-   
-   lista (index) {
-   return GestureDetector(
+  lista(index) {
+    return GestureDetector(
       onTap: () {
-        Bloc().sinkDrinkSelezionato.add(widget.drinks[index]);
+        print(index);
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Details(
-                      drink: widget.drinks,
-                      index: index.toString(),
+                builder: (context) => Dettaglio(
+                      drink: widget.drinks[index],
+                      index: widget.drinks[index].toString(),
                     )));
       },
       child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
@@ -84,14 +80,11 @@ class _CockTailsPageState extends State<CockTailsPage> {
           ),
           child: Column(
             children: [
-              Hero(
-                tag: index.toString(),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  child: Image.network(widget.drinks[index].img,
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width),
-                ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: Image.network(widget.drinks[index].img,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width),
               ),
               Container(
                 decoration: BoxDecoration(
