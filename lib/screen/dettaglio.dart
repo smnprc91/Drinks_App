@@ -14,17 +14,6 @@ class Dettaglio extends StatefulWidget {
 class _DettaglioState extends State<Dettaglio> {
   @override
   Widget build(BuildContext context) {
-    
-
-    var listaSteps = widget.drink.steps.map((step) {
-      return Container(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Text(step, style: TextStyle(color: Colors.white, fontSize: 20)),
-        ),
-      );
-    }).toList();
     return Scaffold(
         body: MyBodyStyle(
             child: SingleChildScrollView(
@@ -38,22 +27,21 @@ class _DettaglioState extends State<Dettaglio> {
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.036),
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(
-                    color: Colors.blueGrey,
-                    width: 1,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: Colors.blueGrey,
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: Container(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.network(
-                        widget.drink.img,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-              ),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.network(
+                      widget.drink.img,
+                      fit: BoxFit.cover,
+                    ),
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -111,7 +99,7 @@ class _DettaglioState extends State<Dettaglio> {
                 ),
               ),
               child: Column(
-                children: listaSteps,
+                children: listastep(),
               ),
             )
           ],
@@ -120,8 +108,8 @@ class _DettaglioState extends State<Dettaglio> {
     )));
   }
 
-  List<Widget> listaingredienti(){
-  return  widget.drink.ingredienti.map((ingrediente) {
+  List<Widget> listaingredienti() {
+    return widget.drink.ingredienti.map((ingrediente) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -130,6 +118,18 @@ class _DettaglioState extends State<Dettaglio> {
             ingrediente,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
+        ),
+      );
+    }).toList();
+  }
+
+  List<Widget> listastep() {
+    return widget.drink.steps.map((step) {
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Text(step, style: TextStyle(color: Colors.white, fontSize: 20)),
         ),
       );
     }).toList();

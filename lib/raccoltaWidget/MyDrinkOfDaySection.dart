@@ -34,7 +34,7 @@ class _MyDrinkOfDayState extends State<MyDrinkOfDay> {
         Container(
             color: Colors.transparent.withOpacity(0.3),
             child: Center(
-              //funnnzioooooooooooooooooooooooooona porco di un dio
+      
 
               child: Text('Drink of the day',
                   style: TextStyle(color: Colors.amber, fontSize: 30)),
