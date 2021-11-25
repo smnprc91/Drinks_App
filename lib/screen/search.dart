@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:progdrinks/screen/dettaglio.dart';
+import 'package:progdrinks/raccoltaWidget/pagine%20favoriti/dettaglio.dart';
 
 class Search extends StatefulWidget {
   Search({required this.categorie, required this.drinks});
@@ -70,7 +69,7 @@ class _SearchState extends State<Search> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Dettaglio(
-                                    index: index.toString(),
+                                   
                                     drink: widget.drinks[index],
                                   )));
                     },

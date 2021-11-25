@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:simple_animations/simple_animations.dart';
+
 
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);

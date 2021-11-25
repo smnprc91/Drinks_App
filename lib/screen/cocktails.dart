@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/bloc/block.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:progdrinks/screen/dettaglio.dart';
 
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks});
@@ -24,6 +24,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
     return displaySize(context).width;
   }
 
+  final Bloc bloc = new Bloc();
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +40,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
     );
   }
 
+  List _selectedItems = [];
   bodyStyle(context) {
     return MyBodyStyle(child: list(context));
   }
@@ -50,100 +53,171 @@ class _CockTailsPageState extends State<CockTailsPage> {
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
-            return lista(index);
-          }),
-    );
-  }
+            return Container(
+              child: ListTile(
+                  onTap: () {
+                    if (_selectedItems.contains(index)) {
+                      setState(() {
+                        _selectedItems.removeWhere((val) => val == index);
+                      });
+                    } else {
+                      setState(() {
+                        _selectedItems.add(index);
 
-  lista(index) {
-    return GestureDetector(
-      onTap: () {
-        print(index);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Dettaglio(
-                      drink: widget.drinks[index],
-                      index: widget.drinks[index].toString(),
-                    )));
-      },
-      child: Padding(
-        padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              color: Colors.blueGrey,
-              width: 1,
-            ),
-          ),
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: Image.network(widget.drinks[index].img,
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
-                  border: Border(
-                    top: BorderSide(
-                      color: Colors.blueGrey,
-                      width: 1,
-                    ),
-                  ),
-                ),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.05,
-                child: Center(
+                     
+                      bloc.sinkLezzo.add(widget.drinks);
+                      });
+                    }
+                  },
+                  title: Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(
+                          color: Colors.blueGrey,
+                          width: 1,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            child: Image.network(widget.drinks[index].img,
+                                fit: BoxFit.cover,
+                                width: MediaQuery.of(context).size.width),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.3),
+                              border: Border(
+                                top: BorderSide(
+                                  color: Colors.blueGrey,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            child: Center(
+                              child: Text(
+                                widget.drinks[index].titolo,
+                                style: TextStyle(
+                                    fontSize: 30, color: Colors.amber),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Aggiungi ai preferiti',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                                Icon(
+                                    (_selectedItems.contains(index))
+                                        ? Icons.favorite
+                                        : Icons.favorite_outline,
+                                    color: Colors.amber),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Difficoltà : ',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                                Text(
+                                  widget.drinks[index].difficolta,
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Center(
+                                child: Text(' Caratteristiche :',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white))),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:
+                                  buildTags(context, widget.drinks[index]),
+                            ),
+                          ),
+                            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.05,
+              color: Colors.black.withOpacity(0.3),
+              child: Center(
                   child: Text(
-                    widget.drinks[index].titolo,
-                    style: TextStyle(fontSize: 30, color: Colors.amber),
-                  ),
+                'Ingredienti',
+                style: TextStyle(fontSize: 20, color: Colors.amber),
+              )),
+            ),
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.blueGrey,
+                  width: 1,
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.05,
-                color: Colors.black.withOpacity(0.3),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Difficoltà : ',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: listaingredienti(context,widget.drinks[index]),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.05,
+              color: Colors.black.withOpacity(0.3),
+              child: Center(
+                  child: Text(
+                'Procedimento',
+                style: TextStyle(fontSize: 20, color: Colors.amber),
+              )),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.blueGrey,
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                children: listastep(context,widget.drinks[index]),
+              ))
+                        ],
+                      ),
                     ),
-                    Text(
-                      widget.drinks[index].difficolta,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.05,
-                color: Colors.black.withOpacity(0.3),
-                child: Center(
-                    child: Text(' Caratteristiche :',
-                        style: TextStyle(fontSize: 20, color: Colors.white))),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.06,
-                color: Colors.black.withOpacity(0.3),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: buildTags(context, widget.drinks[index]),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                  )),
+            );
+          }),
     );
   }
 
@@ -154,6 +228,32 @@ class _CockTailsPageState extends State<CockTailsPage> {
         child: Container(
             child:
                 Text(tag, style: TextStyle(fontSize: 18, color: Colors.white))),
+      );
+    }).toList();
+  }
+  List<Widget> listaingredienti(BuildContext context, Drink drink) {
+    return drink.ingredienti.map((ingrediente) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Text(
+            ingrediente,
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  List<Widget> listastep(BuildContext context, Drink drink) {
+    return drink.steps.map((step) {
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              Text(step, style: TextStyle(color: Colors.white, fontSize: 20)),
+        ),
       );
     }).toList();
   }
