@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/news/newspage.dart';
 import 'package:progdrinks/services/xml.dart';
@@ -17,7 +17,7 @@ class _UpdateState extends State<Update> {
     return FutureBuilder(
         future: XmlFetchService.fetchNoteXml(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          inspect(XmlFetchService.fetchNoteXml());
+        
           if (snapshot.hasData) {
             return NewsPage(news: snapshot.data);
           } else {

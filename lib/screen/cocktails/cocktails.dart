@@ -87,7 +87,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.05,
+                        height: MediaQuery.of(context).size.height * 0.08,
                         child: Center(
                           child: Text(
                             widget.drinks[index].titolo,

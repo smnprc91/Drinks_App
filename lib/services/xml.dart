@@ -28,6 +28,11 @@ class XmlFetchService {
         .toList();
   }
 
+
+
+
+
+
   static Future<News?> fetchNoteXml() async {
     var lingua = 'note.xml';
     try {
@@ -43,4 +48,6 @@ class XmlFetchService {
     var document = xml.XmlDocument.parse(node);
     return News.createFromXml(document.findAllElements('news').first);
   }
+
+  static fetchDayXml() {}
 }

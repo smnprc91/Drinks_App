@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
@@ -8,11 +10,7 @@ import 'package:progdrinks/raccoltaWidget/MyDrinkOfDaySection.dart';
 import 'package:progdrinks/raccoltaWidget/MySearchButton.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-
-
-
-
-
+import 'package:progdrinks/services/xmldod.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({required this.categorie, required this.drinks});
@@ -26,15 +24,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawers(),
         extendBodyBehindAppBar: true,
         appBar: MyAppBarHome(),
-        body:MyBodyStyle(child:  bodyMainContent()));
+        body: MyBodyStyle(child: bodyMainContent()));
   }
-
- 
 
   bodyMainContent() {
     return Container(
@@ -54,14 +56,15 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
-         MyDrinkOfDay(),
+          MyDrinkOfDay(),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-             MySearchButton(categorie:widget.categorie, drinks:widget.drinks),
-          //  MyFavButton(),
+                MySearchButton(
+                    categorie: widget.categorie, drinks: widget.drinks),
+                //  MyFavButton(),
               ],
             ),
           ),
@@ -70,7 +73,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
- 
   secondSectionBody() {
     return Expanded(
       child: Container(

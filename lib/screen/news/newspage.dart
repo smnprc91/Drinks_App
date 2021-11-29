@@ -18,31 +18,58 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: MyAppBar(),
         body: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Color(0xff000029),
-              backgroundBlendMode: BlendMode.srcOver,
-            ),
+         
             child: MyBodyStyle(
-                child: Container(
+                child: Padding(
+                  padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.20),
+                  
+                  child: Container(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: buildnote(),
-                ),
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: buildnote(),
+                  ),
               ),
-            ))));
+            ),
+                ))));
   }
 
   List<Widget> buildnote() {
     return widget.news.note.map((note) {
-      return Text(note,
-          style: TextStyle(
-            fontSize: 200,
-          ));
+      return
+      
+      
+      
+      
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: Colors.blueGrey,
+                      width: 1,
+                    ),
+                  ),
+                  child:  Text(note,
+            style: TextStyle(
+              fontSize: 30, color: Colors.white
+            )),
+                  ),
+      );
+      
+      
+      
+      
+      
+      
+      
+      
     }).toList();
   }
 }
