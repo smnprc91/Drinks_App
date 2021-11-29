@@ -15,9 +15,7 @@ class Bloc {
   BehaviorSubject<List<Drink>> _drinks = BehaviorSubject<List<Drink>>();
   BehaviorSubject<List<Categoria>> _categoria =
       BehaviorSubject<List<Categoria>>();
-  BehaviorSubject<List> _lezzo = BehaviorSubject<List>();
-  Sink<List> get sinkLezzo => _lezzo.sink;
-  Stream<List> get streamLezzo => _lezzo.stream;
+
 
   Sink<List<Drink>> get sinkDrinks => _drinks.sink;
   Stream<List<Drink>> get streamDrinks => _drinks.stream;
@@ -45,6 +43,6 @@ class Bloc {
     _drinks.close();
     _categoria.close();
     _drinkSelezionato.close();
-    _lezzo.close();
+
   }
 }

@@ -3,7 +3,8 @@ import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:progdrinks/raccoltaWidget/pagine%20favoriti/dettaglio.dart';
+
+import 'pagine favoriti/dettaglio.dart';
 
 class Search extends StatefulWidget {
   Search({required this.categorie, required this.drinks});
@@ -69,7 +70,6 @@ class _SearchState extends State<Search> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Dettaglio(
-                                   
                                     drink: widget.drinks[index],
                                   )));
                     },

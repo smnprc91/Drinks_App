@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/block.dart';
+import 'package:progdrinks/bloc/blocfav.dart';
+
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
@@ -40,11 +41,12 @@ class _CockTailsPageState extends State<CockTailsPage> {
     );
   }
 
-  List _selectedItems = [];
   bodyStyle(context) {
     return MyBodyStyle(child: list(context));
   }
 
+  List _selectedItems = [];
+  List<Drink> lezzo = [];
   list(context) {
     return Container(
       child: ListView.builder(
@@ -59,13 +61,13 @@ class _CockTailsPageState extends State<CockTailsPage> {
                     if (_selectedItems.contains(index)) {
                       setState(() {
                         _selectedItems.removeWhere((val) => val == index);
+                         lezzo.remove(widget.drinks[index]);
                       });
                     } else {
                       setState(() {
                         _selectedItems.add(index);
-
-                     
-                      bloc.sinkLezzo.add(widget.drinks);
+                        lezzo.add(widget.drinks[index]);
+                        bloc.sinkLezzo.add(lezzo);
                       });
                     }
                   },
@@ -167,51 +169,54 @@ class _CockTailsPageState extends State<CockTailsPage> {
                                   buildTags(context, widget.drinks[index]),
                             ),
                           ),
-                            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.05,
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                  child: Text(
-                'Ingredienti',
-                style: TextStyle(fontSize: 20, color: Colors.amber),
-              )),
-            ),
-
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.blueGrey,
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: listaingredienti(context,widget.drinks[index]),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.05,
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                  child: Text(
-                'Procedimento',
-                style: TextStyle(fontSize: 20, color: Colors.amber),
-              )),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.blueGrey,
-                  width: 1,
-                ),
-              ),
-              child: Column(
-                children: listastep(context,widget.drinks[index]),
-              ))
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Center(
+                                child: Text(
+                              'Ingredienti',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.amber),
+                            )),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(
+                                color: Colors.blueGrey,
+                                width: 1,
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: listaingredienti(
+                                  context, widget.drinks[index]),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: Colors.black.withOpacity(0.3),
+                            child: Center(
+                                child: Text(
+                              'Procedimento',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.amber),
+                            )),
+                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(
+                                  color: Colors.blueGrey,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Column(
+                                children:
+                                    listastep(context, widget.drinks[index]),
+                              ))
                         ],
                       ),
                     ),
@@ -231,6 +236,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
       );
     }).toList();
   }
+
   List<Widget> listaingredienti(BuildContext context, Drink drink) {
     return drink.ingredienti.map((ingrediente) {
       return Padding(
