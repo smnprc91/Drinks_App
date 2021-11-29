@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/screen/firstStartingPage.dart';
+import 'package:progdrinks/screen/firsttime%20introduction/firstStartingPage.dart';
 import 'package:progdrinks/services/dati/load.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

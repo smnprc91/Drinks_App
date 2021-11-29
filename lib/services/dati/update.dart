@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:progdrinks/screen/drawer/newspage.dart';
+import 'package:progdrinks/screen/news/newspage.dart';
 import 'package:progdrinks/services/xml.dart';
 
 

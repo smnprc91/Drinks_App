@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/screen/search.dart';
+import 'package:progdrinks/screen/search/search.dart';
 
 class MySearchButton extends StatefulWidget {
   const MySearchButton(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/screen/drawer/mailform.dart';
+import 'package:progdrinks/raccoltaWidget/MYcontatti.dart';
+import 'package:progdrinks/raccoltaWidget/MyHome.dart';
+import 'package:progdrinks/raccoltaWidget/MyNews.dart';
+import 'package:progdrinks/screen/mailform/mailform.dart';
 import 'package:progdrinks/services/dati/update.dart';
 
 class Drawers extends StatelessWidget {
@@ -17,54 +20,7 @@ class Drawers extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton.icon(
-                icon: Icon(
-                  Icons.home,
-                  size: 30,
-                  color: Colors.amber,
-                ),
-                label: Text(
-                  'Home',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton.icon(
-                icon: Icon(
-                  Icons.send,
-                  size: 30,
-                  color: Colors.amber,
-                ),
-                label: Text(
-                  'Contattaci',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => EmailSender()));
-                },
-              ),
-              TextButton.icon(
-                icon: Icon(
-                  Icons.campaign_rounded,
-                  size: 30,
-                  color: Colors.amber,
-                ),
-                label: Text(
-                  'Rimani Aggiornato',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Update()));
-                },
-              ),
-            ],
+            children: [MyHome(), Mycontatti(), MyNews()],
           ),
         ),
       ),
