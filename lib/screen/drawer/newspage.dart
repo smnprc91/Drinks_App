@@ -3,7 +3,7 @@ import 'package:progdrinks/Models/news.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
-//questa sezione dell app non è ancora pronta
+//TODO bisogna aggiornare la grafica e testare le dimensioni 
 
 class NewsPage extends StatefulWidget {
   final News news;
@@ -14,6 +14,7 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

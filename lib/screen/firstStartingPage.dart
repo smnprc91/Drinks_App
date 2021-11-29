@@ -10,7 +10,7 @@ class FirstStartingPage extends StatefulWidget {
   @override
   _FirstStartingPageState createState() => _FirstStartingPageState();
 }
-
+//TODO: bisogna sistemare le schermate di introduzione
 class _FirstStartingPageState extends State<FirstStartingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 

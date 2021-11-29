@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 
-import 'package:progdrinks/screen/pagine%20favoriti/dettaglio.dart';
 
 class LoadFav extends StatefulWidget {
   const LoadFav({Key? key}) : super(key: key);
@@ -32,12 +31,12 @@ class _LoadFavState extends State<LoadFav> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                             /** Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Dettaglio(
                                             drink: drinks[index],
-                                          )));
+                                          ))); */
                             },
                             child: ListTile(
                               title: GestureDetector(

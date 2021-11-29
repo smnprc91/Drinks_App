@@ -4,8 +4,10 @@ import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
-import 'pagine favoriti/dettaglio.dart';
+import 'pagina favoriti/dettaglio.dart';
 
+
+//TODO: migliorare la grafica di questa pagina(search)
 class Search extends StatefulWidget {
   Search({required this.categorie, required this.drinks});
 
@@ -66,12 +68,12 @@ class _SearchState extends State<Search> {
                     .contains(drinkcercato)
                 ? GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                     /** Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => Dettaglio(
                                     drink: widget.drinks[index],
-                                  )));
+                                  ))); */
                     },
                     child: ListTile(
                       title: Center(
