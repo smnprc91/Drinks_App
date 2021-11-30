@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "16254919133",
-    "project_id": "myapp-8994b",
-    "storage_bucket": "myapp-8994b.appspot.com"
+    "project_number": "429107168007",
+    "project_id": "myapp-f8814",
+    "storage_bucket": "myapp-f8814.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:16254919133:android:85050038b8220631dad634",
+        "mobilesdk_app_id": "1:429107168007:android:c9513a121851c09ef27ba2",
         "android_client_info": {
           "package_name": "com.example.progdrinks"
         }
       },
       "oauth_client": [
         {
-          "client_id": "16254919133-ott696p22csrtd6attabfpjul87fhitn.apps.googleusercontent.com",
+          "client_id": "429107168007-g9vjr86tts9kma6gm047n5o6cnm1h5fe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpuYhr5GD_-fPveouZGstpHnmX0HtwkGc"
+          "current_key": "AIzaSyAvaDAIVbT6r3LazY9rDyI9adpUpboB_j8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "16254919133-ott696p22csrtd6attabfpjul87fhitn.apps.googleusercontent.com",
+              "client_id": "429107168007-g9vjr86tts9kma6gm047n5o6cnm1h5fe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

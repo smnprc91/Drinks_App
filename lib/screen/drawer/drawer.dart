@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/raccoltaWidget/MYcontatti.dart';
 import 'package:progdrinks/raccoltaWidget/MyHome.dart';
 import 'package:progdrinks/raccoltaWidget/MyNews.dart';
-import 'package:progdrinks/screen/mailform/mailform.dart';
-import 'package:progdrinks/services/dati/update.dart';
+
 
 class Drawers extends StatelessWidget {
   const Drawers({Key? key}) : super(key: key);
