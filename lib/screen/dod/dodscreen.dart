@@ -9,9 +9,11 @@ class DodScreen extends StatefulWidget {
   _DodScreenState createState() => _DodScreenState();
 }
 //TODO: finire di integrare i dati dal model e creare la grafica
+
 class _DodScreenState extends State<DodScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: MyBodyStyle(
             child: SingleChildScrollView(
@@ -131,9 +133,10 @@ class _DodScreenState extends State<DodScreen> {
         ),
       );
     }).toList();
+
+ 
   }
 }
-
 
 
 
