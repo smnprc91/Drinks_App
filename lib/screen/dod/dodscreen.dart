@@ -8,9 +8,12 @@ class DodScreen extends StatefulWidget {
   _DodScreenState createState() => _DodScreenState();
 }
 //TODO: finire di integrare i dati dal model e creare la grafica
+
 class _DodScreenState extends State<DodScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(widget.daydrink.titolo),);
+    return Container(
+      child: Text(widget.daydrink.titolo),
+    );
   }
 }

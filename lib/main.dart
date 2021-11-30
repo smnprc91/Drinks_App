@@ -11,6 +11,9 @@ void main() async {
   runApp(MyApp());
 }
 
+//TODO: inserire nel server i dati giusti , formattare gli xml , scegliere un formatto per le foto, e creare una cartella per le foto
+//TODO:aggiungere la possibilità di switchare il tema dell'app , il bottone va inserito nel drawer.
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
