@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
@@ -10,7 +8,6 @@ import 'package:progdrinks/raccoltaWidget/MyDrinkOfDaySection.dart';
 import 'package:progdrinks/raccoltaWidget/MySearchButton.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-import 'package:progdrinks/services/xmldod.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({required this.categorie, required this.drinks});
@@ -25,7 +22,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-
     super.initState();
   }
 
