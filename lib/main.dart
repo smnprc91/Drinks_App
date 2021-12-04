@@ -5,7 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 int? isviewed;
 void main() async {
-  //CIAONE 23345646445747547
+  //CIAONE 23345646445747547orcamiseria
+
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isviewed = prefs.getInt('onBoard');
