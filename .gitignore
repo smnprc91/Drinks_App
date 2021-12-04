@@ -49,6 +49,7 @@ Latest commit d763127 on 15 Oct
 *.ipr
 *.iws
 .idea/
+.idea/*
 
 # Visual Studio Code related
 .classpath
