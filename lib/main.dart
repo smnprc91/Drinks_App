@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/screen/firstStartingPage.dart';
-import 'package:progdrinks/screen/homepage.dart';
+import 'package:progdrinks/screen/firsttime%20introduction/firstStartingPage.dart';
+import 'package:progdrinks/services/dati/load.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isviewed;
-void main() async {
-  //CIAONE 23345646445747547orcamiseria dio
 
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isviewed = prefs.getInt('onBoard');
@@ -17,12 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: isviewed != 0 ? FirstStartingPage() : HomePage(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: isviewed != 0 ? FirstStartingPage() : Load());
   }
 }
