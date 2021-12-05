@@ -37,12 +37,15 @@ class _DrawerItemState extends State<DrawerItem> {
           color: _isCurrentRoute(context) ? theme.primaryColor : null),
       onTap: () {
         if (_navigationIsAllowed(context)) {
-          Navigator.pop(context);
-          Navigator.of(context).pushNamed(widget.routeName!);
+          
+            Navigator.pop(context);
+          Navigator.of(context).pushNamedAndRemoveUntil(widget.routeName!,
+              (Route<dynamic> route) => !route.hasActiveRouteBelow);
         } else {
           if (widget.routeName == null) {
-            // SystemNavigator.pop(); per uscire dall' app
-            Navigator.pop(context); // per chiudere il drawer
+            SystemNavigator.pop();
+          } else {
+            Navigator.pop(context);
           }
         }
       },

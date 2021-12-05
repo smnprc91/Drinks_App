@@ -28,13 +28,7 @@ class Drawers extends StatelessWidget {
         children: [
           _buildDrawerHeader(context),
           ..._drawerItems,
-          ListTile(
-            title: Text('Esci'),
-            leading: Icon(Icons.exit_to_app),
-            onTap: (){
-              SystemNavigator.pop();
-            },
-          ),
+         
         ],
       ),
     );
