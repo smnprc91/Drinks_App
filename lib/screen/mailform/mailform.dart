@@ -6,6 +6,7 @@ import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);
+  static const String routeName = 'contacts';
 
   @override
   _EmailSenderState createState() => _EmailSenderState();

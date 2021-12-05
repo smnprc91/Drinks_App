@@ -11,6 +11,7 @@ import 'package:progdrinks/screen/drawer/drawer.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({required this.categorie, required this.drinks});
+  static const String routeName = 'home';
 
   final List<Categoria> categorie;
   final List<Drink> drinks;

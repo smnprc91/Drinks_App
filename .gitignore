@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@danielefois
-flutter
-/
-flutter
-Public
-3.6k
-133k
-19.7k
-Code
-Issues
-5k+
-Pull requests
-192
-Actions
-Projects
-166
-Wiki
-Security
-Insights
-flutter/.gitignore
-@blasten
-blasten Bump targetSdkVersion to 31 and organize static values (#91719)
-Latest commit d763127 on 15 Oct
- History
- 21 contributors
-118 lines (107 sloc)  2.16 KB
-
 # Miscellaneous
 *.class
 *.lock
@@ -50,6 +16,7 @@ Latest commit d763127 on 15 Oct
 *.iws
 .idea/
 .idea/*
+.idea
 
 # Visual Studio Code related
 .classpath
@@ -104,6 +71,8 @@ unlinked_spec.ds
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+android/
+android/*
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -151,15 +120,3 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
