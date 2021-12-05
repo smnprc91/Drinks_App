@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:progdrinks/services/dati/load.dart';
+import 'package:progdrinks/screen/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstStartingPage extends StatefulWidget {
@@ -16,9 +16,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
 
   void _onIntroEnd(context) {
     _storeOnboardInfo();
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => Load()),
-    );
+    Navigator.of(context).pushReplacementNamed(HomePage.routeName);
   }
 
   _storeOnboardInfo() async {

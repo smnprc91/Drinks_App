@@ -1,30 +1,27 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/bloc/bloc.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 import 'package:progdrinks/raccoltaWidget/MyDrinkOfDaySection.dart';
-import 'package:progdrinks/raccoltaWidget/MyFavButton.dart';
 import 'package:progdrinks/raccoltaWidget/MySearchButton.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({required this.categorie, required this.drinks});
   static const String routeName = 'home';
-
-  final List<Categoria> categorie;
-  final List<Drink> drinks;
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final Bloc bloc = new Bloc();
+
   @override
   void initState() {
     super.initState();
+    bloc.caricaDati();
   }
 
   @override
@@ -33,17 +30,32 @@ class _HomePageState extends State<HomePage> {
         drawer: Drawers(),
         extendBodyBehindAppBar: true,
         appBar: MyAppBarHome(),
-        body: MyBodyStyle(child: bodyMainContent()));
+        body: StreamBuilder(
+            stream: bloc.streamCategoria,
+            builder: (context, risultatoDelloStream) {
+              if (risultatoDelloStream.hasData) {
+                List<Categoria> categorie = risultatoDelloStream.data as List<Categoria>;
+                return bodyMainContent(categorie);
+              } else {
+                return Container(
+                  child: Center(
+                    child: CircularProgressIndicator()
+                  )
+                );
+              }
+            }
+            )
+    );
   }
 
-  bodyMainContent() {
+  bodyMainContent(List<Categoria> categorie) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           firstSectionBody(),
-          secondSectionBody(),
+          secondSectionBody(categorie),
         ],
       ),
     );
@@ -55,38 +67,38 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           MyDrinkOfDay(),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MySearchButton(
-                    categorie: widget.categorie, drinks: widget.drinks),
-             //   MyFavButton(),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 10.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //     children: [
+          //       MySearchButton(
+          //           categorie: widget.categorie, drinks: widget.drinks),
+          //       //   MyFavButton(),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
   }
 
-  secondSectionBody() {
+  secondSectionBody(List<Categoria> categorie) {
     return Expanded(
       child: Container(
           color: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              firstColumnSection(),
+              firstColumnSection(categorie),
             ],
           )),
     );
   }
 
-  firstColumnSection() {
+  firstColumnSection(List<Categoria> categorie) {
     return CarouselSlider.builder(
-        itemCount: widget.categorie.length,
+        itemCount: categorie.length,
         options: CarouselOptions(
           autoPlay: true,
           aspectRatio: 2.0,
@@ -103,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => CockTailsPage(
-                            drinks: widget.categorie[index].drinks,
+                            drinks: categorie[index].drinks,
                           )));
             },
             child: Container(
@@ -116,7 +128,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Stack(children: [
                 Center(
-                    child: Image.network(widget.categorie[index].img,
+                    child: Image.network(categorie[index].img,
                         fit: BoxFit.cover,
                         width: MediaQuery.of(context).size.width)),
                 Container(
@@ -130,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            widget.categorie[index].titolo,
+                            categorie[index].titolo,
                             style: TextStyle(fontSize: 30, color: Colors.amber),
                           ),
                         ),
