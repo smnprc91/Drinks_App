@@ -13,7 +13,7 @@ class MyFavButton extends StatefulWidget {
 }
 
 class _MyFavButtonState extends State<MyFavButton> {
-  get savedWords => null;
+
 
   @override
   Widget build(BuildContext context) {

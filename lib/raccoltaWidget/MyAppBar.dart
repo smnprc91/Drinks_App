@@ -32,7 +32,7 @@ class _MyAppBarState extends State<MyAppBar> {
                 size: 30,
               ),
               onPressed: () {
-                Navigator.pop(context);
+             Scaffold.of(context).openDrawer();
               },
             ),
           );

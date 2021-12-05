@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
+import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/screen/pagina%20favoriti/dettaglio.dart';
 
 class FavScreen extends StatefulWidget {
-  const FavScreen({Key? key, }) : super(key: key);
+  const FavScreen({
+    Key? key,
+  }) : super(key: key);
   static const String routeName = 'favourites';
 
-  
   @override
   _FavScreenState createState() => _FavScreenState();
 }
 
 class _FavScreenState extends State<FavScreen> {
-   final Bloc bloc = new Bloc();
+  final Bloc bloc = new Bloc();
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +37,12 @@ class _FavScreenState extends State<FavScreen> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                             /** Navigator.push(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Dettaglio(
                                             drink: drinks[index],
-                                          ))); */
+                                          )));
                             },
                             child: ListTile(
                               title: GestureDetector(
@@ -46,7 +51,13 @@ class _FavScreenState extends State<FavScreen> {
                           );
                         })));
           } else {
-            return Container();
+            return Scaffold(
+            drawer: Drawers(),
+            appBar: MyAppBar(),
+              body: Container(
+              color: Colors.blue,
+            ),
+            );
           }
         });
   }

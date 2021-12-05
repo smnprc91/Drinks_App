@@ -45,8 +45,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
     return MyBodyStyle(child: list(context));
   }
 
-  //List _selectedItems = [];
-  //List<Drink> lezzo = [];
+  List _selectedItems = [];
+  List<Drink> lezzo = [];
   list(context) {
     return Container(
       child: ListView.builder(
@@ -97,8 +97,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
                       ),
                       //TODO: Finire di implementare il sistema di selezione favoriti, attualmente fuziona ma bisgona salvare le scelte
                       
-                                      /**
-                  *      GestureDetector(
+                                    
+                     GestureDetector(
                         onTap: () {
                           if (_selectedItems.contains(index)) {
                             setState(() {
@@ -134,8 +134,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           ),
                         ),
                       ),
-                  */
-                      Container(
+                 Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.05,
                         color: Colors.black.withOpacity(0.3),

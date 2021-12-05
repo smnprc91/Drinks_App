@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/news.dart';
 import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
+import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
 import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
 //TODO bisogna aggiornare la grafica e testare le dimensioni 
@@ -19,7 +20,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: MyAppBar(),
+      appBar: MyAppBarHome(),
         body: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
