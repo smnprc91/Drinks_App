@@ -6,7 +6,7 @@ import 'package:progdrinks/bloc/bloc.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-import 'package:progdrinks/widgets/myappbarhome.dart';
+import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mydrinkofdaysection.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         drawer: Drawers(),
         extendBodyBehindAppBar: true,
-        appBar: MyAppBarHome(),
+        appBar:MyAppBar(),
         body: StreamBuilder(
             stream: bloc.streamCategoria,
             builder: (context, risultatoDelloStream) {

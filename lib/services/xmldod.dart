@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart' as xml;
 import 'dart:async' show Future;
-import 'package:progdrinks/Models/drinksofday.dart';
+import 'package:progdrinks/models/drinksofday.dart';
 
 class XmlFetchService {
 

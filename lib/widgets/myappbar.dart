@@ -12,32 +12,11 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
+    
       elevation: 0,
       backgroundColor: Colors.transparent,
       centerTitle: true,
-      title: Builder(
-        builder: (context) {
-          return Container(
-            height: 60,
-            width: 60,
-            decoration: new BoxDecoration(
-                color: Colors.blueGrey.withOpacity(0.4),
-                borderRadius: new BorderRadius.all(Radius.circular(20))),
-            alignment: Alignment.center,
-            child: IconButton(
-              icon: const Icon(
-                Icons.home_filled,
-                color: Colors.amber,
-                size: 30,
-              ),
-              onPressed: () {
-             Scaffold.of(context).openDrawer();
-              },
-            ),
-          );
-        },
-      ),
+  
     );
   }
 }

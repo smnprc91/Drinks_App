@@ -28,6 +28,8 @@ class _FavScreenState extends State<FavScreen> {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
 
             return Scaffold(
+              appBar: MyAppBar(),
+               drawer: Drawers(),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,

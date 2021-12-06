@@ -16,7 +16,7 @@ class DayDrinks {
   List<String> ingredienti;
   List<String> steps;
 
-//TODO: Finire di aggiornare il model
+
   static DayDrinks createFromXml(xml.XmlElement node) {
     return DayDrinks(
       node.findElements('img').first.text,
