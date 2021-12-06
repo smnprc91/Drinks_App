@@ -1,13 +1,12 @@
-
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drinksofday.dart';
+import 'package:progdrinks/services/xmldod.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
 class DodScreen extends StatefulWidget {
-  const DodScreen({Key? key, required this.daydrink}) : super(key: key);
-  final DayDrinks daydrink;
   @override
   _DodScreenState createState() => _DodScreenState();
 }
@@ -16,99 +15,111 @@ class DodScreen extends StatefulWidget {
 class _DodScreenState extends State<DodScreen> {
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: MyAppBar(),
-        body: MyBodyStyle(
-            child: SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.036),
-            child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(
-                    color: Colors.blueGrey,
-                    width: 1,
+    return FutureBuilder(
+        future: XmlFetchService.fetchDrinkdayXml(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            DayDrinks daydrink = snapshot.data;
+            inspect(daydrink);
+            return Scaffold(
+                appBar: MyAppBar(),
+                body: MyBodyStyle(
+                    child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.036),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(
+                                color: Colors.blueGrey,
+                                width: 1,
+                              ),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              width: MediaQuery.of(context).size.width,
+                              child: Image.network(
+                                daydrink.img,
+                                fit: BoxFit.cover,
+                              ),
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          daydrink.titolo,
+                          style: TextStyle(fontSize: 30, color: Colors.amber),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Difficoltà : ' + daydrink.difficolta,
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.blueGrey),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Center(
+                            child: Text(
+                          'Ingredienti',
+                          style: TextStyle(fontSize: 20, color: Colors.amber),
+                        )),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: listaingredienti(daydrink),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Center(
+                            child: Text(
+                          'Procedimento',
+                          style: TextStyle(fontSize: 20, color: Colors.amber),
+                        )),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: Colors.blueGrey,
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          children: listastep(daydrink),
+                        ),
+                      )
+                    ],
                   ),
-                ),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.network(
-                    widget.daydrink.img,
-                    fit: BoxFit.cover,
-                  ),
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.daydrink.titolo,
-              style: TextStyle(fontSize: 30, color: Colors.amber),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Difficoltà : ' + widget.daydrink.difficolta,
-              style: TextStyle(fontSize: 20, color: Colors.blueGrey),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.05,
-            color: Colors.black.withOpacity(0.3),
-            child: Center(
-                child: Text(
-              'Ingredienti',
-              style: TextStyle(fontSize: 20, color: Colors.amber),
-            )),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(
-                color: Colors.blueGrey,
-                width: 1,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: listaingredienti(),
-            ),
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.05,
-            color: Colors.black.withOpacity(0.3),
-            child: Center(
-                child: Text(
-              'Procedimento',
-              style: TextStyle(fontSize: 20, color: Colors.amber),
-            )),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(
-                color: Colors.blueGrey,
-                width: 1,
-              ),
-            ),
-            child: Column(
-              children: listastep(),
-            ),
-          )
-        ],
-      ),
-    )));
+                )));
+          } else {
+            return Container(
+              color: Colors.white,
+              child: Center(child: CircularProgressIndicator()));
+          }
+        });
   }
 
-  List<Widget> listaingredienti() {
-    return widget.daydrink.ingredienti.map((ingrediente) {
+  List<Widget> listaingredienti(DayDrinks daydrink) {
+    return daydrink.ingredienti.map((ingrediente) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -122,8 +133,8 @@ class _DodScreenState extends State<DodScreen> {
     }).toList();
   }
 
-  List<Widget> listastep() {
-    return widget.daydrink.steps.map((step) {
+  List<Widget> listastep(DayDrinks daydrink) {
+    return daydrink.steps.map((step) {
       return Container(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -132,10 +143,5 @@ class _DodScreenState extends State<DodScreen> {
         ),
       );
     }).toList();
-
- 
   }
 }
-
-
-

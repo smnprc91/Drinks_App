@@ -6,7 +6,7 @@ import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-
+import 'package:progdrinks/screen/drawer/drawer.dart';
 //TODO bisogna aggiornare la grafica e testare le dimensioni
 
 class NewsPage extends StatefulWidget {
@@ -27,6 +27,7 @@ class _NewsPageState extends State<NewsPage> {
             return Scaffold(
                 extendBodyBehindAppBar: true,
                 appBar: MyAppBar(),
+                drawer: Drawers(),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -44,7 +45,10 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ))));
           } else {
-            return Container();
+            return Container(
+              color: Colors.white,
+             child: Center(child: CircularProgressIndicator()),
+            );
           }
         });
   }

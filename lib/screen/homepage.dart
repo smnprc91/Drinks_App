@@ -7,7 +7,7 @@ import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
-import 'package:progdrinks/widgets/mydrinkofdaysection.dart';
+import 'package:progdrinks/screen/mydrinkofdaysection.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home';

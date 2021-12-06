@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/services/data/loadday.dart';
+import 'package:progdrinks/screen/dod/dodscreen.dart';
+
 
 
 
@@ -19,7 +20,7 @@ class _MyDrinkOfDayState extends State<MyDrinkOfDay> {
              onTap: () {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (BuildContext context) => LoadDay()
+        builder: (BuildContext context) =>DodScreen()
       ),
     );
       },
