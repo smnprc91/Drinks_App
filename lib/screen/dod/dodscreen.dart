@@ -1,6 +1,8 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/drinksofday.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+import 'package:progdrinks/models/drinksofday.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
 class DodScreen extends StatefulWidget {
   const DodScreen({Key? key, required this.daydrink}) : super(key: key);

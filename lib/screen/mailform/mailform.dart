@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+
 import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/widgets/myappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
 
 class EmailSender extends StatefulWidget {

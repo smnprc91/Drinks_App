@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/news.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+import 'package:progdrinks/widgets/myappbarhome.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
 //TODO bisogna aggiornare la grafica e testare le dimensioni 
 

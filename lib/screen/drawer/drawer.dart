@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:progdrinks/screen/drawer/DrawerItem.dart';
+import 'package:progdrinks/screen/detailsscreen/favscreen.dart';
+import 'package:progdrinks/screen/drawer/drawerItem.dart';
 import 'package:progdrinks/screen/homepage.dart';
 import 'package:progdrinks/screen/mailform/mailform.dart';
-import 'package:progdrinks/screen/pagina%20favoriti/FavScreen.dart';
+
 
 class Drawers extends StatelessWidget {
   Drawers({Key? key}) : super(key: key);

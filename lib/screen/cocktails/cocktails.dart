@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/blocfav.dart';
 
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 //TODO : pulire il codice
+import 'package:flutter/material.dart';
+import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/widgets/myappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
+
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks});
   final List<Drink> drinks;

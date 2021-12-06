@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
+import 'package:progdrinks/screen/detailsscreen/details.dart';
+import 'package:progdrinks/widgets/myappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
-import '../pagina favoriti/dettaglio.dart';
+
 
 
 //TODO: migliorare la grafica di questa pagina(search)

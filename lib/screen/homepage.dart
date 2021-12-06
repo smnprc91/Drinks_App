@@ -1,12 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/categoria.dart';
 import 'package:progdrinks/bloc/bloc.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBarHome.dart';
-import 'package:progdrinks/raccoltaWidget/MyDrinkOfDaySection.dart';
-import 'package:progdrinks/raccoltaWidget/MySearchButton.dart';
+import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/widgets/myappbarhome.dart';
+import 'package:progdrinks/widgets/mydrinkofdaysection.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home';
@@ -34,18 +33,14 @@ class _HomePageState extends State<HomePage> {
             stream: bloc.streamCategoria,
             builder: (context, risultatoDelloStream) {
               if (risultatoDelloStream.hasData) {
-                List<Categoria> categorie = risultatoDelloStream.data as List<Categoria>;
+                List<Categoria> categorie =
+                    risultatoDelloStream.data as List<Categoria>;
                 return bodyMainContent(categorie);
               } else {
                 return Container(
-                  child: Center(
-                    child: CircularProgressIndicator()
-                  )
-                );
+                    child: Center(child: CircularProgressIndicator()));
               }
-            }
-            )
-    );
+            }));
   }
 
   bodyMainContent(List<Categoria> categorie) {
