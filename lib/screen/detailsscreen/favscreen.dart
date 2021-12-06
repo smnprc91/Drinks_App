@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';

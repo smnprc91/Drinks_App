@@ -1,13 +1,15 @@
-
+import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/bloc.dart';
 import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/screen/mydrinkofdaysection.dart';
+import 'package:progdrinks/widgets/mysearchbutton.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home';
@@ -30,14 +32,23 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         drawer: Drawers(),
         extendBodyBehindAppBar: true,
-        appBar:MyAppBar(),
+        appBar: MyAppBar(),
         body: StreamBuilder(
             stream: bloc.streamCategoria,
             builder: (context, risultatoDelloStream) {
               if (risultatoDelloStream.hasData) {
                 List<Categoria> categorie =
                     risultatoDelloStream.data as List<Categoria>;
-                return bodyMainContent(categorie);
+
+                var drinks= categorie
+                .map((Categoria c) => c.drinks)
+                .toList()
+                .expand((e) => e)
+                .toList();
+            
+
+                inspect(drinks);
+                return bodyMainContent(categorie, drinks);
               } else {
                 return Container(
                     child: Center(child: CircularProgressIndicator()));
@@ -45,36 +56,35 @@ class _HomePageState extends State<HomePage> {
             }));
   }
 
-  bodyMainContent(List<Categoria> categorie) {
+  bodyMainContent(List<Categoria> categorie,drinks ) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          firstSectionBody(),
+          firstSectionBody(drinks),
           secondSectionBody(categorie),
         ],
       ),
     );
   }
 
-  firstSectionBody() {
+  firstSectionBody(List<Drink>drinks) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       child: Column(
         children: [
           MyDrinkOfDay(),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 10.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: [
-          //       MySearchButton(
-          //           categorie: widget.categorie, drinks: widget.drinks),
-          //       //   MyFavButton(),
-          //     ],
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MySearchButton(drinks: drinks),
+                //   MyFavButton(),
+              ],
+            ),
+          ),
         ],
       ),
     );

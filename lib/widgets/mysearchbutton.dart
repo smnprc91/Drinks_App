@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/models/drink.dart';
+
 import 'package:progdrinks/screen/search/search.dart';
 
 class MySearchButton extends StatefulWidget {
   const MySearchButton(
-      {Key? key, required this.categorie, required this.drinks})
+      {Key? key, required this.drinks})
       : super(key: key);
 
-  final List<Categoria> categorie;
   final List<Drink> drinks;
   @override
   _MySearchButtonState createState() => _MySearchButtonState();
@@ -26,7 +25,7 @@ class _MySearchButtonState extends State<MySearchButton> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Search(
-                          categorie: widget.categorie,
+                      
                           drinks: widget.drinks,
                         )));
           },
