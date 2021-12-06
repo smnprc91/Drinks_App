@@ -1,6 +1,7 @@
-import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/drink.dart';
+import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/services/xml.dart';
+
 import 'package:rxdart/rxdart.dart';
 
 class Bloc {
@@ -15,7 +16,6 @@ class Bloc {
   BehaviorSubject<List<Drink>> _drinks = BehaviorSubject<List<Drink>>();
   BehaviorSubject<List<Categoria>> _categoria =
       BehaviorSubject<List<Categoria>>();
-
 
   Sink<List<Drink>> get sinkDrinks => _drinks.sink;
   Stream<List<Drink>> get streamDrinks => _drinks.stream;
@@ -37,12 +37,9 @@ class Bloc {
     sinkCategoria.add(categorie);
   }
 
-
-
   void dispose() {
     _drinks.close();
     _categoria.close();
     _drinkSelezionato.close();
-
   }
 }
