@@ -8,7 +8,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
-import 'package:progdrinks/screen/mydrinkofdaysection.dart';
+import 'package:progdrinks/screen/dod/mydrinkofdaysection.dart';
 import 'package:progdrinks/screen/search/mysearchbutton.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,11 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: Drawers(),
-        extendBodyBehindAppBar: true,
-        appBar: MyAppBar(),
-        body: StreamBuilder(
+    return  StreamBuilder(
             stream: bloc.streamCategoria,
             builder: (context, risultatoDelloStream) {
               if (risultatoDelloStream.hasData) {
@@ -48,16 +44,22 @@ class _HomePageState extends State<HomePage> {
             
 
                 inspect(drinks);
-                return bodyMainContent(categorie, drinks);
+                return Scaffold(
+                  extendBodyBehindAppBar: true,
+                  appBar: MyAppBar(child :MySearchButton(drinks: drinks,)),
+                  drawer: Drawers(),
+                  body: bodyMainContent(categorie, drinks),
+                );
               } else {
                 return Container(
                     child: Center(child: CircularProgressIndicator()));
               }
-            }));
+            });
   }
 
-  bodyMainContent(List<Categoria> categorie,drinks ) {
-    return Container(
+ 
+  bodyMainContent(List<Categoria> categorie,drinks){
+ return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -67,29 +69,20 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-  }
 
+  }
   firstSectionBody(List<Drink>drinks) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: [
           MyDrinkOfDay(),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MySearchButton(drinks: drinks),
-             
-              ],
-            ),
-          ),
+       
         ],
       ),
     );
   }
-
+ 
   secondSectionBody(List<Categoria> categorie) {
     return Expanded(
       child: Container(
@@ -160,4 +153,5 @@ class _HomePageState extends State<HomePage> {
           );
         });
   }
+  
 }

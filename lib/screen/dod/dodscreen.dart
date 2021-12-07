@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/services/xmldod.dart';
-import 'package:progdrinks/widgets/myappbar.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
 class DodScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _DodScreenState extends State<DodScreen> {
             DayDrinks daydrink = snapshot.data;
             inspect(daydrink);
             return Scaffold(
-                appBar: MyAppBar(),
+                appBar: MyAllPagesAppBar(),
                 body: MyBodyStyle(
                     child: SingleChildScrollView(
                   child: Column(

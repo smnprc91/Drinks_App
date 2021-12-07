@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
@@ -57,13 +58,12 @@ class _EmailSenderState extends State<EmailSender> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        drawer: Drawers(),
-        appBar: buildAppBar(),
+         appBar: MyAllPagesAppBar(),
         body: buildbodystyle());
   }
 
   buildAppBar() {
-    return MyAppBar();
+    return MyAllPagesAppBar();
   }
 
   buildbodystyle() {

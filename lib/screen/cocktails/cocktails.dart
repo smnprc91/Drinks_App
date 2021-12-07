@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
@@ -37,7 +38,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: MyAppBar(),
+      appBar: MyAllPagesAppBar(),
       body: bodyStyle(context),
     );
   }

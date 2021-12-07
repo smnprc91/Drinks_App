@@ -3,6 +3,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 
 
@@ -28,8 +29,8 @@ class _FavScreenState extends State<FavScreen> {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
 
             return Scaffold(
-              appBar: MyAppBar(),
-               drawer: Drawers(),
+              appBar: MyAllPagesAppBar(),
+           
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -54,8 +55,8 @@ class _FavScreenState extends State<FavScreen> {
                         })));
           } else {
             return Scaffold(
-            drawer: Drawers(),
-            appBar: MyAppBar(),
+        
+             appBar: MyAllPagesAppBar(),
               body: Container(
               color: Colors.blue,
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
@@ -25,7 +26,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: MyAppBar(),
+        appBar: MyAllPagesAppBar(),
         body: MyBodyStyle(
           child: buildbodystyle(),
         ));

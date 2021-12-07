@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
 class Dettaglio extends StatefulWidget {
@@ -20,97 +21,92 @@ class _DettaglioState extends State<Dettaglio> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
+    return Scaffold( 
+       appBar: MyAllPagesAppBar(),
         body: MyBodyStyle(
             child: SingleChildScrollView(
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.036),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(
-                      color: Colors.blueGrey,
-                      width: 1,
-                    ),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.036),
+            child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(
+                    color: Colors.blueGrey,
+                    width: 1,
                   ),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.width,
-                    child: Image.network(
-                      widget.drink.img,
-                      fit: BoxFit.cover,
-                    ),
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                widget.drink.titolo,
-                style: TextStyle(fontSize: 30, color: Colors.amber),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Difficoltà : ' + widget.drink.difficolta,
-                style: TextStyle(fontSize: 20, color: Colors.blueGrey),
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.05,
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                  child: Text(
-                'Ingredienti',
-                style: TextStyle(fontSize: 20, color: Colors.amber),
-              )),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.blueGrey,
-                  width: 1,
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: listaingredienti(),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.network(
+                    widget.drink.img,
+                    fit: BoxFit.cover,
+                  ),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.drink.titolo,
+              style: TextStyle(fontSize: 30, color: Colors.amber),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Difficoltà : ' + widget.drink.difficolta,
+              style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.05,
+            color: Colors.black.withOpacity(0.3),
+            child: Center(
+                child: Text(
+              'Ingredienti',
+              style: TextStyle(fontSize: 20, color: Colors.amber),
+            )),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(
+                color: Colors.blueGrey,
+                width: 1,
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.05,
-              color: Colors.black.withOpacity(0.3),
-              child: Center(
-                  child: Text(
-                'Procedimento',
-                style: TextStyle(fontSize: 20, color: Colors.amber),
-              )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: listaingredienti(),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.blueGrey,
-                  width: 1,
-                ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.05,
+            color: Colors.black.withOpacity(0.3),
+            child: Center(
+                child: Text(
+              'Procedimento',
+              style: TextStyle(fontSize: 20, color: Colors.amber),
+            )),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(
+                color: Colors.blueGrey,
+                width: 1,
               ),
-              child: Column(
-                children: listastep(),
-              ),
-            )
-          ],
-        ),
+            ),
+            child: Column(
+              children: listastep(),
+            ),
+          )
+        ],
       ),
     )));
   }
