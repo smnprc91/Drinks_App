@@ -47,7 +47,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
   }
 
   List _selectedItems = [];
-  List<Drink> lezzo = [];
+  List<Drink> favdrink = [];
   list(context) {
     return Container(
       child: ListView.builder(
@@ -104,13 +104,13 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           if (_selectedItems.contains(index)) {
                             setState(() {
                               _selectedItems.removeWhere((val) => val == index);
-                              lezzo.remove(widget.drinks[index]);
+                              favdrink.remove(widget.drinks[index]);
                             });
                           } else {
                             setState(() {
                               _selectedItems.add(index);
-                              lezzo.add(widget.drinks[index]);
-                              bloc.sinkLezzo.add(lezzo);
+                           favdrink.add(widget.drinks[index]);
+                              bloc.sinkFavdrink.add(favdrink);
                             });
                           }
                         },

@@ -9,14 +9,14 @@ class Bloc {
 
   Bloc._internal();
   
-  BehaviorSubject<List> _lezzo = BehaviorSubject();
-  Sink<List> get sinkLezzo => _lezzo.sink;
-  Stream<List> get streamLezzo => _lezzo.stream;
+  BehaviorSubject<List> _favdrink = BehaviorSubject();
+  Sink<List> get sinkFavdrink => _favdrink.sink;
+  Stream<List> get streamFavdrink => _favdrink.stream;
 
 
 
   void dispose() {
    
-    _lezzo.close();
+    _favdrink.close();
   }
 }

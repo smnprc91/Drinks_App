@@ -9,7 +9,7 @@ import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/screen/mydrinkofdaysection.dart';
-import 'package:progdrinks/widgets/mysearchbutton.dart';
+import 'package:progdrinks/screen/search/mysearchbutton.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home';
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MySearchButton(drinks: drinks),
-                //   MyFavButton(),
+             
               ],
             ),
           ),

@@ -22,7 +22,7 @@ class _FavScreenState extends State<FavScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: bloc.streamLezzo,
+        stream: bloc.streamFavdrink,
         builder: (context, risultatoDelloStream) {
           if (risultatoDelloStream.hasData) {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;

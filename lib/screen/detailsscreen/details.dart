@@ -3,8 +3,6 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
-
-
 class Dettaglio extends StatefulWidget {
   const Dettaglio({required this.drink});
 
@@ -19,10 +17,11 @@ final Bloc bloc = new Bloc();
 class _DettaglioState extends State<Dettaglio> {
   bool selected = true;
   var listadrink;
-  List<Drink> lezzo = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
         body: MyBodyStyle(
             child: SingleChildScrollView(
       child: GestureDetector(
