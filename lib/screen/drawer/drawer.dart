@@ -18,7 +18,10 @@ class Drawers extends StatelessWidget {
         name: 'Contattaci',
         icon: Icons.contact_phone,
         routeName: EmailSender.routeName),
-    DrawerItem(name: 'news', icon: Icons.new_label_sharp, routeName: NewsPage.routeName),
+    DrawerItem(
+        name: 'news',
+        icon: Icons.new_label_sharp,
+        routeName: NewsPage.routeName),
   ];
 
   @override

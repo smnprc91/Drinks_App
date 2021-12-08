@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
-import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
 class CockTailsPage extends StatefulWidget {

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/bloc.dart';
@@ -7,7 +6,6 @@ import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-import 'package:progdrinks/widgets/myappbar.dart';
 import 'package:progdrinks/screen/dod/mydrinkofdaysection.dart';
 import 'package:progdrinks/screen/search/mysearchbutton.dart';
 
@@ -29,37 +27,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return  StreamBuilder(
-            stream: bloc.streamCategoria,
-            builder: (context, risultatoDelloStream) {
-              if (risultatoDelloStream.hasData) {
-                List<Categoria> categorie =
-                    risultatoDelloStream.data as List<Categoria>;
+    
 
-                var drinks= categorie
+    return StreamBuilder(
+        stream: bloc.streamCategoria,
+        builder: (context, risultatoDelloStream) {
+          if (risultatoDelloStream.hasData) {
+            List<Categoria> categorie =
+                risultatoDelloStream.data as List<Categoria>;
+
+            var drinks = categorie
                 .map((Categoria c) => c.drinks)
                 .toList()
                 .expand((e) => e)
                 .toList();
-            
 
-                inspect(drinks);
-                return Scaffold(
-                  extendBodyBehindAppBar: true,
-                  appBar: MyAppBar(child :MySearchButton(drinks: drinks,)),
-                  drawer: Drawers(),
-                  body: bodyMainContent(categorie, drinks),
-                );
-              } else {
-                return Container(
-                    child: Center(child: CircularProgressIndicator()));
-              }
-            });
+            return new Scaffold(
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+               iconTheme: IconThemeData(color: Colors.amber) ,
+                actions: [MySearchButton(drinks: drinks)],
+              ),
+              drawer: Drawers(),
+              body: bodyMainContent(categorie, drinks),
+            );
+          } else {
+            return Container(child: Center(child: CircularProgressIndicator()));
+          }
+        });
   }
 
- 
-  bodyMainContent(List<Categoria> categorie,drinks){
- return Container(
+  bodyMainContent(List<Categoria> categorie, drinks) {
+    return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -69,20 +70,19 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
-
   }
-  firstSectionBody(List<Drink>drinks) {
+
+  firstSectionBody(List<Drink> drinks) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.5,
       child: Column(
         children: [
           MyDrinkOfDay(),
-       
         ],
       ),
     );
   }
- 
+
   secondSectionBody(List<Categoria> categorie) {
     return Expanded(
       child: Container(
@@ -153,5 +153,4 @@ class _HomePageState extends State<HomePage> {
           );
         });
   }
-  
 }
