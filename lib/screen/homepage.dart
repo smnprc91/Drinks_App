@@ -14,6 +14,7 @@ import 'package:progdrinks/screen/dod/dodscreen.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 
 import 'package:progdrinks/screen/search/mysearchbutton.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = 'home';
@@ -26,7 +27,12 @@ class _HomePageState extends State<HomePage> {
   final Bloc bloc = new Bloc();
 
   int currentPage = 0;
+  late TutorialCoachMark tutorialCoachMark;
+  List<TargetFocus> targets = <TargetFocus>[];
 
+  GlobalKey keyButton = GlobalKey();
+  GlobalKey keyButton1 = GlobalKey();
+  GlobalKey keyButton2 = GlobalKey();
   @override
   void initState() {
     super.initState();
@@ -52,11 +58,17 @@ class _HomePageState extends State<HomePage> {
               extendBodyBehindAppBar: true,
               floatingActionButton: FloatingActionButton(
                 backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.priority_high,
-                  color: Colors.amber,
+                child: Container(
+                  key: keyButton2,
+                  child: Icon(
+                    Icons.priority_high,
+                    color: Colors.amber,
+                    key: keyButton1,
+                  ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showTutorial();
+                },
               ),
               appBar: AppBar(
                 elevation: 0,
@@ -65,7 +77,9 @@ class _HomePageState extends State<HomePage> {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: MySearchButton(drinks: drinks),
+                    child: MySearchButton(
+                      drinks: drinks,
+                    ),
                   )
                 ],
               ),
@@ -147,7 +161,8 @@ class _HomePageState extends State<HomePage> {
                       AutoSizeText('Drink del giorno',
                           maxLines: 1,
                           minFontSize: 20,
-                          style: TextStyle(color: Colors.black, fontSize: 30)),
+                          style:
+                              TextStyle(color: Colors.black45, fontSize: 30)),
                     ],
                   )))),
         ],
@@ -187,7 +202,8 @@ class _HomePageState extends State<HomePage> {
                       AutoSizeText('Scegli una categoria',
                           maxLines: 1,
                           minFontSize: 20,
-                          style: TextStyle(color: Colors.black, fontSize: 30)),
+                          style:
+                              TextStyle(color: Colors.black45, fontSize: 30)),
                       Icon(
                         Icons.arrow_downward_outlined,
                         color: Colors.amber,
@@ -211,7 +227,7 @@ class _HomePageState extends State<HomePage> {
             CarouselSlider.builder(
                 itemCount: categorie.length,
                 options: CarouselOptions(
-                  autoPlay: false,
+                  autoPlay: true,
                   aspectRatio: 2.0,
                   enlargeCenterPage: true,
                   onPageChanged: (index, fn) {
@@ -264,11 +280,102 @@ class _HomePageState extends State<HomePage> {
 
   colText() {
     if (currentPage == 0) {
-      return Colors.black;
+      return Colors.black45;
     } else if (currentPage == 1) {
-      return Colors.black;
+      return Colors.black45;
     } else {
-      return Colors.black;
+      return Colors.black45;
     }
+  }
+
+  void showTutorial() {
+    initTargets();
+    tutorialCoachMark = TutorialCoachMark(
+      context,
+      targets: targets,
+      colorShadow: Colors.white.withOpacity(0.5),
+      textStyleSkip: TextStyle(color: Colors.black),
+      textSkip: "SKIP",
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+      onFinish: () {
+        print("finish");
+      },
+      onClickTarget: (target) {
+        print('onClickTarget: $target');
+      },
+      onClickOverlay: (target) {
+        print('onClickOverlay: $target');
+      },
+      onSkip: () {
+        print("skip");
+      },
+    )..show();
+  }
+
+  void initTargets() {
+    targets.clear();
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation1",
+        keyTarget: keyButton1,
+        alignSkip: Alignment.topRight,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                     AutoSizeText(
+                     
+                      "ciao ",
+                      minFontSize: 30,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation2",
+        keyTarget: keyButton2,
+        alignSkip: Alignment.topRight,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                   AutoSizeText(
+                     
+                      "yo yo yo ",
+                      minFontSize: 30,
+                      style: TextStyle(
+                        
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
