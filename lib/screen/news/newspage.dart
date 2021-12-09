@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/services/xml.dart';
@@ -52,20 +53,13 @@ class _NewsPageState extends State<NewsPage> {
 
   List<Widget> buildnote(News news) {
     return news.note.map((note) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            border: Border.all(
-              color: Colors.blueGrey,
-              width: 1,
-            ),
-          ),
-          child:
-              Text(note, style: TextStyle(fontSize: 30, color: Colors.black)),
+      return Card(
+        elevation: 9,
+        child: ListTile(
+
+          title: AutoSizeText(  note, style: TextStyle(fontSize: 30, color: Colors.black),
         ),
-      );
+      ));
     }).toList();
   }
 }

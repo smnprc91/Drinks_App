@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:progdrinks/models/drink.dart';
@@ -67,23 +68,28 @@ class _SearchState extends State<Search> {
             return widget.drinks[index].titolo
                     .toLowerCase()
                     .contains(drinkcercato)
-                ? GestureDetector(
-                    onTap: () {
-                 Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Dettaglio(
-                                    drink: widget.drinks[index],
-                                  ))); 
-                    },
-                    child: ListTile(
-                      title: Center(
-                          child: Text(
-                        widget.drinks[index].titolo,
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    ),
-                  )
+                ? 
+                  Card(
+                            elevation: 19,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      widget.drinks[index].img)),
+                              title: Text(widget.drinks[index].titolo),
+                              trailing: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Dettaglio(
+                                                drink: widget.drinks[index],
+                                              )));
+                                },
+                                child: Icon(Icons.arrow_forward_rounded),
+                              ),
+                            ),
+                          )
                 : Container();
           },
         ))
