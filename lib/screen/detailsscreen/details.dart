@@ -54,13 +54,7 @@ class _DettaglioState extends State<Dettaglio> {
               style: TextStyle(fontSize: 30, color: Colors.amber),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Difficoltà : ' + widget.drink.difficolta,
-              style: TextStyle(fontSize: 20, color: Colors.blueGrey),
-            ),
-          ),
+         
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.05,

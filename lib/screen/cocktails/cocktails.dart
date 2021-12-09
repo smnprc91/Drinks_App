@@ -1,5 +1,7 @@
-
 //TODO : pulire il codice
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
@@ -73,7 +75,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height * 0.3,
-                        child: Image.network(widget.drinks[index].img,
+                        child: CachedNetworkImage(
+                            imageUrl: widget.drinks[index].img,
                             fit: BoxFit.cover,
                             width: MediaQuery.of(context).size.width),
                       ),
@@ -97,9 +100,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
                         ),
                       ),
                       //TODO: Finire di implementare il sistema di selezione favoriti, attualmente fuziona ma bisgona salvare le scelte
-                      
-                                    
-                     GestureDetector(
+
+                      GestureDetector(
                         onTap: () {
                           if (_selectedItems.contains(index)) {
                             setState(() {
@@ -109,7 +111,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           } else {
                             setState(() {
                               _selectedItems.add(index);
-                           favdrink.add(widget.drinks[index]);
+                              favdrink.add(widget.drinks[index]);
                               bloc.sinkFavdrink.add(favdrink);
                             });
                           }
@@ -135,11 +137,12 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           ),
                         ),
                       ),
-                 Container(
+                      Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.05,
                         color: Colors.black.withOpacity(0.3),
                         child: Row(
+                          
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -147,10 +150,16 @@ class _CockTailsPageState extends State<CockTailsPage> {
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            Text(
-                              widget.drinks[index].difficolta,
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                            Container(
+                          
+                              width: 150,
+                              child: ListView.builder(
+                                
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: widget.drinks[index].difficolta,
+                                  itemBuilder: (context, index) {
+                                    return Icon(Icons.star,color: Colors.amber,);
+                                  }),
                             )
                           ],
                         ),
@@ -264,4 +273,6 @@ class _CockTailsPageState extends State<CockTailsPage> {
       );
     }).toList();
   }
+
+ 
 }
