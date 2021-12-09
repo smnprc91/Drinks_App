@@ -1,9 +1,14 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/bloc.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
@@ -19,6 +24,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Bloc bloc = new Bloc();
+
+  int currentPage = 0;
 
   @override
   void initState() {
@@ -43,12 +50,24 @@ class _HomePageState extends State<HomePage> {
 
             return new Scaffold(
               extendBodyBehindAppBar: true,
-
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.priority_high,
+                  color: Colors.amber,
+                ),
+                onPressed: () {},
+              ),
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 iconTheme: IconThemeData(color: Colors.amber),
-                actions: [MySearchButton(drinks: drinks)],
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: MySearchButton(drinks: drinks),
+                  )
+                ],
               ),
               drawer: Drawers(),
               body: bodyMainContent(categorie, drinks),
@@ -61,8 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   bodyMainContent(List<Categoria> categorie, drinks) {
     return Container(
-      color: Colors.transparent,
-
+      color: Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -80,17 +98,21 @@ class _HomePageState extends State<HomePage> {
       color: Colors.transparent,
       child: Stack(
         textDirection: TextDirection.rtl,
-        clipBehavior: Clip.hardEdge,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) => DodScreen()),
+              );
+            },
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Image.network(
                 'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
                 fit: BoxFit.fitHeight,
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.34,
+                height: MediaQuery.of(context).size.height * 0.37,
               ),
             ),
           ),
@@ -118,11 +140,11 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(
-                        Icons.thumb_up,
+                        Icons.arrow_upward_outlined,
                         color: Colors.amber,
                         size: 30,
                       ),
-                      AutoSizeText('Drink of the day',
+                      AutoSizeText('Drink del giorno',
                           maxLines: 1,
                           minFontSize: 20,
                           style: TextStyle(color: Colors.black, fontSize: 30)),
@@ -162,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      AutoSizeText('scegli una categoria',
+                      AutoSizeText('Scegli una categoria',
                           maxLines: 1,
                           minFontSize: 20,
                           style: TextStyle(color: Colors.black, fontSize: 30)),
@@ -174,64 +196,79 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ))),
             ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  caText(
+                    categorie,
+                  ),
+                  style: TextStyle(color: colText(), fontSize: 25),
+                ),
+              ),
+            ),
             CarouselSlider.builder(
                 itemCount: categorie.length,
                 options: CarouselOptions(
-                  autoPlay: true,
+                  autoPlay: false,
                   aspectRatio: 2.0,
                   enlargeCenterPage: true,
+                  onPageChanged: (index, fn) {
+                    setState(() {
+                      currentPage = index;
+                    });
+                  },
                 ),
                 itemBuilder: (
                   BuildContext context,
                   int index,
                   int i,
                 ) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CockTailsPage(
-                                    drinks: categorie[index].drinks,
-                                  )));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 1,
+                  return Container(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CockTailsPage(
+                                      drinks: categorie[index].drinks,
+                                    )));
+                      },
+                      child: Container(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.contain,
+                          imageUrl: categorie[index].img,
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
-                      child: Stack(children: [
-                        Center(
-                            child: Image.network(categorie[index].img,
-                                fit: BoxFit.cover,
-                                width: MediaQuery.of(context).size.width)),
-                        Container(
-                            color: Colors.transparent.withOpacity(0.3),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.black.withOpacity(0.5),
-                                child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    categorie[index].titolo,
-                                    style: TextStyle(
-                                        fontSize: 30, color: Colors.amber),
-                                  ),
-                                ),
-                              ),
-                            ))
-                      ]),
                     ),
                   );
                 }),
           ],
         ));
+  }
+
+  caText(
+    List<Categoria> categorie,
+  ) {
+    if (currentPage == 0) {
+      return categorie[0].titolo;
+    } else if (currentPage == 1) {
+      return categorie[1].titolo;
+    } else {
+      return categorie[2].titolo;
+    }
+  }
+
+  colText() {
+    if (currentPage == 0) {
+      return Colors.black;
+    } else if (currentPage == 1) {
+      return Colors.black;
+    } else {
+      return Colors.black;
+    }
   }
 }
