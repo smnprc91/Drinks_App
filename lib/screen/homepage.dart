@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,11 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/bloc.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/models/drink.dart';
-import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-
 import 'package:progdrinks/screen/search/mysearchbutton.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -26,7 +22,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Bloc bloc = new Bloc();
 
-  int currentPage = 0;
+  int currentImage = 0;
   late TutorialCoachMark tutorialCoachMark;
   List<TargetFocus> targets = <TargetFocus>[];
 
@@ -232,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                   enlargeCenterPage: true,
                   onPageChanged: (index, fn) {
                     setState(() {
-                      currentPage = index;
+                     currentImage = index;
                     });
                   },
                 ),
@@ -269,9 +265,9 @@ class _HomePageState extends State<HomePage> {
   caText(
     List<Categoria> categorie,
   ) {
-    if (currentPage == 0) {
+    if (currentImage == 0) {
       return categorie[0].titolo;
-    } else if (currentPage == 1) {
+    } else if (currentImage == 1) {
       return categorie[1].titolo;
     } else {
       return categorie[2].titolo;
@@ -279,9 +275,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   colText() {
-    if (currentPage == 0) {
+    if (currentImage == 0) {
       return Colors.black45;
-    } else if (currentPage == 1) {
+    } else if (currentImage == 1) {
       return Colors.black45;
     } else {
       return Colors.black45;

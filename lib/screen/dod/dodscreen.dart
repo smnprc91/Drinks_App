@@ -20,7 +20,6 @@ class _DodScreenState extends State<DodScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             DayDrinks daydrink = snapshot.data;
-            inspect(daydrink);
             return Scaffold(
                 appBar: MyAllPagesAppBar(),
                 body: MyBodyStyle(
@@ -54,12 +53,31 @@ class _DodScreenState extends State<DodScreen> {
                           style: TextStyle(fontSize: 30, color: Colors.amber),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Difficoltà : ' + daydrink.difficolta,
-                          style:
-                              TextStyle(fontSize: 20, color: Colors.blueGrey),
+                  Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        color: Colors.black.withOpacity(0.3),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Difficoltà : ',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            Container(
+                              width: 150,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: daydrink.difficolta,
+                                  itemBuilder: (context, index) {
+                                    return Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    );
+                                  }),
+                            )
+                          ],
                         ),
                       ),
                       Container(

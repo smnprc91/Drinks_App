@@ -142,7 +142,6 @@ class _CockTailsPageState extends State<CockTailsPage> {
                         height: MediaQuery.of(context).size.height * 0.05,
                         color: Colors.black.withOpacity(0.3),
                         child: Row(
-                          
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -151,14 +150,15 @@ class _CockTailsPageState extends State<CockTailsPage> {
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
                             Container(
-                          
                               width: 150,
                               child: ListView.builder(
-                                
                                   scrollDirection: Axis.horizontal,
                                   itemCount: widget.drinks[index].difficolta,
                                   itemBuilder: (context, index) {
-                                    return Icon(Icons.star,color: Colors.amber,);
+                                    return Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    );
                                   }),
                             )
                           ],
@@ -273,6 +273,4 @@ class _CockTailsPageState extends State<CockTailsPage> {
       );
     }).toList();
   }
-
- 
 }

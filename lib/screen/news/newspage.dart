@@ -22,7 +22,6 @@ class _NewsPageState extends State<NewsPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             News news = snapshot.data;
-            inspect(news);
             return Scaffold(
                 extendBodyBehindAppBar: true,
                 appBar: MyAllPagesAppBar(),

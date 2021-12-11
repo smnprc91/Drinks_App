@@ -6,12 +6,9 @@ import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 
-
-
-
 //TODO: migliorare la grafica di questa pagina(search)
 class Search extends StatefulWidget {
-  Search({ required this.drinks});
+  Search({required this.drinks});
 
   final List<Drink> drinks;
 
@@ -36,7 +33,6 @@ class _SearchState extends State<Search> {
     return Container(
         child: Column(
       children: <Widget>[
-       
         Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.15,
@@ -68,28 +64,27 @@ class _SearchState extends State<Search> {
             return widget.drinks[index].titolo
                     .toLowerCase()
                     .contains(drinkcercato)
-                ? 
-                  Card(
-                            elevation: 19,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                  radius: 25,
-                                  backgroundImage: CachedNetworkImageProvider(
-                                      widget.drinks[index].img)),
-                              title: Text(widget.drinks[index].titolo),
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dettaglio(
-                                                drink: widget.drinks[index],
-                                              )));
-                                },
-                                child: Icon(Icons.arrow_forward_rounded),
-                              ),
-                            ),
-                          )
+                ? Card(
+                    elevation: 19,
+                    child: ListTile(
+                      leading: CircleAvatar(
+                          radius: 25,
+                          backgroundImage: CachedNetworkImageProvider(
+                              widget.drinks[index].img)),
+                      title: Text(widget.drinks[index].titolo),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dettaglio(
+                                        drink: widget.drinks[index],
+                                      )));
+                        },
+                        child: Icon(Icons.arrow_forward_rounded),
+                      ),
+                    ),
+                  )
                 : Container();
           },
         ))
