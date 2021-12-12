@@ -1,17 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 
-import '../pagina favoriti/dettaglio.dart';
-
+import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/screen/detailsscreen/details.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
 //TODO: migliorare la grafica di questa pagina(search)
 class Search extends StatefulWidget {
-  Search({required this.categorie, required this.drinks});
+  Search({required this.drinks});
 
-  final List<Categoria> categorie;
   final List<Drink> drinks;
 
   @override
@@ -25,7 +23,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: MyAppBar(),
+        appBar: MyAllPagesAppBar(),
         body: MyBodyStyle(
           child: buildbodystyle(),
         ));
@@ -46,7 +44,7 @@ class _SearchState extends State<Search> {
                 drinkcercato = risultatoricerca.toLowerCase();
               });
             },
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            style: TextStyle(color: Colors.black, fontSize: 20),
             decoration: InputDecoration(
                 enabledBorder: const OutlineInputBorder(
                   borderSide:
@@ -66,21 +64,25 @@ class _SearchState extends State<Search> {
             return widget.drinks[index].titolo
                     .toLowerCase()
                     .contains(drinkcercato)
-                ? GestureDetector(
-                    onTap: () {
-                 Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Dettaglio(
-                                    drink: widget.drinks[index],
-                                  ))); 
-                    },
+                ? Card(
+                    elevation: 19,
                     child: ListTile(
-                      title: Center(
-                          child: Text(
-                        widget.drinks[index].titolo,
-                        style: TextStyle(color: Colors.white),
-                      )),
+                      leading: CircleAvatar(
+                          radius: 25,
+                          backgroundImage: CachedNetworkImageProvider(
+                              widget.drinks[index].img)),
+                      title: Text(widget.drinks[index].titolo),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Dettaglio(
+                                        drink: widget.drinks[index],
+                                      )));
+                        },
+                        child: Icon(Icons.arrow_forward_rounded),
+                      ),
                     ),
                   )
                 : Container();

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:progdrinks/Models/categoria.dart';
-import 'package:progdrinks/Models/news.dart';
+import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/news.dart';
 import 'package:xml/xml.dart' as xml;
 import 'dart:async' show Future;
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:progdrinks/screen/drawer/DrawerItem.dart';
+import 'package:progdrinks/screen/detailsscreen/favscreen.dart';
+import 'package:progdrinks/screen/drawer/drawerItem.dart';
 import 'package:progdrinks/screen/homepage.dart';
 import 'package:progdrinks/screen/mailform/mailform.dart';
-import 'package:progdrinks/screen/pagina%20favoriti/FavScreen.dart';
+import 'package:progdrinks/screen/news/newspage.dart';
 
 class Drawers extends StatelessWidget {
   Drawers({Key? key}) : super(key: key);
@@ -18,7 +18,10 @@ class Drawers extends StatelessWidget {
         name: 'Contattaci',
         icon: Icons.contact_phone,
         routeName: EmailSender.routeName),
-    DrawerItem(name: 'Note', icon: Icons.info_rounded),
+    DrawerItem(
+        name: 'news',
+        icon: Icons.new_label_sharp,
+        routeName: NewsPage.routeName),
   ];
 
   @override
@@ -28,7 +31,6 @@ class Drawers extends StatelessWidget {
         children: [
           _buildDrawerHeader(context),
           ..._drawerItems,
-         
         ],
       ),
     );

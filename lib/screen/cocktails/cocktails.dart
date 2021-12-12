@@ -1,10 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:progdrinks/Models/drink.dart';
-import 'package:progdrinks/bloc/blocfav.dart';
-
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
 //TODO : pulire il codice
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
+
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks});
   final List<Drink> drinks;
@@ -36,7 +39,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: MyAppBar(),
+      appBar: MyAllPagesAppBar(),
       body: bodyStyle(context),
     );
   }
@@ -46,7 +49,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
   }
 
   List _selectedItems = [];
-  List<Drink> lezzo = [];
+  List<Drink> favdrink = [];
   list(context) {
     return Container(
       child: ListView.builder(
@@ -72,7 +75,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
                     children: [
                       Container(
                         height: MediaQuery.of(context).size.height * 0.3,
-                        child: Image.network(widget.drinks[index].img,
+                        child: CachedNetworkImage(
+                            imageUrl: widget.drinks[index].img,
                             fit: BoxFit.cover,
                             width: MediaQuery.of(context).size.width),
                       ),
@@ -96,20 +100,19 @@ class _CockTailsPageState extends State<CockTailsPage> {
                         ),
                       ),
                       //TODO: Finire di implementare il sistema di selezione favoriti, attualmente fuziona ma bisgona salvare le scelte
-                      
-                                    
-                     GestureDetector(
+
+                      GestureDetector(
                         onTap: () {
                           if (_selectedItems.contains(index)) {
                             setState(() {
                               _selectedItems.removeWhere((val) => val == index);
-                              lezzo.remove(widget.drinks[index]);
+                              favdrink.remove(widget.drinks[index]);
                             });
                           } else {
                             setState(() {
                               _selectedItems.add(index);
-                              lezzo.add(widget.drinks[index]);
-                              bloc.sinkLezzo.add(lezzo);
+                              favdrink.add(widget.drinks[index]);
+                              bloc.sinkFavdrink.add(favdrink);
                             });
                           }
                         },
@@ -134,7 +137,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                           ),
                         ),
                       ),
-                 Container(
+                      Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.05,
                         color: Colors.black.withOpacity(0.3),
@@ -146,10 +149,17 @@ class _CockTailsPageState extends State<CockTailsPage> {
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            Text(
-                              widget.drinks[index].difficolta,
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white),
+                            Container(
+                              width: 150,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: widget.drinks[index].difficolta,
+                                  itemBuilder: (context, index) {
+                                    return Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    );
+                                  }),
                             )
                           ],
                         ),

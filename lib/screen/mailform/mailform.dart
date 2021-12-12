@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:progdrinks/raccoltaWidget/MyAppBar.dart';
-import 'package:progdrinks/raccoltaWidget/MyBodyStyle.dart';
-import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/widgets/myallpagesappbar.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 
 
 class EmailSender extends StatefulWidget {
@@ -17,7 +16,7 @@ class _EmailSenderState extends State<EmailSender> {
   bool isHTML = false;
 
   final _recipientController = TextEditingController(
-    text: 'emailtestperapp@gmail.com',
+    text: 'smnprc91@hmail.com',
   );
 
   final _subjectController = TextEditingController(text: ' ');
@@ -56,13 +55,12 @@ class _EmailSenderState extends State<EmailSender> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        drawer: Drawers(),
-        appBar: buildAppBar(),
+         appBar: MyAllPagesAppBar(),
         body: buildbodystyle());
   }
 
   buildAppBar() {
-    return MyAppBar();
+    return MyAllPagesAppBar();
   }
 
   buildbodystyle() {
@@ -86,14 +84,14 @@ class _EmailSenderState extends State<EmailSender> {
                     'Inviaci il tuo feedback o una tua ricetta compilando questo form',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 30,
                     )),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                   controller: _recipientController,
                   decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
@@ -107,7 +105,7 @@ class _EmailSenderState extends State<EmailSender> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                   controller: _subjectController,
                   decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
@@ -123,7 +121,7 @@ class _EmailSenderState extends State<EmailSender> {
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(color: Colors.black, fontSize: 20),
                     controller: _bodyController,
                     maxLines: null,
                     expands: true,

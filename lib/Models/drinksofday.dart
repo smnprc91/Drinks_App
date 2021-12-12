@@ -11,17 +11,19 @@ class DayDrinks {
   );
   String img;
   String titolo;
-  String difficolta;
+  int difficolta;
   List<String> tags;
   List<String> ingredienti;
   List<String> steps;
 
-//TODO: Finire di aggiornare il model
+
   static DayDrinks createFromXml(xml.XmlElement node) {
     return DayDrinks(
       node.findElements('img').first.text,
       node.findElements('titolo').first.text,
-      node.findElements('difficolta').first.text,
+      int.parse(
+        node.findElements('difficolta').first.text,
+      ),
       node
           .findElements('tags')
           .first
