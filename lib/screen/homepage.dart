@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
+import 'package:progdrinks/screen/dod/drinkofday.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/screen/search/mysearchbutton.dart';
 import 'package:progdrinks/services/xml.dart';
@@ -102,117 +103,36 @@ class _HomePageState extends State<HomePage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          _firstSectionBody(drinks),
+          _firstSectionBody(),
+        
           _secondSectionBody(categorie),
         ],
       ),
     );
   }
 
-  _firstSectionBody(drinks) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.42,
-      color: Colors.transparent,
-      child: Stack(
-        textDirection: TextDirection.rtl,
-        children: [
-          _imgGesture(),
-          _positioned(),
-        ],
-      ),
-    );
+  _firstSectionBody() {
+    return DrinkOfDay();
   }
 
-  _imgGesture() {
-    return GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
-          );
-        },
-        child: _img());
-  }
-
-  _img() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: 'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-        fit: BoxFit.fitHeight,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.37,
-      ),
-    );
-  }
-
-  _positioned() {
-    return Positioned(
-        left: MediaQuery.of(context).size.width * 0.1,
-        right: 0,
-        bottom: 0,
-        child: _containerDeco());
-  }
-
-  _containerDeco() {
-    return Container(
-        height: MediaQuery.of(context).size.height * 0.11,
-        decoration: _firstBoxDecoration(),
-        child: _row());
-  }
-
-  _firstBoxDecoration() {
-    return BoxDecoration(
-        boxShadow: [_firstBoxShadow()],
-        color: Colors.white,
-        borderRadius: new BorderRadius.only(
-            topLeft: Radius.circular(40.0), bottomLeft: Radius.circular(40.0)));
-  }
-
-  _firstBoxShadow() {
-    return BoxShadow(
-      color: Colors.grey.withOpacity(0.5),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: Offset(0, 3), // changes position of shadow
-    );
-  }
-
-  _row() {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [_icon(), _autoSized()],
-    ));
-  }
-
-  _icon() {
-    return Icon(
-      Icons.arrow_upward_outlined,
-      color: Colors.amber,
-      size: 30,
-    );
-  }
-
-  _autoSized() {
-    return AutoSizeText('Drink del giorno',
-        maxLines: 1,
-        minFontSize: 20,
-        style: TextStyle(color: Colors.black45, fontSize: 30));
-  }
+  
 
   _secondSectionBody(List<Categoria> categorie) {
     return Container(
         color: Colors.transparent,
         child: Column(
           children: [
-            _firstColumnSection(),
+          //  _firstColumnSection(),
             _secondColumnSection(categorie),
             _carouselSlider(categorie),
           ],
         ));
   }
 
+ 
+
+ /** 
+  * 
   _firstColumnSection() {
     return Padding(
       padding: EdgeInsets.only(
@@ -222,7 +142,8 @@ class _HomePageState extends State<HomePage> {
       child: _firstColumnSectionContainer(),
     );
   }
-
+  
+  
   _firstColumnSectionContainer() {
     return Container(
         height: MediaQuery.of(context).size.height * 0.11,
@@ -268,7 +189,7 @@ class _HomePageState extends State<HomePage> {
       color: Colors.amber,
       size: 30,
     );
-  }
+  } */
 
   _secondColumnSection(categorie) {
     return Padding(
@@ -284,7 +205,27 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+ _caText(
+    List<Categoria> categorie,
+  ) {
+    if (currentImage == 0) {
+      return categorie[0].titolo;
+    } else if (currentImage == 1) {
+      return categorie[1].titolo;
+    } else {
+      return categorie[2].titolo;
+    }
+  }
 
+  _colText() {
+    if (currentImage == 0) {
+      return Colors.black45;
+    } else if (currentImage == 1) {
+      return Colors.black45;
+    } else {
+      return Colors.black45;
+    }
+  }
   _carouselSlider(categorie) {
     return CarouselSlider.builder(
         itemCount: categorie.length,
@@ -325,27 +266,7 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  _caText(
-    List<Categoria> categorie,
-  ) {
-    if (currentImage == 0) {
-      return categorie[0].titolo;
-    } else if (currentImage == 1) {
-      return categorie[1].titolo;
-    } else {
-      return categorie[2].titolo;
-    }
-  }
-
-  _colText() {
-    if (currentImage == 0) {
-      return Colors.black45;
-    } else if (currentImage == 1) {
-      return Colors.black45;
-    } else {
-      return Colors.black45;
-    }
-  }
+ 
 
   _loadingCircle() {
     return Container(

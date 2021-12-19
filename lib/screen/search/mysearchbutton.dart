@@ -14,20 +14,11 @@ class MySearchButton extends StatefulWidget {
 class _MySearchButtonState extends State<MySearchButton> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Search(
-                      drinks: widget.drinks,
-                    )));
-      },
-      child: Icon(
-        Icons.search_sharp,
+    return Icon(
+      Icons.search_sharp,
+      size: 30,
      
-        color: Colors.amber,
-      ),
+      color: Colors.amber,
     );
   }
 }
