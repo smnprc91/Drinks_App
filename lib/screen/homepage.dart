@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
-import 'package:progdrinks/screen/dod/drinkofday.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-import 'package:progdrinks/screen/search/mysearchbutton.dart';
+import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -87,13 +85,25 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(color: Colors.amber),
       actions: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: MySearchButton(
-            drinks: drinks,
-          ),
-        )
+        _searchButton(drinks),
       ],
+    );
+  }
+
+  _searchButton(drinks) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Search(drinks: drinks)));
+        },
+        child: Icon(
+          Icons.search_sharp,
+          size: 30,
+          color: Colors.amber,
+        ),
+      ),
     );
   }
 
@@ -104,7 +114,6 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.zero,
         children: [
           _firstSectionBody(),
-        
           _secondSectionBody(categorie),
         ],
       ),
@@ -112,9 +121,100 @@ class _HomePageState extends State<HomePage> {
   }
 
   _firstSectionBody() {
-    return DrinkOfDay();
+   
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.42,
+      color: Colors.transparent,
+      child: Stack(
+      
+        children: [
+          _imgGesture(),
+          _positioned(),
+        ],
+      ),
+    );
   }
 
+  _imgGesture() {
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
+          );
+        },
+        child: _img());
+  }
+
+  _img() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: CachedNetworkImage(
+        imageUrl: 'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
+        fit: BoxFit.fitHeight,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.37,
+      ),
+    );
+  }
+
+  _positioned() {
+    return Positioned(
+        left: MediaQuery.of(context).size.width * 0.1,
+        right: MediaQuery.of(context).size.width * 0.1,
+        bottom: 0,
+        child: _containerDeco());
+  }
+
+  _containerDeco() {
+    return Container(
+        height: MediaQuery.of(context).size.height * 0.11,
+        decoration: _firstBoxDecoration(),
+        child: _row());
+  }
+
+  _firstBoxDecoration() {
+    return BoxDecoration(
+        boxShadow: [_firstBoxShadow()],
+        color: Colors.white,
+        borderRadius: new BorderRadius.only(
+            topLeft: Radius.circular(40.0),
+            bottomLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
+            bottomRight: Radius.circular(40.0)));
+  }
+
+  _firstBoxShadow() {
+    return BoxShadow(
+      color: Colors.grey.withOpacity(0.5),
+      spreadRadius: 5,
+      blurRadius: 7,
+      offset: Offset(0, 3), // changes position of shadow
+    );
+  }
+
+  _row() {
+    return Center(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [_icon(), _autoSized()],
+    ));
+  }
+
+  _icon() {
+    return Icon(
+      Icons.thumb_up_off_alt,
+      color: Colors.amber,
+      size: 30,
+    );
+  }
+
+  _autoSized() {
+    return AutoSizeText('Drink del giorno',
+        maxLines: 1,
+        minFontSize: 20,
+        style: TextStyle(color: Colors.black45, fontSize: 30));
+  }
   
 
   _secondSectionBody(List<Categoria> categorie) {
@@ -122,74 +222,24 @@ class _HomePageState extends State<HomePage> {
         color: Colors.transparent,
         child: Column(
           children: [
-          //  _firstColumnSection(),
+            _firstColumnSection(),
             _secondColumnSection(categorie),
-            _carouselSlider(categorie),
+            _thirdColumnSection(categorie),
+            _fourthColumnSection(),
           ],
         ));
   }
 
- 
-
- /** 
-  * 
   _firstColumnSection() {
     return Padding(
-      padding: EdgeInsets.only(
-          right: MediaQuery.of(context).size.width * 0.1,
-          top: MediaQuery.of(context).size.height * 0.04,
-          bottom: MediaQuery.of(context).size.height * 0.04),
-      child: _firstColumnSectionContainer(),
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        color: Colors.amberAccent,
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 2,
+      ),
     );
   }
-  
-  
-  _firstColumnSectionContainer() {
-    return Container(
-        height: MediaQuery.of(context).size.height * 0.11,
-        decoration: _boxDecoration(),
-        child: Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _firstColumnSectionText(),
-            _firstColumnSectionIcon(),
-          ],
-        )));
-  }
-
-  _boxDecoration() {
-    return BoxDecoration(
-        boxShadow: [_boxShadow()],
-        color: Colors.white,
-        borderRadius: new BorderRadius.only(
-            topRight: Radius.circular(40.0),
-            bottomRight: Radius.circular(40.0)));
-  }
-
-  _boxShadow() {
-    return BoxShadow(
-      color: Colors.grey.withOpacity(0.5),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: Offset(0, 3),
-    );
-  }
-
-  _firstColumnSectionText() {
-    return AutoSizeText('Scegli una categoria',
-        maxLines: 1,
-        minFontSize: 20,
-        style: TextStyle(color: Colors.black45, fontSize: 30));
-  }
-
-  _firstColumnSectionIcon() {
-    return Icon(
-      Icons.arrow_downward_outlined,
-      color: Colors.amber,
-      size: 30,
-    );
-  } */
 
   _secondColumnSection(categorie) {
     return Padding(
@@ -197,15 +247,17 @@ class _HomePageState extends State<HomePage> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          _caText(
-            categorie,
-          ),
+          'Categoria: ' +
+              _caText(
+                categorie,
+              ),
           style: TextStyle(color: _colText(), fontSize: 25),
         ),
       ),
     );
   }
- _caText(
+
+  _caText(
     List<Categoria> categorie,
   ) {
     if (currentImage == 0) {
@@ -226,7 +278,8 @@ class _HomePageState extends State<HomePage> {
       return Colors.black45;
     }
   }
-  _carouselSlider(categorie) {
+
+  _thirdColumnSection(categorie) {
     return CarouselSlider.builder(
         itemCount: categorie.length,
         options: CarouselOptions(
@@ -266,7 +319,16 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
- 
+  _fourthColumnSection() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        color: Colors.amberAccent,
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: 2,
+      ),
+    );
+  }
 
   _loadingCircle() {
     return Container(

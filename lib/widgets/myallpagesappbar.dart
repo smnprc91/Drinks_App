@@ -12,7 +12,7 @@ class _MyAllPagesAppBarState extends State<MyAllPagesAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-    
+      iconTheme: IconThemeData(color: Colors.amber),
       elevation: 0,
       backgroundColor: Colors.transparent,
       centerTitle: true,
