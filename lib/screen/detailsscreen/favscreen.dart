@@ -7,6 +7,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 class FavScreen extends StatefulWidget {
   const FavScreen({
@@ -31,7 +32,9 @@ class _FavScreenState extends State<FavScreen> {
 
             return Scaffold(
                 extendBodyBehindAppBar: true,
-                appBar: MyAllPagesAppBar(child: Text('data'),),
+                appBar: MyAllPagesAppBar(
+                  child: _title(),
+                ),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -53,7 +56,7 @@ class _FavScreenState extends State<FavScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Dettaglio(
-                                                drink: drinks[index],index: drinks[index]
+                                                drink: drinks[index],
                                               )));
                                 },
                                 child: Icon(Icons.arrow_forward_rounded),
@@ -64,7 +67,7 @@ class _FavScreenState extends State<FavScreen> {
           } else {
             return Scaffold(
               extendBodyBehindAppBar: true,
-              appBar: MyAllPagesAppBar(child: Text('data'),),
+              appBar: MyAllPagesAppBar(child: _title()),
               body: Container(
                 color: Colors.white,
                 child: Padding(
@@ -82,5 +85,9 @@ class _FavScreenState extends State<FavScreen> {
             );
           }
         });
+  }
+
+  _title() {
+    return MyText(child: 'Favoriti');
   }
 }

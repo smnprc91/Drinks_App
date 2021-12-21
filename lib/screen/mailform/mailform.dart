@@ -1,8 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-
+import 'package:progdrinks/widgets/text.dart';
 
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);
@@ -55,12 +56,14 @@ class _EmailSenderState extends State<EmailSender> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-         appBar:buildAppBar(),
+        appBar: buildAppBar(),
         body: buildbodystyle());
   }
 
   buildAppBar() {
-    return MyAllPagesAppBar(child: Text('data'),);
+    return MyAllPagesAppBar(
+      child: _title(),
+    );
   }
 
   buildbodystyle() {
@@ -148,5 +151,9 @@ class _EmailSenderState extends State<EmailSender> {
         ),
       ],
     );
+  }
+
+  _title() {
+    return MyText(child: 'Contatti');
   }
 }

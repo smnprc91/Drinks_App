@@ -6,12 +6,14 @@ import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 class Dettaglio extends StatefulWidget {
-  const Dettaglio({required this.drink, required this.index});
+  const Dettaglio({
+    required this.drink,
+  });
 
   final Drink drink;
-  final index;
 
   @override
   _DettaglioState createState() => _DettaglioState();
@@ -43,14 +45,14 @@ class _DettaglioState extends State<Dettaglio> {
           _firstSectionBody(drink),
           GestureDetector(
             onTap: () {
-              if (_selectedItems.contains(widget.index)) {
+              if (_selectedItems.contains(widget.drink)) {
                 setState(() {
-                  _selectedItems.removeWhere((val) => val == widget.index);
+                  _selectedItems.removeWhere((val) => val == widget.drink);
                   favdrink.remove(widget.drink);
                 });
               } else {
                 setState(() {
-                  _selectedItems.add(widget.index);
+                  _selectedItems.add(widget.drink);
                   favdrink.add(widget.drink);
                   bloc.sinkFavdrink.add(favdrink);
                 });
@@ -68,7 +70,7 @@ class _DettaglioState extends State<Dettaglio> {
                     style: TextStyle(fontSize: 20, color: Colors.grey),
                   ),
                   Icon(
-                      (_selectedItems.contains(widget.index))
+                      (_selectedItems.contains(widget.drink))
                           ? Icons.favorite
                           : Icons.favorite_outline,
                       color: Colors.amber),
@@ -136,10 +138,7 @@ class _DettaglioState extends State<Dettaglio> {
   }
 
   _title(drink) {
-    return AutoSizeText(
-      drink.titolo,
-      style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
-    );
+    return MyText(child: drink.titolo);
   }
 
   _difficulty(drink) {

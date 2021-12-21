@@ -6,6 +6,7 @@ import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/services/xmldod.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 class DodScreen extends StatefulWidget {
   @override
@@ -55,11 +56,7 @@ class _DodScreenState extends State<DodScreen> {
           Card(
             elevation: 9,
             child: Column(
-              children: [
-               _stepsTitle(),
-                _spacer(),
-              _stepsList(daydrink)
-              ],
+              children: [_stepsTitle(), _spacer(), _stepsList(daydrink)],
             ),
           ),
         ],
@@ -106,14 +103,7 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _title(daydrink) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: Text(
-        daydrink.titolo,
-        style: TextStyle(
-            fontSize: 30, color: Colors.amber, fontWeight: FontWeight.bold),
-      ),
-    );
+    return MyText(child: daydrink.titolo);
   }
 
   _difficulty(daydrink) {

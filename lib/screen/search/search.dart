@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 //TODO: migliorare la grafica di questa pagina(search)
 class Search extends StatefulWidget {
@@ -23,7 +25,9 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: MyAllPagesAppBar(child: Text('data'),),
+        appBar: MyAllPagesAppBar(
+          child: _title(),
+        ),
         body: MyBodyStyle(
           child: buildbodystyle(),
         ));
@@ -78,7 +82,7 @@ class _SearchState extends State<Search> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Dettaglio(
-                                        drink: widget.drinks[index],index: widget.drinks[index]
+                                        drink: widget.drinks[index],
                                       )));
                         },
                         child: Icon(Icons.arrow_forward_rounded),
@@ -90,5 +94,9 @@ class _SearchState extends State<Search> {
         ))
       ],
     ));
+  }
+
+  _title() {
+    return MyText(child: 'Cerca');
   }
 }

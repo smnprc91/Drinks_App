@@ -7,6 +7,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks, required this.categoria});
@@ -75,7 +76,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Dettaglio(
-                                  drink: widget.drinks[index],index: widget.drinks[index],
+                                  drink: widget.drinks[index],
                                 )));
                   },
                   child: Icon(Icons.arrow_forward_rounded),
@@ -87,10 +88,6 @@ class _CockTailsPageState extends State<CockTailsPage> {
   }
 
   _title(categoria) {
-    return AutoSizeText(
-      widget.categoria,
-      style: TextStyle(
-          fontSize: 30, color: Colors.amber, fontWeight: FontWeight.bold),
-    );
+    return MyText(child: widget.categoria);
   }
 }
