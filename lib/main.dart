@@ -25,3 +25,6 @@ class MyApp extends StatelessWidget {
         home: isviewed != 0 ? FirstStartingPage() : Load());
   }
 }
+
+
+

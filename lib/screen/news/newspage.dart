@@ -24,7 +24,7 @@ class _NewsPageState extends State<NewsPage> {
             News news = snapshot.data;
             return Scaffold(
                 extendBodyBehindAppBar: true,
-                appBar: MyAllPagesAppBar(),
+                appBar: MyAllPagesAppBar(child: Text('data'),),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,

@@ -31,7 +31,7 @@ class _DodScreenState extends State<DodScreen> {
   _scaffold(daydrink) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: MyAllPagesAppBar(),
+        appBar: MyAllPagesAppBar(child: _title(daydrink)),
         body: _bodySection(daydrink));
   }
 
@@ -42,15 +42,26 @@ class _DodScreenState extends State<DodScreen> {
       child: Column(
         children: [
           _firstSectionBody(daydrink),
-          _title(daydrink),
-          _spacer(),
-          _ingredientsTitle(),
-          _spacer(),
-          _ingredientsList(daydrink),
-          _spacer(),
-          _stepsTitle(),
-          _spacer(),
-          _stepsList(daydrink)
+          Card(
+            elevation: 9,
+            child: Column(
+              children: [
+                _ingredientsTitle(),
+                _spacer(),
+                _ingredientsList(daydrink),
+              ],
+            ),
+          ),
+          Card(
+            elevation: 9,
+            child: Column(
+              children: [
+               _stepsTitle(),
+                _spacer(),
+              _stepsList(daydrink)
+              ],
+            ),
+          ),
         ],
       ),
     ));
@@ -59,7 +70,7 @@ class _DodScreenState extends State<DodScreen> {
   _firstSectionBody(daydrink) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.35,
+        height: MediaQuery.of(context).size.height * 0.40,
         color: Colors.transparent,
         child: Stack(
           fit: StackFit.expand,
@@ -74,15 +85,24 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _img(daydrink) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: daydrink.img,
-        fit: BoxFit.fitHeight,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.37,
-      ),
-    );
+    return ShaderMask(
+        shaderCallback: (rect) {
+          return LinearGradient(
+            begin: Alignment.center,
+            end: Alignment.bottomCenter,
+            colors: [Colors.black, Colors.transparent],
+          ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+        },
+        blendMode: BlendMode.dstIn,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: CachedNetworkImage(
+            imageUrl: daydrink.img,
+            fit: BoxFit.fitHeight,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.37,
+          ),
+        ));
   }
 
   _title(daydrink) {
@@ -90,7 +110,8 @@ class _DodScreenState extends State<DodScreen> {
       padding: const EdgeInsets.only(top: 10.0),
       child: Text(
         daydrink.titolo,
-        style: TextStyle(fontSize: 30, color: Colors.grey),
+        style: TextStyle(
+            fontSize: 30, color: Colors.amber, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -143,12 +164,9 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _ingredientsList(daydrink) {
-    return Card(
-      elevation: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: listaingredienti(daydrink),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: listaingredienti(daydrink),
     );
   }
 
@@ -180,11 +198,8 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _stepsList(daydrink) {
-    return Card(
-      elevation: 3,
-      child: Column(
-        children: listastep(daydrink),
-      ),
+    return Column(
+      children: listastep(daydrink),
     );
   }
 

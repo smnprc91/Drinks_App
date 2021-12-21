@@ -31,7 +31,7 @@ class _FavScreenState extends State<FavScreen> {
 
             return Scaffold(
                 extendBodyBehindAppBar: true,
-                appBar: MyAllPagesAppBar(),
+                appBar: MyAllPagesAppBar(child: Text('data'),),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -53,7 +53,7 @@ class _FavScreenState extends State<FavScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Dettaglio(
-                                                drink: drinks[index],
+                                                drink: drinks[index],index: drinks[index]
                                               )));
                                 },
                                 child: Icon(Icons.arrow_forward_rounded),
@@ -64,7 +64,7 @@ class _FavScreenState extends State<FavScreen> {
           } else {
             return Scaffold(
               extendBodyBehindAppBar: true,
-              appBar: MyAllPagesAppBar(),
+              appBar: MyAllPagesAppBar(child: Text('data'),),
               body: Container(
                 color: Colors.white,
                 child: Padding(

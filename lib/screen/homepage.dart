@@ -121,13 +121,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   _firstSectionBody() {
-   
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.42,
       color: Colors.transparent,
       child: Stack(
-      
         children: [
           _imgGesture(),
           _positioned(),
@@ -215,7 +213,6 @@ class _HomePageState extends State<HomePage> {
         minFontSize: 20,
         style: TextStyle(color: Colors.black45, fontSize: 30));
   }
-  
 
   _secondSectionBody(List<Categoria> categorie) {
     return Container(
@@ -298,22 +295,25 @@ class _HomePageState extends State<HomePage> {
           int i,
         ) {
           return Container(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
+            child: Container(
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
+                    children: <Widget>[
+                     GestureDetector(
+                       onTap: (){
+                            Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => CockTailsPage(
-                              drinks: categorie[index].drinks,
+                              drinks: categorie[index].drinks,categoria:  categorie[index].titolo,
                             )));
-              },
-              child: Container(
-                child: CachedNetworkImage(
-                  fit: BoxFit.contain,
-                  imageUrl: categorie[index].img,
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
+                       },
+                       child: CachedNetworkImage( fit: BoxFit.cover, width: 1000.0, imageUrl:categorie[index].img ,)),
+                      
+                    ],
+                  )),
             ),
           );
         });

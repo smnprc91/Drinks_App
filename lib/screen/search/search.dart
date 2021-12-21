@@ -23,7 +23,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: MyAllPagesAppBar(),
+        appBar: MyAllPagesAppBar(child: Text('data'),),
         body: MyBodyStyle(
           child: buildbodystyle(),
         ));
@@ -78,7 +78,7 @@ class _SearchState extends State<Search> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Dettaglio(
-                                        drink: widget.drinks[index],
+                                        drink: widget.drinks[index],index: widget.drinks[index]
                                       )));
                         },
                         child: Icon(Icons.arrow_forward_rounded),

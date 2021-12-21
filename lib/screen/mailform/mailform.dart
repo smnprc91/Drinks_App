@@ -55,12 +55,12 @@ class _EmailSenderState extends State<EmailSender> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-         appBar: MyAllPagesAppBar(),
+         appBar:buildAppBar(),
         body: buildbodystyle());
   }
 
   buildAppBar() {
-    return MyAllPagesAppBar();
+    return MyAllPagesAppBar(child: Text('data'),);
   }
 
   buildbodystyle() {
