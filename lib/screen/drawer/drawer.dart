@@ -1,28 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/detailsscreen/favscreen.dart';
-import 'package:progdrinks/screen/drawer/drawerItem.dart';
-import 'package:progdrinks/screen/homepage.dart';
+import 'package:progdrinks/screen/drawer/draweritem.dart';
+
 import 'package:progdrinks/screen/mailform/mailform.dart';
 import 'package:progdrinks/screen/news/newspage.dart';
 
 class Drawers extends StatelessWidget {
   Drawers({Key? key}) : super(key: key);
-
-  final List<DrawerItem> _drawerItems = [
-    DrawerItem(name: 'Home', icon: Icons.home, routeName: HomePage.routeName),
-    DrawerItem(
-        name: 'Preferiti',
-        icon: Icons.favorite,
-        routeName: FavScreen.routeName),
-    DrawerItem(
-        name: 'Contattaci',
-        icon: Icons.contact_phone,
-        routeName: EmailSender.routeName),
-    DrawerItem(
-        name: 'news',
-        icon: Icons.new_label_sharp,
-        routeName: NewsPage.routeName),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +14,8 @@ class Drawers extends StatelessWidget {
       child: ListView(
         children: [
           _buildDrawerHeader(context),
-          ..._drawerItems,
+          _homeButton(context),
+          ..._drawerItems
         ],
       ),
     );
@@ -52,4 +37,28 @@ class Drawers extends StatelessWidget {
           )
         ]));
   }
+
+  _homeButton(context) {
+    return ListTile(
+      title: Text(
+        'home',
+      ),
+      leading: Icon(
+        Icons.home,
+      ),
+      onTap: () {
+        Navigator.pop(context);
+      },
+    );
+  }
+
+ final  List<DrawerItem> _drawerItems = [
+    DrawerItem(name: 'Preferiti', icon: Icons.favorite, routeName: FavScreen()),
+    DrawerItem(
+        name: 'Contattaci',
+        icon: Icons.contact_phone,
+        routeName: EmailSender()),
+    DrawerItem(
+        name: 'news', icon: Icons.new_label_sharp, routeName: NewsPage()),
+  ];
 }

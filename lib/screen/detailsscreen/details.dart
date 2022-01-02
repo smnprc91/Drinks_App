@@ -43,41 +43,7 @@ class _DettaglioState extends State<Dettaglio> {
       child: Column(
         children: [
           _firstSectionBody(drink),
-          GestureDetector(
-            onTap: () {
-              if (_selectedItems.contains(widget.drink)) {
-                setState(() {
-                  _selectedItems.removeWhere((val) => val == widget.drink);
-                  favdrink.remove(widget.drink);
-                });
-              } else {
-                setState(() {
-                  _selectedItems.add(widget.drink);
-                  favdrink.add(widget.drink);
-                  bloc.sinkFavdrink.add(favdrink);
-                });
-              }
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.05,
-              color: Colors.black.withOpacity(0.3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Aggiungi ai preferiti',
-                    style: TextStyle(fontSize: 20, color: Colors.grey),
-                  ),
-                  Icon(
-                      (_selectedItems.contains(widget.drink))
-                          ? Icons.favorite
-                          : Icons.favorite_outline,
-                      color: Colors.amber),
-                ],
-              ),
-            ),
-          ),
+          _favSelection(),
           Card(
             elevation: 9,
             child: Column(
@@ -150,6 +116,7 @@ class _DettaglioState extends State<Dettaglio> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Text('Difficoltà :'),
             Icon(
               MdiIcons.chefHat,
               color: Colors.amber,
@@ -254,7 +221,46 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _listSpacer() {
+  _favSelection() {
+    return GestureDetector(
+      onTap: () {
+        if (_selectedItems.contains(widget.drink)) {
+          setState(() {
+            _selectedItems.removeWhere((val) => val == widget.drink);
+            favdrink.remove(widget.drink);
+          });
+        } else {
+          setState(() {
+            _selectedItems.add(widget.drink);
+            favdrink.add(widget.drink);
+            bloc.sinkFavdrink.add(favdrink);
+          });
+        }
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.05,
+      
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Aggiungi ai preferiti',
+              style: TextStyle(fontSize: 20, color: Colors.grey),
+            ),
+            Icon(
+                (_selectedItems.contains(widget.drink))
+                    ? Icons.favorite
+                    : Icons.favorite_outline,
+                color: Colors.amber),
+          ],
+        ),
+      ),
+    );
+  }
+
+/**
+ *   _listSpacer() {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
@@ -264,6 +270,7 @@ class _DettaglioState extends State<Dettaglio> {
       ),
     );
   }
+ */
 
   /*   GestureDetector(
                         onTap: () {

@@ -42,24 +42,24 @@ class _FavScreenState extends State<FavScreen> {
                     child: ListView.builder(
                         itemCount: drinks.length,
                         itemBuilder: (context, index) {
-                          return Card(
-                            elevation: 19,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                  radius: 25,
-                                  backgroundImage: CachedNetworkImageProvider(
-                                      drinks[index].img)),
-                              title: Text(drinks[index].titolo),
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Dettaglio(
-                                                drink: drinks[index],
-                                              )));
-                                },
-                                child: Icon(Icons.arrow_forward_rounded),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Dettaglio(
+                                            drink: drinks[index],
+                                          )));
+                            },
+                            child: Card(
+                              elevation: 19,
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                    radius: 25,
+                                    backgroundImage: CachedNetworkImageProvider(
+                                        drinks[index].img)),
+                                title: Text(drinks[index].titolo),
+                                trailing: Icon(Icons.arrow_forward_rounded),
                               ),
                             ),
                           );

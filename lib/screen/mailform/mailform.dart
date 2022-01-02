@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
@@ -7,7 +6,7 @@ import 'package:progdrinks/widgets/text.dart';
 
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);
-  static const String routeName = 'contacts';
+
 
   @override
   _EmailSenderState createState() => _EmailSenderState();

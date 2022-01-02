@@ -230,7 +230,8 @@ class _DodScreenState extends State<DodScreen> {
     );
   }
 
-  _listSpacer() {
+ /**
+  *  _listSpacer() {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
@@ -240,4 +241,5 @@ class _DodScreenState extends State<DodScreen> {
       ),
     );
   }
+  */
 }

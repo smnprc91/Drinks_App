@@ -1,5 +1,4 @@
 //TODO : pulire il codice
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
@@ -52,7 +51,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
     return MyBodyStyle(child: list(context));
   }
 
-  List _selectedItems = [];
+
   List<Drink> favdrink = [];
   list(context) {
     return Container(
@@ -62,15 +61,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
-            return Card(
-              elevation: 19,
-              child: ListTile(
-                leading: CircleAvatar(
-                    radius: 25,
-                    backgroundImage:
-                        CachedNetworkImageProvider(widget.drinks[index].img)),
-                title: Text(widget.drinks[index].titolo),
-                trailing: GestureDetector(
+            return GestureDetector(
+           
                   onTap: () {
                     Navigator.push(
                         context,
@@ -79,7 +71,17 @@ class _CockTailsPageState extends State<CockTailsPage> {
                                   drink: widget.drinks[index],
                                 )));
                   },
-                  child: Icon(Icons.arrow_forward_rounded),
+                 
+                
+              child: Card(
+                elevation: 19,
+                child: ListTile(
+                  leading: CircleAvatar(
+                      radius: 25,
+                      backgroundImage:
+                          CachedNetworkImageProvider(widget.drinks[index].img)),
+                  title: Text(widget.drinks[index].titolo),
+                  trailing: Icon(Icons.arrow_forward_rounded),
                 ),
               ),
             );

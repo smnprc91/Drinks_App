@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/news.dart';
@@ -10,7 +9,7 @@ import 'package:progdrinks/widgets/text.dart';
 //TODO bisogna aggiornare la grafica e testare le dimensioni
 
 class NewsPage extends StatefulWidget {
-  static const String routeName = 'news';
+
   @override
   _NewsPageState createState() => _NewsPageState();
 }

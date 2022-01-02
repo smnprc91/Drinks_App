@@ -16,7 +16,9 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
 
   void _onIntroEnd(context) {
     _storeOnboardInfo();
-    Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+      Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+          );
   }
 
   _storeOnboardInfo() async {

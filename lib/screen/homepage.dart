@@ -11,8 +11,6 @@ import 'package:progdrinks/services/xml.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatefulWidget {
-  static const String routeName = 'home';
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -121,27 +119,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   _firstSectionBody() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.42,
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          _imgGesture(),
-          _positioned(),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.42,
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            _img(),
+            _positioned(),
+          ],
+        ),
       ),
     );
-  }
-
-  _imgGesture() {
-    return GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
-          );
-        },
-        child: _img());
   }
 
   _img() {
@@ -301,17 +296,21 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   child: Stack(
                     children: <Widget>[
-                     GestureDetector(
-                       onTap: (){
+                      GestureDetector(
+                          onTap: () {
                             Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CockTailsPage(
-                              drinks: categorie[index].drinks,categoria:  categorie[index].titolo,
-                            )));
-                       },
-                       child: CachedNetworkImage( fit: BoxFit.cover, width: 1000.0, imageUrl:categorie[index].img ,)),
-                      
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CockTailsPage(
+                                          drinks: categorie[index].drinks,
+                                          categoria: categorie[index].titolo,
+                                        )));
+                          },
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            width: 1000.0,
+                            imageUrl: categorie[index].img,
+                          )),
                     ],
                   )),
             ),
