@@ -28,7 +28,6 @@ class _DettaglioState extends State<Dettaglio> {
     return _scaffold(widget.drink);
   }
 
-  List _selectedItems = [];
   List<Drink> favdrink = [];
   _scaffold(drink) {
     return Scaffold(
@@ -66,7 +65,7 @@ class _DettaglioState extends State<Dettaglio> {
     ));
   }
 
-  _firstSectionBody(drink) {
+  _firstSectionBody(Drink drink) {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.40,
@@ -83,7 +82,7 @@ class _DettaglioState extends State<Dettaglio> {
         ));
   }
 
-  _img(drink) {
+  _img(Drink drink) {
     return ShaderMask(
         shaderCallback: (rect) {
           return LinearGradient(
@@ -104,11 +103,11 @@ class _DettaglioState extends State<Dettaglio> {
         ));
   }
 
-  _title(drink) {
+  _title(Drink drink) {
     return MyText(child: drink.titolo);
   }
 
-  _difficulty(drink) {
+  _difficulty(Drink drink) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
@@ -156,14 +155,14 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _ingredientsList(drink) {
+  _ingredientsList(Drink drink) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: listaingredienti(drink),
     );
   }
 
-  List<Widget> listaingredienti(drink) {
+  List<Widget> listaingredienti(Drink drink) {
     return widget.drink.ingredienti.map((ingrediente) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -222,7 +221,7 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _favSelection(drink) {
+  _favSelection(Drink drink) {
     return FavouriteButton(drinkid: drink.drinkid);
   }
 

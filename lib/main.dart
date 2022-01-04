@@ -13,6 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isviewed = prefs.getInt('onBoard');
+  Bloc bloc = Bloc();
+  await bloc.loadSavedData();
 
   runApp(MyApp());
 }

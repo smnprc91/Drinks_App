@@ -23,6 +23,12 @@ class _FavScreenState extends State<FavScreen> {
   final Bloc bloc = new Bloc();
 
   @override
+  void initState() {
+    bloc.loadSavedData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: bloc.streamFavdrink,

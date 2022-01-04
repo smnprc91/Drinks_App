@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/categoria.dart';
 import 'package:progdrinks/screen/cocktails/cocktails.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   int currentImage = 0;
   late TutorialCoachMark tutorialCoachMark;
   List<TargetFocus> targets = <TargetFocus>[];
+  Bloc bloc = Bloc();
 
   GlobalKey keyButton = GlobalKey();
   GlobalKey keyButton1 = GlobalKey();
@@ -36,11 +39,12 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.hasData) {
           List<Categoria> categorie = snapshot.data as List<Categoria>;
 
-          var drinks = categorie
+          List<Drink> drinks = categorie
               .map((Categoria c) => c.drinks)
-              .toList()
               .expand((e) => e)
-              .toList();
+              .toList() as List<Drink>;
+
+          bloc.drinks = drinks;
 
           return _scaffold(drinks, categorie);
         } else {

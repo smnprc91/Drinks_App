@@ -1,3 +1,4 @@
+import 'package:progdrinks/models/drink.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,30 +10,54 @@ class Bloc {
   }
 
   Bloc._internal();
-  
-  BehaviorSubject<Set<int>> _favdrink = BehaviorSubject();
-  Sink<Set<int>> get sinkFavdrink => _favdrink.sink;
-  Stream<Set<int>> get streamFavdrink => _favdrink.stream;
 
+  BehaviorSubject<List<Drink>> _favdrink = BehaviorSubject();
+  Sink<List<Drink>> get sinkFavdrink => _favdrink.sink;
+  Stream<List<Drink>> get streamFavdrink => _favdrink.stream;
+
+  Set<int> _savedDrinks = new Set();
+  List<Drink> drinks = [];
 
   Future<bool> addFavourite(int drinkId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Set<int> savedDrinks = await loadSavedData();
+    await loadSavedData();
 
-    savedDrinks.add(drinkId);
+    _savedDrinks.add(drinkId);
 
-    await prefs.setStringList('drinks', savedDrinks.map((drink) => drink.toString()).toList());
+    await prefs.setStringList('drinks', _savedDrinks.map((drink) => drink.toString()).toList());
 
-    _favdrink.sink.add(savedDrinks);
+    _favdrink.sink.add(_mapIdsToDrinks());
 
     return true;
   }
 
+  List<Drink> _mapIdsToDrinks() {
+    return _savedDrinks.
+        where((id) {
+          return drinks.where((drink) => drink.drinkid == id).isNotEmpty;
+        }).map((id) {
+          return drinks.where((drink) => drink.drinkid == id).first;
+        })
+      .toList();
+  }
+
   Future<Set<int>>loadSavedData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('drinks')!
-        .map((drink) => int.parse(drink))
-        .toSet();
+    List<String>? fetchedDrinks = prefs.getStringList('drinks');
+
+    if (fetchedDrinks != null) {
+      _savedDrinks = fetchedDrinks
+          .map((drink) => int.parse(drink))
+          .toSet();
+    }
+
+    _favdrink.sink.add(_mapIdsToDrinks());
+
+    return _savedDrinks;
+  }
+
+  bool isFavourite(int drinkId) {
+    return _savedDrinks.contains(drinkId);
   }
 
   void dispose() {
