@@ -2,6 +2,7 @@ import 'package:xml/xml.dart' as xml;
 
 class Drink {
   Drink(
+    this.drinkid,
     this.img,
     this.titolo,
     this.difficolta,
@@ -9,7 +10,7 @@ class Drink {
     this.ingredienti,
     this.steps,
   );
-
+  int drinkid;
   String img;
   String titolo;
   int difficolta;
@@ -21,6 +22,7 @@ class Drink {
     xml.XmlElement node,
   ) {
     return Drink(
+      int.parse(node.findElements('drinkid').first.text),
       node.findElements('img').first.text,
       node.findElements('titolo').first.text,
       int.parse(
