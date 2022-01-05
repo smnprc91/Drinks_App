@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           List<Drink> drinks = categorie
               .map((Categoria c) => c.drinks)
               .expand((e) => e)
-              .toList() as List<Drink>;
+              .toList();
 
           bloc.drinks = drinks;
 

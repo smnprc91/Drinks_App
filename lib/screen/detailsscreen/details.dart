@@ -20,9 +20,14 @@ class Dettaglio extends StatefulWidget {
   _DettaglioState createState() => _DettaglioState();
 }
 
-final Bloc bloc = new Bloc();
-
 class _DettaglioState extends State<Dettaglio> {
+  @override
+  void initState() {
+    Bloc bloc = Bloc();
+    bloc.loadSavedData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _scaffold(widget.drink);

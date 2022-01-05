@@ -66,27 +66,27 @@ class _SearchState extends State<Search> {
             return widget.drinks[index].titolo
                     .toLowerCase()
                     .contains(drinkcercato)
-                ? Card(
-                    elevation: 19,
-                    child: ListTile(
-                      leading: CircleAvatar(
-                          radius: 25,
-                          backgroundImage: CachedNetworkImageProvider(
-                              widget.drinks[index].img)),
-                      title: Text(widget.drinks[index].titolo),
-                      trailing: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
+                ? GestureDetector(
+                  onTap: (){
+                     Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Dettaglio(
                                         drink: widget.drinks[index],
                                       )));
-                        },
-                        child: Icon(Icons.arrow_forward_rounded),
+                  },
+                  child: Card(
+                      elevation: 19,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                            radius: 25,
+                            backgroundImage: CachedNetworkImageProvider(
+                                widget.drinks[index].img)),
+                        title: Text(widget.drinks[index].titolo),
+                        trailing: Icon(Icons.arrow_forward_rounded),
                       ),
                     ),
-                  )
+                )
                 : Container();
           },
         ))

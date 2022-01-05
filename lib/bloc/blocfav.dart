@@ -31,6 +31,18 @@ class Bloc {
     return true;
   }
 
+Future<bool> removeFavourite(int drinkId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await loadSavedData();
+
+    _savedDrinks.remove(drinkId);
+
+    await prefs.setStringList('drinks', _savedDrinks.map((drink) => drink.toString()).toList());
+
+    _favdrink.sink.add(_mapIdsToDrinks());
+
+    return true;
+  }
   List<Drink> _mapIdsToDrinks() {
     return _savedDrinks.
         where((id) {

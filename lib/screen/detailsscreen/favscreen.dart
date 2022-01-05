@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +20,10 @@ class FavScreen extends StatefulWidget {
 
 class _FavScreenState extends State<FavScreen> {
   final Bloc bloc = new Bloc();
-
+  
   @override
   void initState() {
+    Bloc bloc = Bloc();
     bloc.loadSavedData();
     super.initState();
   }
@@ -35,7 +35,9 @@ class _FavScreenState extends State<FavScreen> {
         builder: (context, risultatoDelloStream) {
           if (risultatoDelloStream.hasData) {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
+         
 
+         
             return Scaffold(
                 extendBodyBehindAppBar: true,
                 appBar: MyAllPagesAppBar(
@@ -46,8 +48,10 @@ class _FavScreenState extends State<FavScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,
                     child: ListView.builder(
+                      
                         itemCount: drinks.length,
                         itemBuilder: (context, index) {
+                      
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -62,8 +66,9 @@ class _FavScreenState extends State<FavScreen> {
                               child: ListTile(
                                 leading: CircleAvatar(
                                     radius: 25,
-                                    backgroundImage: CachedNetworkImageProvider(
-                                        drinks[index].img)),
+                                    backgroundImage:
+                                        CachedNetworkImageProvider(
+                                            drinks[index].img)),
                                 title: Text(drinks[index].titolo),
                                 trailing: Icon(Icons.arrow_forward_rounded),
                               ),

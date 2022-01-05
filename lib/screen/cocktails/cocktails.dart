@@ -1,7 +1,6 @@
 //TODO : pulire il codice
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
@@ -12,30 +11,12 @@ class CockTailsPage extends StatefulWidget {
   const CockTailsPage({required this.drinks, required this.categoria});
   final List<Drink> drinks;
   final String categoria;
+
   @override
   _CockTailsPageState createState() => _CockTailsPageState();
 }
 
 class _CockTailsPageState extends State<CockTailsPage> {
-  Size displaySize(BuildContext context) {
-    return MediaQuery.of(context).size;
-  }
-
-  double displayHeight(BuildContext context) {
-    return displaySize(context).height;
-  }
-
-  double displayWidth(BuildContext context) {
-    return displaySize(context).width;
-  }
-
-  final Bloc bloc = new Bloc();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +32,6 @@ class _CockTailsPageState extends State<CockTailsPage> {
     return MyBodyStyle(child: list(context));
   }
 
-
   List<Drink> favdrink = [];
   list(context) {
     return Container(
@@ -62,17 +42,14 @@ class _CockTailsPageState extends State<CockTailsPage> {
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-           
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Dettaglio(
-                                  drink: widget.drinks[index],
-                                )));
-                  },
-                 
-                
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Dettaglio(
+                              drink: widget.drinks[index],
+                            )));
+              },
               child: Card(
                 elevation: 19,
                 child: ListTile(
