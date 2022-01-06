@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
     return AutoSizeText('Drink del giorno',
         maxLines: 1,
         minFontSize: 20,
-        style: TextStyle(color: Colors.black45, fontSize: 30));
+        style: TextStyle(color: Colors.black45, fontSize: 15));
   }
 
   _secondSectionBody(List<Categoria> categorie) {
@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> {
               _caText(
                 categorie,
               ),
-          style: TextStyle(color: _colText(), fontSize: 25),
+          style: TextStyle(color: _colText(), fontSize: 20),
         ),
       ),
     );
@@ -279,7 +279,7 @@ class _HomePageState extends State<HomePage> {
     return CarouselSlider.builder(
         itemCount: categorie.length,
         options: CarouselOptions(
-          autoPlay: true,
+          autoPlay: false,
           aspectRatio: 2.0,
           enlargeCenterPage: true,
           onPageChanged: (index, fn) {
@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
       TargetFocus(
         identify: "keyBottomNavigation1",
         keyTarget: keyButton1,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.bottomLeft,
         contents: [_firstTargetContent()],
       ),
     );
@@ -395,12 +395,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AutoSizeText(
-                "ciao ",
-                minFontSize: 30,
-                style: TextStyle(
-                  color: Colors.black,
+              Container(
+                height: MediaQuery.of(context).size.height*0.8,
+                color: Colors.amber,
+                child: Column(children: [
+                  AutoSizeText(
+                  "Ciao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
+                  minFontSize: 20,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
+                ],),
               ),
             ],
           ),
@@ -414,7 +420,7 @@ class _HomePageState extends State<HomePage> {
       TargetFocus(
         identify: "keyBottomNavigation2",
         keyTarget: keyButton2,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.bottomLeft,
         contents: [_secondTargetContent()],
       ),
     );
@@ -429,12 +435,18 @@ class _HomePageState extends State<HomePage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              AutoSizeText(
-                "yo yo yo ",
-                minFontSize: 30,
-                style: TextStyle(
-                  color: Colors.black,
+             Container(
+                height: MediaQuery.of(context).size.height*0.8,
+                color: Colors.amber,
+                child: Column(children: [
+                  AutoSizeText(
+                  "Ciao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
+                  minFontSize: 20,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
+                ],),
               ),
             ],
           ),

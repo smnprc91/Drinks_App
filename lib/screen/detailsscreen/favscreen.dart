@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
+import 'package:progdrinks/widgets/FavouriteButton.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/text.dart';
 
@@ -19,25 +20,21 @@ class FavScreen extends StatefulWidget {
 }
 
 class _FavScreenState extends State<FavScreen> {
-  final Bloc bloc = new Bloc();
-  
+  Bloc _favouriteBloc = Bloc();
   @override
   void initState() {
-    Bloc bloc = Bloc();
-    bloc.loadSavedData();
+    _favouriteBloc.loadSavedData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: bloc.streamFavdrink,
+        stream: _favouriteBloc.streamFavdrink,
         builder: (context, risultatoDelloStream) {
           if (risultatoDelloStream.hasData) {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
-         
 
-         
             return Scaffold(
                 extendBodyBehindAppBar: true,
                 appBar: MyAllPagesAppBar(
@@ -48,10 +45,8 @@ class _FavScreenState extends State<FavScreen> {
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,
                     child: ListView.builder(
-                      
                         itemCount: drinks.length,
                         itemBuilder: (context, index) {
-                      
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -69,8 +64,17 @@ class _FavScreenState extends State<FavScreen> {
                                     backgroundImage:
                                         CachedNetworkImageProvider(
                                             drinks[index].img)),
-                                title: Text(drinks[index].titolo),
-                                trailing: Icon(Icons.arrow_forward_rounded),
+                                title: Padding(
+                                  padding: const EdgeInsets.only(left :0.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                    AutoSizeText(drinks[index].titolo),FavouriteButton(
+                                      drinkid: drinks[index].drinkid , titolo: drinks[index].titolo,),
+                                  ],),
+                                ),
+                             
+                                
                               ),
                             ),
                           );

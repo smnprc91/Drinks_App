@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/firsttime%20introduction/firstStartingPage.dart';
 import 'package:progdrinks/screen/homepage.dart';
-import 'package:progdrinks/themes/theme-gold.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 int? isviewed;
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: goldTheme,
+     
         home: isviewed != 0 ? FirstStartingPage() : HomePage());
   }
 }

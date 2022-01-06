@@ -87,7 +87,7 @@ class _EmailSenderState extends State<EmailSender> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 30,
+                      fontSize: 15,
                     )),
               ),
               Padding(
@@ -101,7 +101,7 @@ class _EmailSenderState extends State<EmailSender> {
                             const BorderSide(color: Colors.blueGrey, width: 2),
                       ),
                       labelText: 'Destinatario',
-                      labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
+                      labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
                 ),
               ),
               Padding(
@@ -115,7 +115,7 @@ class _EmailSenderState extends State<EmailSender> {
                             const BorderSide(color: Colors.blueGrey, width: 2),
                       ),
                       labelText: 'Il tuo nome e cognome',
-                      labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
+                      labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
                 ),
               ),
               Container(
@@ -136,7 +136,7 @@ class _EmailSenderState extends State<EmailSender> {
                         labelText: "Dici cosa ne pensi!",
                         hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
                         labelStyle:
-                            TextStyle(color: Colors.amber, fontSize: 30)),
+                            TextStyle(color: Colors.amber, fontSize: 20)),
                   ),
                 ),
               ),

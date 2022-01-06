@@ -227,56 +227,8 @@ class _DettaglioState extends State<Dettaglio> {
   }
 
   _favSelection(Drink drink) {
-    return FavouriteButton(drinkid: drink.drinkid);
+    return FavouriteButton(drinkid: drink.drinkid,titolo: drink.titolo,);
   }
 
-/**
- *   _listSpacer() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        color: Colors.grey,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
-      ),
-    );
-  }
- */
 
-  /*   GestureDetector(
-                        onTap: () {
-                          if (_selectedItems.contains(index)) {
-                            setState(() {
-                              _selectedItems.removeWhere((val) => val == index);
-                              favdrink.remove(widget.drinks[index]);
-                            });
-                          } else {
-                            setState(() {
-                              _selectedItems.add(index);
-                              favdrink.add(widget.drinks[index]);
-                              bloc.sinkFavdrink.add(favdrink);
-                            });
-                          }
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          color: Colors.black.withOpacity(0.3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Aggiungi ai preferiti',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.grey),
-                              ),
-                              Icon(
-                                  (_selectedItems.contains(index))
-                                      ? Icons.favorite
-                                      : Icons.favorite_outline,
-                                  color: Colors.amber),
-                            ],
-                          ),
-                        ),
-                      ), */
 }

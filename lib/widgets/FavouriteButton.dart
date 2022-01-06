@@ -3,8 +3,10 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 
 class FavouriteButton extends StatefulWidget {
-  const FavouriteButton({Key? key, required this.drinkid}) : super(key: key);
+  const FavouriteButton({Key? key, required this.drinkid, required this.titolo})
+      : super(key: key);
   final int drinkid;
+  final String titolo;
 
   @override
   _FavouriteButtonState createState() => _FavouriteButtonState();
@@ -25,21 +27,26 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                 .isNotEmpty;
             return Container(
                 child: MaterialButton(
-                    child:
-                        isFavourite ?  Icon(Icons.favorite,color: Colors.amber,): Icon(Icons.favorite_border,color: Colors.amber,),
+                    child: isFavourite
+                        ? Icon(
+                            Icons.favorite,
+                            color: Colors.amber,
+                          )
+                        : Icon(
+                            Icons.favorite_border,
+                            color: Colors.amber,
+                          ),
                     onPressed: () {
                       isFavourite
                           ? _favouriteBloc.removeFavourite(widget.drinkid)
                           : _favouriteBloc.addFavourite(widget.drinkid);
                       isFavourite
-                          ? ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(
-                                 duration: Duration(milliseconds: 500),
-                                content: Text('Rimosso dai preferiti')))
-                          : ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(
-                                duration: Duration(milliseconds: 500),
-                                content: Text('Aggiunto ai preferiti')));
+                          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(milliseconds: 700),
+                              content: Text(widget.titolo +'  rimosso dai preferiti')))
+                          : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(milliseconds: 700),
+                              content: Text(widget.titolo +'  aggiunto ai preferiti')));
                     }));
           } else {
             return Center(child: CircularProgressIndicator());

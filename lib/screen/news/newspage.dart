@@ -59,7 +59,7 @@ class _NewsPageState extends State<NewsPage> {
           child: ListTile(
             title: AutoSizeText(
               note,
-              style: TextStyle(fontSize: 30, color: Colors.black),
+              style: TextStyle(fontSize: 15, color: Colors.black),
             ),
           ));
     }).toList();
