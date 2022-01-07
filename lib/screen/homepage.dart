@@ -10,6 +10,7 @@ import 'package:progdrinks/screen/dod/dodscreen.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
+import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,14 +58,15 @@ class _HomePageState extends State<HomePage> {
   _scaffold(drinks, categorie) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      floatingActionButton: _floatingActionButton(),
+     // floatingActionButton: _floatingActionButton(),
       appBar: _appBar(drinks),
       drawer: Drawers(),
       body: bodyMainContent(categorie, drinks),
     );
   }
 
-  _floatingActionButton() {
+ /*
+   _floatingActionButton() {
     return FloatingActionButton(
       backgroundColor: Colors.white,
       child: Container(
@@ -80,6 +82,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+  */
 
   _appBar(drinks) {
     return AppBar(
@@ -110,8 +113,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   bodyMainContent(List<Categoria> categorie, drinks) {
-    return Container(
-      color: Colors.white,
+    return MyBodyStyle(
+     
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -165,7 +168,7 @@ class _HomePageState extends State<HomePage> {
 
   _containerDeco() {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.11,
+        height: MediaQuery.of(context).size.height * 0.08,
         decoration: _firstBoxDecoration(),
         child: _row());
   }
@@ -242,8 +245,8 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(20.0),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(
-          'Categoria: ' +
+        child: AutoSizeText(
+          'Cerca per categorie: ' +
               _caText(
                 categorie,
               ),
@@ -267,11 +270,11 @@ class _HomePageState extends State<HomePage> {
 
   _colText() {
     if (currentImage == 0) {
-      return Colors.black45;
+      return Colors.grey.withOpacity(0.6);
     } else if (currentImage == 1) {
-      return Colors.black45;
+      return Colors.grey.withOpacity(0.6);
     } else {
-      return Colors.black45;
+      return Colors.grey.withOpacity(0.6);
     }
   }
 
@@ -344,7 +347,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void showTutorial() {
+/*  void showTutorial() {
     initTargets();
     tutorialCoachMark = TutorialCoachMark(
       context,
@@ -399,13 +402,56 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height*0.8,
                 color: Colors.amber,
                 child: Column(children: [
-                  AutoSizeText(
-                  "Ciao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
-                  minFontSize: 20,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AutoSizeText(
+                    "Ciao! in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
+                    minFontSize: 15,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: AutoSizeText(
+                    "Per prima cosa è possibile controllare la raccolta di tutti i drink. Per farlo prima clicca su una categoria a tua scelta e poi sul drink che ti attira di più",
+                    minFontSize: 15,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                ),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(
+                  "Inoltre è possibile vedere la ricetta aggionta in giornata",
+                  minFontSize: 15,
                   style: TextStyle(
-                    color: Colors.black,
+                      color: Colors.black,
                   ),
                 ),
+                   ),
+                    Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(
+                  "Non poteva mancare inoltre il sistema di ricerca dei drink per farlo clicca sulla lente di ingrandimento gialla messa nell'angolo in alto a destra",
+                  minFontSize: 15,
+                  style: TextStyle(
+                      color: Colors.black,
+                  ),
+                ),
+                   ),
+                     Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: AutoSizeText(
+                  "Per continuare clicca sul punto esclamativo",
+                  minFontSize: 15,
+                  style: TextStyle(
+                      color: Colors.black,
+                  ),
+                ),
+                   ),
                 ],),
               ),
             ],
@@ -440,8 +486,22 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.amber,
                 child: Column(children: [
                   AutoSizeText(
-                  "Ciao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'appCiao in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
-                  minFontSize: 20,
+                  "Ciao!, in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
+                  minFontSize: 15,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                    AutoSizeText(
+                  "Per prima cosa è possibile controllare la raccolta di tutti i drink. Per farlo prima clicca su una categoria a tua scelta e poi sul drink che ti attira di più",
+                  minFontSize: 15,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                   AutoSizeText(
+                  "",
+                  minFontSize: 15,
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -453,5 +513,5 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-  }
+  } */
 }

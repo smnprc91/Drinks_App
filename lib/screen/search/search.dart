@@ -6,7 +6,7 @@ import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/text.dart';
 
-//TODO: migliorare la grafica di questa pagina(search)
+
 class Search extends StatefulWidget {
   Search({required this.drinks});
 

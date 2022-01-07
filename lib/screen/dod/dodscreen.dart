@@ -12,7 +12,7 @@ class DodScreen extends StatefulWidget {
   @override
   _DodScreenState createState() => _DodScreenState();
 }
-//TODO: finire di integrare i dati dal model e creare la grafica
+
 
 class _DodScreenState extends State<DodScreen> {
   @override
@@ -230,16 +230,5 @@ class _DodScreenState extends State<DodScreen> {
     );
   }
 
- /**
-  *  _listSpacer() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        color: Colors.grey,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
-      ),
-    );
-  }
-  */
+
 }

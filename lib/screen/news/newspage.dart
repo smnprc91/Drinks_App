@@ -6,7 +6,7 @@ import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/text.dart';
 
-//TODO bisogna aggiornare la grafica e testare le dimensioni
+
 
 class NewsPage extends StatefulWidget {
 

@@ -15,7 +15,17 @@ class Drawers extends StatelessWidget {
         children: [
           _buildDrawerHeader(context),
           _homeButton(context),
-          ..._drawerItems
+          ..._drawerItems,
+          Container(
+            height: MediaQuery.of(context).size.height*0.4,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left:30.0),
+                child: Text('v.0.1'),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -27,12 +37,12 @@ class Drawers extends StatelessWidget {
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.fill, image: AssetImage('assets/drawer-bg.jpg'))),
+                fit: BoxFit.fill, image: AssetImage('assets/drawer.jpg'))),
         child: Stack(children: <Widget>[
           Positioned(
             bottom: 12.0,
             left: 16.0,
-            child: Text("iDrink",
+            child: Text("DrinkIt",
                 style: Theme.of(context).primaryTextTheme.headline5),
           )
         ]));
@@ -52,7 +62,7 @@ class Drawers extends StatelessWidget {
     );
   }
 
- final  List<DrawerItem> _drawerItems = [
+  final List<DrawerItem> _drawerItems = [
     DrawerItem(name: 'Preferiti', icon: Icons.favorite, routeName: FavScreen()),
     DrawerItem(
         name: 'Contattaci',
