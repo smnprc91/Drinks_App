@@ -55,11 +55,12 @@ class _NewsPageState extends State<NewsPage> {
   List<Widget> buildnote(News news) {
     return news.note.map((note) {
       return Card(
+        color: Theme.of(context).secondaryHeaderColor,
           elevation: 9,
           child: ListTile(
             title: AutoSizeText(
               note,
-              style: TextStyle(fontSize: 15, color: Colors.black),
+              style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
             ),
           ));
     }).toList();

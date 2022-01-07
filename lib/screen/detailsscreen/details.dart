@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +52,7 @@ class _DettaglioState extends State<Dettaglio> {
           _firstSectionBody(drink),
           _favSelection(drink),
           Card(
+            color: Theme.of(context).secondaryHeaderColor,
             elevation: 9,
             child: Column(
               children: [
@@ -60,6 +63,7 @@ class _DettaglioState extends State<Dettaglio> {
             ),
           ),
           Card(
+            color: Theme.of(context).secondaryHeaderColor,
             elevation: 9,
             child: Column(
               children: [_stepsTitle(), _spacer(), _stepsList(drink)],
@@ -121,7 +125,7 @@ class _DettaglioState extends State<Dettaglio> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Difficoltà :'),
+            Text('Difficoltà :',style: TextStyle(color: Colors.amber),),
             Icon(
               MdiIcons.chefHat,
               color: Colors.amber,
@@ -155,7 +159,7 @@ class _DettaglioState extends State<Dettaglio> {
       child: Center(
           child: Text(
         'Ingredienti',
-        style: TextStyle(fontSize: 20, color: Colors.amber),
+        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
       )),
     );
   }
@@ -175,7 +179,7 @@ class _DettaglioState extends State<Dettaglio> {
           width: MediaQuery.of(context).size.width,
           child: Text(
             ingrediente,
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
         ),
       );
@@ -189,7 +193,7 @@ class _DettaglioState extends State<Dettaglio> {
       child: Center(
           child: Text(
         'Procedimento',
-        style: TextStyle(fontSize: 20, color: Colors.amber),
+        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
       )),
     );
   }
@@ -205,12 +209,9 @@ class _DettaglioState extends State<Dettaglio> {
       return Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AutoSizeText(step,
-                  style: TextStyle(color: Colors.grey, fontSize: 20)),
-            ),
+            padding: const EdgeInsets.all(8.0),
+            child: AutoSizeText(step,
+                style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
           ));
     }).toList();
   }

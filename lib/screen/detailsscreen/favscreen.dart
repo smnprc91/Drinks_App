@@ -43,7 +43,7 @@ class _FavScreenState extends State<FavScreen> {
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.white,
+                    color: Theme.of(context).primaryColor,
                     child: ListView.builder(
                         itemCount: drinks.length,
                         itemBuilder: (context, index) {
@@ -57,6 +57,7 @@ class _FavScreenState extends State<FavScreen> {
                                           )));
                             },
                             child: Card(
+                              color: Theme.of(context).secondaryHeaderColor,
                               elevation: 19,
                               child: ListTile(
                                 leading: CircleAvatar(

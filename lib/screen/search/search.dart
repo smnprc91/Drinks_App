@@ -40,22 +40,25 @@ class _SearchState extends State<Search> {
               top: MediaQuery.of(context).size.height * 0.15,
               left: 10,
               right: 10),
-          child: TextField(
-            onChanged: (risultatoricerca) {
-              setState(() {
-                drinkcercato = risultatoricerca.toLowerCase();
-              });
-            },
-            style: TextStyle(color: Colors.black, fontSize: 20),
-            decoration: InputDecoration(
-                enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.blueGrey, width: 2),
-                ),
-                labelText: "Cerca",
-                hintText: 'Inserisci il nome',
-                hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
-                labelStyle: TextStyle(color: Colors.amber, fontSize: 25)),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom:8.0),
+            child: TextField(
+              onChanged: (risultatoricerca) {
+                setState(() {
+                  drinkcercato = risultatoricerca.toLowerCase();
+                });
+              },
+              style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
+              decoration: InputDecoration(
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.blueGrey, width: 2),
+                  ),
+                  labelText: "Cerca",
+                  hintText: 'Inserisci il nome',
+                  hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
+                  labelStyle: TextStyle(color: Colors.amber, fontSize: 25)),
+            ),
           ),
         ),
         Expanded(
@@ -76,6 +79,7 @@ class _SearchState extends State<Search> {
                                       )));
                   },
                   child: Card(
+                    color: Theme.of(context).secondaryHeaderColor,
                       elevation: 19,
                       child: ListTile(
                         leading: CircleAvatar(

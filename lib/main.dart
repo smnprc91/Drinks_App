@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
      theme: ThemeData(
-    primaryColor: Color(0xff212529)
+    primaryColor: Color(0xff212529),
+    secondaryHeaderColor: Color(0xffb4c4c4)
      ),
         home: isviewed != 0 ? FirstStartingPage() : HomePage());
   }

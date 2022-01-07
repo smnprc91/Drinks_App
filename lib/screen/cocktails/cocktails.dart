@@ -34,35 +34,39 @@ class _CockTailsPageState extends State<CockTailsPage> {
 
   List<Drink> favdrink = [];
   list(context) {
-    return Container(
-      child: ListView.builder(
-          padding: EdgeInsets.zero,
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemCount: widget.drinks.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Dettaglio(
-                              drink: widget.drinks[index],
-                            )));
-              },
-              child: Card(
-                elevation: 19,
-                child: ListTile(
-                  leading: CircleAvatar(
-                      radius: 25,
-                      backgroundImage:
-                          CachedNetworkImageProvider(widget.drinks[index].img)),
-                  title: Text(widget.drinks[index].titolo),
-                  trailing: Icon(Icons.arrow_forward_rounded),
+    return Padding(
+      padding: const EdgeInsets.only(top:30.0),
+      child: Container(
+        child: ListView.builder(
+            padding: EdgeInsets.zero,
+            physics:
+                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            itemCount: widget.drinks.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Dettaglio(
+                                drink: widget.drinks[index],
+                              )));
+                },
+                child: Card(
+                  color:  Theme.of(context).secondaryHeaderColor,
+                  elevation: 19,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                        radius: 25,
+                        backgroundImage:
+                            CachedNetworkImageProvider(widget.drinks[index].img)),
+                    title: Text(widget.drinks[index].titolo),
+                    trailing: Icon(Icons.arrow_forward_rounded),
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 

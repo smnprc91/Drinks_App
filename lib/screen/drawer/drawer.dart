@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/detailsscreen/favscreen.dart';
 import 'package:progdrinks/screen/drawer/draweritem.dart';
@@ -11,22 +12,26 @@ class Drawers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
-          _buildDrawerHeader(context),
-          _homeButton(context),
-          ..._drawerItems,
-          Container(
-            height: MediaQuery.of(context).size.height*0.4,
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left:30.0),
-                child: Text('v.0.1'),
+      
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        color: Theme.of(context).secondaryHeaderColor,
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height*0.7,
+              child: ListView(
+                children: [
+                  _buildDrawerHeader(context),
+                  _homeButton(context),
+                  ..._drawerItems,
+                
+                ],
               ),
             ),
-          )
-        ],
+            _version(context)
+          ],
+        ),
       ),
     );
   }
@@ -71,4 +76,28 @@ class Drawers extends StatelessWidget {
     DrawerItem(
         name: 'news', icon: Icons.new_label_sharp, routeName: NewsPage()),
   ];
+
+  _version(context) {
+    return Container(
+  
+      height: MediaQuery.of(context).size.height * 0.30,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          height: MediaQuery.of(context).size.height*0.08,
+          color: Theme.of(context).primaryColor,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AutoSizeText('Versione:  0.1',style: TextStyle(color: Colors.white),),
+              ),
+            
+            ],),
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -31,7 +31,7 @@ class _DodScreenState extends State<DodScreen> {
 
   _scaffold(daydrink) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         appBar: MyAllPagesAppBar(child: _title(daydrink)),
         body: _bodySection(daydrink));
   }
@@ -44,6 +44,7 @@ class _DodScreenState extends State<DodScreen> {
         children: [
           _firstSectionBody(daydrink),
           Card(
+              color: Theme.of(context).secondaryHeaderColor,
             elevation: 9,
             child: Column(
               children: [
@@ -54,6 +55,7 @@ class _DodScreenState extends State<DodScreen> {
             ),
           ),
           Card(
+              color: Theme.of(context).secondaryHeaderColor,
             elevation: 9,
             child: Column(
               children: [_stepsTitle(), _spacer(), _stepsList(daydrink)],
@@ -82,7 +84,7 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _img(daydrink) {
-    return ShaderMask(
+     return ShaderMask(
         shaderCallback: (rect) {
           return LinearGradient(
             begin: Alignment.center,
@@ -115,6 +117,7 @@ class _DodScreenState extends State<DodScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            AutoSizeText('Difficoltà ' ,style: TextStyle(color: Colors.amber),),
             Icon(
               MdiIcons.chefHat,
               color: Colors.amber,
@@ -148,7 +151,7 @@ class _DodScreenState extends State<DodScreen> {
       child: Center(
           child: Text(
         'Ingredienti',
-        style: TextStyle(fontSize: 20, color: Colors.amber),
+        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight:FontWeight.w700,)
       )),
     );
   }
@@ -168,7 +171,7 @@ class _DodScreenState extends State<DodScreen> {
           width: MediaQuery.of(context).size.width,
           child: Text(
             ingrediente,
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
         ),
       );
@@ -182,7 +185,7 @@ class _DodScreenState extends State<DodScreen> {
       child: Center(
           child: Text(
         'Procedimento',
-        style: TextStyle(fontSize: 20, color: Colors.amber),
+        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
       )),
     );
   }
@@ -202,7 +205,7 @@ class _DodScreenState extends State<DodScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: AutoSizeText(step,
-                  style: TextStyle(color: Colors.grey, fontSize: 20)),
+                  style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
             ),
           ));
     }).toList();

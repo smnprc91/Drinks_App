@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
   _firstBoxDecoration() {
     return BoxDecoration(
         boxShadow: [_firstBoxShadow()],
-        color: Colors.white,
+        color:Theme.of(context).secondaryHeaderColor,
         borderRadius: new BorderRadius.only(
             topLeft: Radius.circular(40.0),
             bottomLeft: Radius.circular(40.0),
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
     return AutoSizeText('Drink del giorno',
         maxLines: 1,
         minFontSize: 20,
-        style: TextStyle(color: Colors.black45, fontSize: 15));
+        style: TextStyle(color: Colors.black, fontSize: 15));
   }
 
   _secondSectionBody(List<Categoria> categorie) {
@@ -270,11 +270,11 @@ class _HomePageState extends State<HomePage> {
 
   _colText() {
     if (currentImage == 0) {
-      return Colors.grey.withOpacity(0.6);
+      return Theme.of(context).secondaryHeaderColor;
     } else if (currentImage == 1) {
-      return Colors.grey.withOpacity(0.6);
+      return  Theme.of(context).secondaryHeaderColor;
     } else {
-      return Colors.grey.withOpacity(0.6);
+      return  Theme.of(context).secondaryHeaderColor;
     }
   }
 

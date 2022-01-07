@@ -31,7 +31,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
 
   @override
   Widget build(BuildContext context) {
-    const primarycolotr =  Color(0xff212529);
+    const primarycolotr = Color(0xff212529);
     const pageDecoration = const PageDecoration(
       titleTextStyle: TextStyle(
           fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.amber),
@@ -52,13 +52,16 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
         PageViewModel(
           title: 'Benvenuto in DrinkIt',
           bodyWidget: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
+      
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: Image.asset('assets/fondo.jpg'),
+                Container(
+                   height: MediaQuery.of(context).size.height * 0.3,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Image.asset('assets/fondo.jpg'),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 40.0),
@@ -96,15 +99,16 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
         PageViewModel(
           title: "La responsabilità prima di  tutto.",
           bodyWidget: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset('assets/dont.jpg'),
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: Image.asset('assets/dont.jpg')),
                 Text(
                   'Metti la sicurezza al primo posto , non rischiare.',
                   style: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
@@ -115,7 +119,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                   child: Text(
                     'SE GUIDI NON BEVI',
                     style: TextStyle(
-                      fontSize: 30.0,
+                      fontSize: 25.0,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
@@ -129,13 +133,20 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
-      showSkipButton: false,
+      showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
       //rtl: true, // Display as right-to-left
-      skip: const Text('Skip',style: TextStyle(color: primarycolotr),),
-      next: const Icon(Icons.arrow_forward,color: primarycolotr,),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600,color: primarycolotr)),
+      skip: const Text(
+        'Salta',
+        style: TextStyle(color: primarycolotr),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: primarycolotr,
+      ),
+      done: const Text('Finito',
+          style: TextStyle(fontWeight: FontWeight.w600, color: primarycolotr)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: kIsWeb
@@ -151,7 +162,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.white,
+        color:  Color(0xffb4c4c4),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

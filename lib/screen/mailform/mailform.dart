@@ -86,19 +86,19 @@ class _EmailSenderState extends State<EmailSender> {
                     'Inviaci il tuo feedback o una tua ricetta compilando questo form',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontSize: 20,
                     )),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
                   controller: _recipientController,
                   decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder:  OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Colors.blueGrey, width: 2),
+                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
                       ),
                       labelText: 'Destinatario',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
@@ -107,12 +107,12 @@ class _EmailSenderState extends State<EmailSender> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
                   controller: _subjectController,
                   decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder:  OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Colors.blueGrey, width: 2),
+                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
                       ),
                       labelText: 'Il tuo nome e cognome',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
@@ -123,17 +123,17 @@ class _EmailSenderState extends State<EmailSender> {
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color:Theme.of(context).secondaryHeaderColor, fontSize: 20),
                     controller: _bodyController,
                     maxLines: null,
                     expands: true,
                     textAlignVertical: TextAlignVertical.top,
                     decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.blueGrey, width: 2),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).secondaryHeaderColor, width: 2),
                         ),
-                        labelText: "Dici cosa ne pensi!",
+                        labelText: "Di cosa ne pensi!",
                         hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
                         labelStyle:
                             TextStyle(color: Colors.amber, fontSize: 20)),
