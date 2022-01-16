@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:progdrinks/screen/detailsscreen/favscreen.dart';
+import 'package:progdrinks/screen/favourites/favscreen.dart';
 import 'package:progdrinks/screen/drawer/draweritem.dart';
 
 import 'package:progdrinks/screen/mailform/mailform.dart';

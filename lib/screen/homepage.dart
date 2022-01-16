@@ -1,17 +1,14 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/categoria.dart';
-import 'package:progdrinks/screen/cocktails/cocktails.dart';
-import 'package:progdrinks/screen/dod/dodscreen.dart';
+import 'package:progdrinks/screen/carousel/carouselsection.dart';
+import 'package:progdrinks/screen/dod/dodsection.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:progdrinks/widgets/mycircular.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,14 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentImage = 0;
-  late TutorialCoachMark tutorialCoachMark;
-  List<TargetFocus> targets = <TargetFocus>[];
   Bloc bloc = Bloc();
-
-  GlobalKey keyButton = GlobalKey();
-  GlobalKey keyButton1 = GlobalKey();
-  GlobalKey keyButton2 = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +39,7 @@ class _HomePageState extends State<HomePage> {
 
           return _scaffold(drinks, categorie);
         } else {
-          return _loadingCircle();
+          return MyCircularProgressIndicator();
         }
       }),
     );
@@ -58,31 +48,11 @@ class _HomePageState extends State<HomePage> {
   _scaffold(drinks, categorie) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-     // floatingActionButton: _floatingActionButton(),
       appBar: _appBar(drinks),
       drawer: Drawers(),
       body: bodyMainContent(categorie, drinks),
     );
   }
-
- /*
-   _floatingActionButton() {
-    return FloatingActionButton(
-      backgroundColor: Colors.white,
-      child: Container(
-        key: keyButton2,
-        child: Icon(
-          Icons.priority_high,
-          color: Colors.amber,
-          key: keyButton1,
-        ),
-      ),
-      onPressed: () {
-        showTutorial();
-      },
-    );
-  }
-  */
 
   _appBar(drinks) {
     return AppBar(
@@ -114,404 +84,16 @@ class _HomePageState extends State<HomePage> {
 
   bodyMainContent(List<Categoria> categorie, drinks) {
     return MyBodyStyle(
-     
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          _firstSectionBody(),
-          _secondSectionBody(categorie),
+          DrinkOfDaySection(),
+          CarouselSection(categorie: categorie ,),
         ],
       ),
     );
   }
 
-  _firstSectionBody() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
-        );
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.42,
-        color: Colors.transparent,
-        child: Stack(
-          children: [
-            _img(),
-            _positioned(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _img() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: 'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-        fit: BoxFit.fitHeight,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.37,
-      ),
-    );
-  }
-
-  _positioned() {
-    return Positioned(
-        left: MediaQuery.of(context).size.width * 0.1,
-        right: MediaQuery.of(context).size.width * 0.1,
-        bottom: 0,
-        child: _containerDeco());
-  }
-
-  _containerDeco() {
-    return Container(
-        height: MediaQuery.of(context).size.height * 0.08,
-        decoration: _firstBoxDecoration(),
-        child: _row());
-  }
-
-  _firstBoxDecoration() {
-    return BoxDecoration(
-        boxShadow: [_firstBoxShadow()],
-        color:Theme.of(context).secondaryHeaderColor,
-        borderRadius: new BorderRadius.only(
-            topLeft: Radius.circular(40.0),
-            bottomLeft: Radius.circular(40.0),
-            topRight: Radius.circular(40.0),
-            bottomRight: Radius.circular(40.0)));
-  }
-
-  _firstBoxShadow() {
-    return BoxShadow(
-      color: Colors.grey.withOpacity(0.5),
-      spreadRadius: 5,
-      blurRadius: 7,
-      offset: Offset(0, 3), // changes position of shadow
-    );
-  }
-
-  _row() {
-    return Center(
-        child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [_icon(), _autoSized()],
-    ));
-  }
-
-  _icon() {
-    return Icon(
-      Icons.thumb_up_off_alt,
-      color: Colors.amber,
-      size: 30,
-    );
-  }
-
-  _autoSized() {
-    return AutoSizeText('Drink del giorno',
-        maxLines: 1,
-        minFontSize: 20,
-        style: TextStyle(color: Colors.black, fontSize: 15));
-  }
-
-  _secondSectionBody(List<Categoria> categorie) {
-    return Container(
-        color: Colors.transparent,
-        child: Column(
-          children: [
-            _firstColumnSection(),
-            _secondColumnSection(categorie),
-            _thirdColumnSection(categorie),
-            _fourthColumnSection(),
-          ],
-        ));
-  }
-
-  _firstColumnSection() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Container(
-        color: Colors.amberAccent,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
-      ),
-    );
-  }
-
-  _secondColumnSection(categorie) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: AutoSizeText(
-          'Cerca per categorie: ' +
-              _caText(
-                categorie,
-              ),
-          style: TextStyle(color: _colText(), fontSize: 20),
-        ),
-      ),
-    );
-  }
-
-  _caText(
-    List<Categoria> categorie,
-  ) {
-    if (currentImage == 0) {
-      return categorie[0].titolo;
-    } else if (currentImage == 1) {
-      return categorie[1].titolo;
-    } else {
-      return categorie[2].titolo;
-    }
-  }
-
-  _colText() {
-    if (currentImage == 0) {
-      return Theme.of(context).secondaryHeaderColor;
-    } else if (currentImage == 1) {
-      return  Theme.of(context).secondaryHeaderColor;
-    } else {
-      return  Theme.of(context).secondaryHeaderColor;
-    }
-  }
-
-  _thirdColumnSection(categorie) {
-    return CarouselSlider.builder(
-        itemCount: categorie.length,
-        options: CarouselOptions(
-          autoPlay: false,
-          aspectRatio: 2.0,
-          enlargeCenterPage: true,
-          onPageChanged: (index, fn) {
-            setState(() {
-              currentImage = index;
-            });
-          },
-        ),
-        itemBuilder: (
-          BuildContext context,
-          int index,
-          int i,
-        ) {
-          return Container(
-            child: Container(
-              margin: EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CockTailsPage(
-                                          drinks: categorie[index].drinks,
-                                          categoria: categorie[index].titolo,
-                                        )));
-                          },
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            width: 1000.0,
-                            imageUrl: categorie[index].img,
-                          )),
-                    ],
-                  )),
-            ),
-          );
-        });
-  }
-
-  _fourthColumnSection() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: Container(
-        color: Colors.amberAccent,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
-      ),
-    );
-  }
-
-  _loadingCircle() {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: Colors.amber,
-        ),
-      ),
-    );
-  }
-
-/*  void showTutorial() {
-    initTargets();
-    tutorialCoachMark = TutorialCoachMark(
-      context,
-      targets: targets,
-      colorShadow: Colors.white.withOpacity(0.5),
-      textStyleSkip: TextStyle(color: Colors.black),
-      textSkip: "SKIP",
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-      onFinish: () {
-        print("finish");
-      },
-      onClickTarget: (target) {
-        print('onClickTarget: $target');
-      },
-      onClickOverlay: (target) {
-        print('onClickOverlay: $target');
-      },
-      onSkip: () {
-        print("skip");
-      },
-    )..show();
-  }
-
-  void initTargets() {
-    targets.clear();
-    _firstPage();
-    _secondPage();
-  }
-
-  _firstPage() {
-    return targets.add(
-      TargetFocus(
-        identify: "keyBottomNavigation1",
-        keyTarget: keyButton1,
-        alignSkip: Alignment.bottomLeft,
-        contents: [_firstTargetContent()],
-      ),
-    );
-  }
-
-  _firstTargetContent() {
-    return TargetContent(
-      align: ContentAlign.top,
-      builder: (context, controller) {
-        return Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height*0.8,
-                color: Colors.amber,
-                child: Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AutoSizeText(
-                    "Ciao! in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
-                    minFontSize: 15,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AutoSizeText(
-                    "Per prima cosa è possibile controllare la raccolta di tutti i drink. Per farlo prima clicca su una categoria a tua scelta e poi sul drink che ti attira di più",
-                    minFontSize: 15,
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                ),
-                  ),
-                   Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: AutoSizeText(
-                  "Inoltre è possibile vedere la ricetta aggionta in giornata",
-                  minFontSize: 15,
-                  style: TextStyle(
-                      color: Colors.black,
-                  ),
-                ),
-                   ),
-                    Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: AutoSizeText(
-                  "Non poteva mancare inoltre il sistema di ricerca dei drink per farlo clicca sulla lente di ingrandimento gialla messa nell'angolo in alto a destra",
-                  minFontSize: 15,
-                  style: TextStyle(
-                      color: Colors.black,
-                  ),
-                ),
-                   ),
-                     Padding(
-                     padding: const EdgeInsets.all(8.0),
-                     child: AutoSizeText(
-                  "Per continuare clicca sul punto esclamativo",
-                  minFontSize: 15,
-                  style: TextStyle(
-                      color: Colors.black,
-                  ),
-                ),
-                   ),
-                ],),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  _secondPage() {
-    return targets.add(
-      TargetFocus(
-        identify: "keyBottomNavigation2",
-        keyTarget: keyButton2,
-        alignSkip: Alignment.bottomLeft,
-        contents: [_secondTargetContent()],
-      ),
-    );
-  }
-
-  _secondTargetContent() {
-    return TargetContent(
-      align: ContentAlign.top,
-      builder: (context, controller) {
-        return Container(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-             Container(
-                height: MediaQuery.of(context).size.height*0.8,
-                color: Colors.amber,
-                child: Column(children: [
-                  AutoSizeText(
-                  "Ciao!, in questa pagina ti spiegherò brevemente quello che è possibile fare all'interno dell'app",
-                  minFontSize: 15,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                    AutoSizeText(
-                  "Per prima cosa è possibile controllare la raccolta di tutti i drink. Per farlo prima clicca su una categoria a tua scelta e poi sul drink che ti attira di più",
-                  minFontSize: 15,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                   AutoSizeText(
-                  "",
-                  minFontSize: 15,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                ],),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  } */
+  
+  
 }

@@ -6,13 +6,13 @@ import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/services/xmldod.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
 class DodScreen extends StatefulWidget {
   @override
   _DodScreenState createState() => _DodScreenState();
 }
-
 
 class _DodScreenState extends State<DodScreen> {
   @override
@@ -38,70 +38,72 @@ class _DodScreenState extends State<DodScreen> {
 
   _bodySection(daydrink) {
     return MyBodyStyle(
-        child: SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          _firstSectionBody(daydrink),
-          Card(
-              color: Theme.of(context).secondaryHeaderColor,
-            elevation: 9,
-            child: Column(
-              children: [
-                _ingredientsTitle(),
-                _spacer(),
-                _ingredientsList(daydrink),
-              ],
+        child: Container(
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            _firstSectionBody(daydrink),
+           
+           Card(
+             elevation: 1,
+             color: Colors.transparent,
+             child:  Padding(
+               padding: const EdgeInsets.only(bottom:8.0),
+               child: Column(
+               children: [
+                 Padding(padding: const EdgeInsets.only(left: 5,top: 5),
+                 child: _difficulty(daydrink), ),
+                
+
+                 Padding(
+                    padding: const EdgeInsets.only(top:10.0,bottom: 15),
+                    child: MyCard(
+                      value: 8.0,
+                      child: Column(
+                        children: [
+                          _ingredientsTitle(),
+                          _buildIngredientsList(daydrink),
+                        ],
+                      ),
+                    ),
+                  ), 
+                   MyCard(
+                      value: 8.0,
+                child: Column(
+                  children: [
+                    _stepsTitle(),
+                    _stepsList(daydrink),
+                  ],
+                ),
             ),
-          ),
-          Card(
-              color: Theme.of(context).secondaryHeaderColor,
-            elevation: 9,
-            child: Column(
-              children: [_stepsTitle(), _spacer(), _stepsList(daydrink)],
-            ),
-          ),
-        ],
+               ],
+           ),
+             ),
+          )
+          ],
+        ),
       ),
     ));
   }
 
   _firstSectionBody(daydrink) {
     return Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width * 0.90,
         height: MediaQuery.of(context).size.height * 0.40,
-        color: Colors.transparent,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            _img(daydrink),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: _difficulty(daydrink),
-            )
-          ],
-        ));
+        child: _img(daydrink));
   }
 
   _img(daydrink) {
-     return ShaderMask(
-        shaderCallback: (rect) {
-          return LinearGradient(
-            begin: Alignment.center,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.transparent],
-          ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-        },
-        blendMode: BlendMode.dstIn,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: CachedNetworkImage(
-            imageUrl: daydrink.img,
-            fit: BoxFit.fitHeight,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.37,
-          ),
-        ));
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: CachedNetworkImage(
+        imageUrl: daydrink.img,
+        fit: BoxFit.cover,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.37,
+      ),
+    );
   }
 
   _title(daydrink) {
@@ -117,14 +119,18 @@ class _DodScreenState extends State<DodScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            AutoSizeText('Difficoltà ' ,style: TextStyle(color: Colors.amber),),
             Icon(
               MdiIcons.chefHat,
-              color: Colors.amber,
+             color: Theme.of(context).secondaryHeaderColor,
+              size: 15,
+            ),
+            AutoSizeText(
+              '  Difficoltà  ',
+              style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
             ),
             Text(
-              ' : ',
-              style: TextStyle(color: Colors.amber),
+              '  :  ',
+              style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
             ),
             Container(
               width: 150,
@@ -134,7 +140,8 @@ class _DodScreenState extends State<DodScreen> {
                   itemBuilder: (context, index) {
                     return Icon(
                       MdiIcons.asterisk,
-                      color: Colors.amber,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      size: 15,
                     );
                   }),
             )
@@ -148,30 +155,35 @@ class _DodScreenState extends State<DodScreen> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
-      child: Center(
-          child: Text(
-        'Ingredienti',
-        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight:FontWeight.w700,)
-      )),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: AutoSizeText('Ingredienti :',
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).secondaryHeaderColor,
+              fontWeight: FontWeight.w700,
+            )),
+      ),
     );
   }
 
-  _ingredientsList(daydrink) {
+  _buildIngredientsList(daydrink) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: listaingredienti(daydrink),
+      children: ingredientList(daydrink),
     );
   }
 
-  List<Widget> listaingredienti(DayDrinks daydrink) {
+  List<Widget> ingredientList(DayDrinks daydrink) {
     return daydrink.ingredienti.map((ingrediente) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          child: Text(
+          child: AutoSizeText(
             ingrediente,
-            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
+            style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
           ),
         ),
       );
@@ -182,11 +194,16 @@ class _DodScreenState extends State<DodScreen> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
-      child: Center(
-          child: Text(
-        'Procedimento',
-        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
-      )),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: AutoSizeText(
+          'Procedimento :',
+          style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).secondaryHeaderColor,
+              fontWeight: FontWeight.w700),
+        ),
+      ),
     );
   }
 
@@ -201,12 +218,11 @@ class _DodScreenState extends State<DodScreen> {
       return Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AutoSizeText(step,
-                  style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
-            ),
+            padding: const EdgeInsets.only(left: 10.0, bottom: 4),
+            child: AutoSizeText(step,
+                style: TextStyle(
+                    color: Theme.of(context).secondaryHeaderColor,
+                    fontSize: 15)),
           ));
     }).toList();
   }
@@ -222,16 +238,5 @@ class _DodScreenState extends State<DodScreen> {
     );
   }
 
-  _spacer() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        color: Colors.amberAccent,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
-      ),
-    );
-  }
-
-
+  
 }

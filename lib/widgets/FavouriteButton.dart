@@ -26,10 +26,13 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                 .where((drink) => drink.drinkid == widget.drinkid)
                 .isNotEmpty;
             return Container(
-                child: MaterialButton(
+             
+                child: RawMaterialButton(
+                  fillColor: Theme.of(context).primaryColor,
+                    shape: CircleBorder(),
                     child: isFavourite
                         ? Icon(
-                            Icons.favorite,
+                            Icons.favorite_rounded,
                             color: Colors.amber,
                           )
                         : Icon(
@@ -43,10 +46,12 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                       isFavourite
                           ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(milliseconds: 700),
-                              content: Text(widget.titolo +'  rimosso dai preferiti')))
+                              content: Text(
+                                  widget.titolo + '  rimosso dai preferiti')))
                           : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(milliseconds: 700),
-                              content: Text(widget.titolo +'  aggiunto ai preferiti')));
+                              content: Text(
+                                  widget.titolo + '  aggiunto ai preferiti')));
                     }));
           } else {
             return Center(child: CircularProgressIndicator());

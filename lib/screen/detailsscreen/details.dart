@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +7,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/widgets/FavouriteButton.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
 class Dettaglio extends StatefulWidget {
@@ -45,78 +44,88 @@ class _DettaglioState extends State<Dettaglio> {
 
   _bodySection(drink) {
     return MyBodyStyle(
-        child: SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        children: [
-          _firstSectionBody(drink),
-          _favSelection(drink),
-          Card(
-            color: Theme.of(context).secondaryHeaderColor,
-            elevation: 9,
-            child: Column(
-              children: [
-                _ingredientsTitle(),
-                _spacer(),
-                _ingredientsList(drink),
-              ],
-            ),
-          ),
-          Card(
-            color: Theme.of(context).secondaryHeaderColor,
-            elevation: 9,
-            child: Column(
-              children: [_stepsTitle(), _spacer(), _stepsList(drink)],
-            ),
-          ),
-        ],
+        child: Container(
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            _firstSectionBody(drink),
+            Card(
+              elevation: 1,
+              color: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, top: 5),
+                      child: _difficulty(drink),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 15),
+                      child: MyCard(
+                         value: 8.0,
+                        child: Column(
+                          children: [
+                            _ingredientsTitle(),
+                            _buildIngredientsList(drink),
+                          ],
+                        ),
+                      ),
+                    ),
+                    MyCard(
+                       value: 8.0,
+                      child: Column(
+                        children: [
+                          _stepsTitle(),
+                          _stepsList(drink),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }
 
-  _firstSectionBody(Drink drink) {
+  _firstSectionBody(daydrink) {
     return Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width * 0.90,
         height: MediaQuery.of(context).size.height * 0.40,
-        color: Colors.transparent,
         child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            _img(drink),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: _difficulty(drink),
+          children: [
+            _img(daydrink),
+            Positioned(
+              child: FavouriteButton(
+                  drinkid: widget.drink.drinkid, titolo: widget.drink.titolo),
+              top: MediaQuery.of(context).size.height * 0.3,
+              left: MediaQuery.of(context).size.width * 0.7,
             )
           ],
         ));
   }
 
-  _img(Drink drink) {
-    return ShaderMask(
-        shaderCallback: (rect) {
-          return LinearGradient(
-            begin: Alignment.center,
-            end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.transparent],
-          ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-        },
-        blendMode: BlendMode.dstIn,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: CachedNetworkImage(
-            imageUrl: widget.drink.img,
-            fit: BoxFit.fitHeight,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.37,
-          ),
-        ));
+  _img(daydrink) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: CachedNetworkImage(
+        imageUrl: daydrink.img,
+        fit: BoxFit.cover,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.37,
+      ),
+    );
   }
 
-  _title(Drink drink) {
-    return MyText(child: drink.titolo);
+  _title(daydrink) {
+    return MyText(child: daydrink.titolo);
   }
 
-  _difficulty(Drink drink) {
+  _difficulty(daydrink) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
@@ -125,24 +134,29 @@ class _DettaglioState extends State<Dettaglio> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Difficoltà :',style: TextStyle(color: Colors.amber),),
             Icon(
               MdiIcons.chefHat,
-              color: Colors.amber,
+              color: Theme.of(context).secondaryHeaderColor,
+              size: 15,
+            ),
+            AutoSizeText(
+              '  Difficoltà  ',
+              style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
             ),
             Text(
-              ' : ',
-              style: TextStyle(color: Colors.amber),
+              '  :  ',
+              style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
             ),
             Container(
               width: 150,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: drink.difficolta,
+                  itemCount: daydrink.difficolta,
                   itemBuilder: (context, index) {
                     return Icon(
                       MdiIcons.asterisk,
-                      color: Colors.amber,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      size: 15,
                     );
                   }),
             )
@@ -156,30 +170,35 @@ class _DettaglioState extends State<Dettaglio> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
-      child: Center(
-          child: Text(
-        'Ingredienti',
-        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
-      )),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: AutoSizeText('Ingredienti :',
+            style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).secondaryHeaderColor,
+              fontWeight: FontWeight.w700,
+            )),
+      ),
     );
   }
 
-  _ingredientsList(Drink drink) {
+  _buildIngredientsList(daydrink) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: listaingredienti(drink),
+      children: ingredientList(daydrink),
     );
   }
 
-  List<Widget> listaingredienti(Drink drink) {
+  List<Widget> ingredientList(Drink drink) {
     return widget.drink.ingredienti.map((ingrediente) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0),
         child: Container(
           width: MediaQuery.of(context).size.width,
-          child: Text(
+          child: AutoSizeText(
             ingrediente,
-            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20),
+            style: TextStyle(
+                color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
           ),
         ),
       );
@@ -190,46 +209,39 @@ class _DettaglioState extends State<Dettaglio> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
-      child: Center(
-          child: Text(
-        'Procedimento',
-        style: TextStyle(fontSize: 20, color: Colors.amber,fontWeight: FontWeight.w700),
-      )),
-    );
-  }
-
-  _stepsList(drink) {
-    return Column(
-      children: listastep(drink),
-    );
-  }
-
-  List<Widget> listastep(drink) {
-    return widget.drink.steps.map((step) {
-      return Container(
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AutoSizeText(step,
-                style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
-          ));
-    }).toList();
-  }
-
-  _spacer() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        color: Colors.amberAccent,
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: AutoSizeText(
+          'Procedimento :',
+          style: TextStyle(
+              fontSize: 20,
+              color: Theme.of(context).secondaryHeaderColor,
+              fontWeight: FontWeight.w700),
+        ),
       ),
     );
   }
 
-  _favSelection(Drink drink) {
-    return FavouriteButton(drinkid: drink.drinkid,titolo: drink.titolo,);
+  _stepsList(daydrink) {
+    return Column(
+      children: listastep(daydrink),
+    );
   }
+
+  List<Widget> listastep(Drink drink) {
+    return widget.drink.steps.map((step) {
+      return Container(
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10.0, bottom: 4),
+            child: AutoSizeText(step,
+                style: TextStyle(
+                    color: Theme.of(context).secondaryHeaderColor,
+                    fontSize: 15)),
+          ));
+    }).toList();
+  }
+
 
 
 }
