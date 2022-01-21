@@ -15,7 +15,7 @@ class Drawers extends StatelessWidget {
       
       child: Container(
         height: MediaQuery.of(context).size.height,
-        color: Theme.of(context).secondaryHeaderColor,
+        color: Theme.of(context).primaryColor,
         child: Column(
           children: [
             Container(
@@ -48,7 +48,7 @@ class Drawers extends StatelessWidget {
             bottom: 12.0,
             left: 16.0,
             child: Text("DrinkIt",
-                style: Theme.of(context).primaryTextTheme.headline5),
+                style: TextStyle(color: Theme.of(context).secondaryHeaderColor)),
           )
         ]));
   }
@@ -56,10 +56,10 @@ class Drawers extends StatelessWidget {
   _homeButton(context) {
     return ListTile(
       title: Text(
-        'home',
+        'home', style: TextStyle(color: Theme.of(context).secondaryHeaderColor)
       ),
       leading: Icon(
-        Icons.home,
+        Icons.home,color: Theme.of(context).secondaryHeaderColor
       ),
       onTap: () {
         Navigator.pop(context);
@@ -74,7 +74,7 @@ class Drawers extends StatelessWidget {
         icon: Icons.contact_phone,
         routeName: EmailSender()),
     DrawerItem(
-        name: 'news', icon: Icons.new_label_sharp, routeName: NewsPage()),
+        name: 'News', icon: Icons.new_label_sharp, routeName: NewsPage()),
   ];
 
   _version(context) {
@@ -85,13 +85,13 @@ class Drawers extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: Container(
           height: MediaQuery.of(context).size.height*0.08,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).secondaryHeaderColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: AutoSizeText('Versione:  0.1',style: TextStyle(color: Colors.white),),
+                child: AutoSizeText('Versione:  0.1',style: TextStyle(color:  Theme.of(context).primaryColor),),
               ),
             
             ],),

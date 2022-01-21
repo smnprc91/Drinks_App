@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
       appBar: _appBar(drinks),
       drawer: Drawers(),
       body: bodyMainContent(categorie, drinks),
+      floatingActionButton: realTimeNotificaion(),
     );
   }
 
@@ -106,13 +107,13 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
-          lezzo()
+    
         ],
       ),
     );
   }
 
-  lezzo() {
+  realTimeNotificaion() {
     return FutureBuilder(
         future: XmlFetchService.fetchNoteXml(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -128,7 +129,12 @@ class _HomePageState extends State<HomePage> {
             }
 
             if (isup == newslist) {
-              return IconButton(
+              return FloatingActionButton(
+                  backgroundColor: Theme.of(context).primaryColor.withRed(30),
+                  child: Icon(
+                    Icons.notifications,
+                    color: Colors.amber,
+                  ),
                   onPressed: () {
                     _savedList(news);
 
@@ -137,16 +143,12 @@ class _HomePageState extends State<HomePage> {
                       isup = 0;
                       showAlertDialog(context, news);
                     });
-                  },
-                  icon: Icon(Icons.notification_add));
+                  });
             } else {
               return Container();
             }
           } else {
-            return Container(
-              color: Colors.white,
-              child: Center(child: CircularProgressIndicator()),
-            );
+            return MyCircularProgressIndicator();
           }
         });
   }
@@ -155,7 +157,6 @@ class _HomePageState extends State<HomePage> {
     int isup = news.note.length + 1;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('list', isup);
- 
   }
 
   List<Widget> buildnote(News news) {
@@ -175,7 +176,7 @@ class _HomePageState extends State<HomePage> {
 
   showAlertDialog(BuildContext context, news) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = RawMaterialButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();

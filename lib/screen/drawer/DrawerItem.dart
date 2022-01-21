@@ -21,10 +21,10 @@ class _DrawerItemState extends State<DrawerItem> {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        widget.name,
+        widget.name,style: TextStyle(color:Theme.of(context).secondaryHeaderColor ),
       ),
       leading: Icon(
-        widget.icon,
+        widget.icon,color: Theme.of(context).secondaryHeaderColor
       ),
       onTap: () {
         Navigator.pop(context);

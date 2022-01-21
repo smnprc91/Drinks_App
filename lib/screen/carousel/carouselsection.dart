@@ -28,19 +28,13 @@ class _CarouselSectionState extends State<CarouselSection> {
       child: Column(
         children: [
           _secondColumnSection(categorie),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
-            child: MyCard(
-                value: 0.0,
-                child: Column(
-                  children: [
-                    _thirdColumnSection(categorie),
-                  ],
-                )),
-          ),
+          MyCard(
+              value: .0,
+              child: Column(
+                children: [
+                  _thirdColumnSection(categorie),
+                ],
+              )),
           _scrollButtonSection()
         ],
       ),
@@ -79,7 +73,7 @@ class _CarouselSectionState extends State<CarouselSection> {
               _controller.previousPage();
             },
             child: Icon(
-              Icons.arrow_left,color: Colors.amber,
+              Icons.arrow_back_rounded,color: Colors.amber,size: 15,
             ),
           ),
         ),
@@ -87,7 +81,7 @@ class _CarouselSectionState extends State<CarouselSection> {
           padding: const EdgeInsets.only(left: 8.0),
           child: ElevatedButton(
             child: Icon(
-              Icons.arrow_right,color: Colors.amber,
+              Icons.arrow_forward_rounded,color: Colors.amber,size: 15,
             ),
                 style: ElevatedButton.styleFrom(
                 primary:  Theme.of(context).primaryColor.withRed(30),
@@ -145,28 +139,24 @@ class _CarouselSectionState extends State<CarouselSection> {
         ) {
           return Container(
             child: Container(
-              margin: EdgeInsets.all(5.0),
+              margin: EdgeInsets.all(10.0),
               child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CockTailsPage(
-                                          drinks: categorie[index].drinks,
-                                          categoria: categorie[index].titolo,
-                                        )));
-                          },
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            width: 1000.0,
-                            imageUrl: categorie[index].img,
-                          )),
-                    ],
-                  )),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CockTailsPage(
+                                      drinks: categorie[index].drinks,
+                                      categoria: categorie[index].titolo,
+                                    )));
+                      },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        width: 1000.0,
+                        imageUrl: categorie[index].img,
+                      ))),
             ),
           );
         });

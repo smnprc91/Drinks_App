@@ -101,6 +101,7 @@ class _DettaglioState extends State<Dettaglio> {
             _img(daydrink),
             Positioned(
               child: FavouriteButton(
+                color: Theme.of(context).primaryColor,
                   drinkid: widget.drink.drinkid, titolo: widget.drink.titolo),
               top: MediaQuery.of(context).size.height * 0.3,
               left: MediaQuery.of(context).size.width * 0.7,

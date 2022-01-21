@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
 
@@ -40,11 +39,14 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
   _img() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: 'https://www.labarbieriadimilano.it/images/18_immagine.jpg',
-        fit: BoxFit.fitHeight,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.37,
+      child: Material(
+        elevation: 5,
+        child: Image.asset(
+          'assets/dod.jpg',
+          fit: BoxFit.fitHeight,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.37,
+        ),
       ),
     );
   }
@@ -67,7 +69,7 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
   _firstBoxDecoration() {
     return BoxDecoration(
         boxShadow: [_firstBoxShadow()],
-        color: Theme.of(context).secondaryHeaderColor,
+        color:  Theme.of(context).primaryColor.withRed(30),
         borderRadius: new BorderRadius.only(
             topLeft: Radius.circular(40.0),
             bottomLeft: Radius.circular(40.0),
@@ -96,7 +98,7 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
     return Icon(
       Icons.thumb_up_off_alt,
       color: Colors.amber,
-      size: 30,
+      size: 25,
     );
   }
 
@@ -104,8 +106,7 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
     return AutoSizeText('Drink del giorno',
         maxLines: 1,
         minFontSize: 20,
-        style: TextStyle(color: Colors.black, fontSize: 15));
+        style: TextStyle(
+            color: Theme.of(context).secondaryHeaderColor, fontSize: 15));
   }
-
- 
 }

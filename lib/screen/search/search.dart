@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
 
@@ -54,10 +56,10 @@ class _SearchState extends State<Search> {
                     borderSide:
                         const BorderSide(color: Colors.blueGrey, width: 2),
                   ),
-                  labelText: "Cerca",
-                  hintText: 'Inserisci il nome',
-                  hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
-                  labelStyle: TextStyle(color: Colors.amber, fontSize: 25)),
+                  labelText: "Tocca qui",
+                  hintText: 'Inserisci il nome del drink',
+                  hintStyle: TextStyle(color: Colors.amber, fontSize: 15),
+                  labelStyle: TextStyle(color: Colors.amber, fontSize: 15)),
             ),
           ),
         ),
@@ -78,16 +80,15 @@ class _SearchState extends State<Search> {
                                         drink: widget.drinks[index],
                                       )));
                   },
-                  child: Card(
-                    color: Theme.of(context).secondaryHeaderColor,
-                      elevation: 19,
+                  child: MyCard(
+                   value: 0,
                       child: ListTile(
                         leading: CircleAvatar(
                             radius: 25,
                             backgroundImage: CachedNetworkImageProvider(
                                 widget.drinks[index].img)),
-                        title: Text(widget.drinks[index].titolo),
-                        trailing: Icon(Icons.arrow_forward_rounded),
+                        title: AutoSizeText(widget.drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor,fontSize: 15),),
+                        trailing: Icon(Icons.arrow_forward_rounded,color:  Theme.of(context).secondaryHeaderColor,),
                       ),
                     ),
                 )

@@ -53,17 +53,19 @@ class _CockTailsPageState extends State<CockTailsPage> {
                               )));
                 },
                 child: Card(
-                  color:  Theme.of(context).secondaryHeaderColor,
-                  elevation: 19,
+                  color:  Theme.of(context).primaryColor,
+                  elevation: 10,
                   child: ListTile(
                     leading: CircleAvatar(
                         radius: 25,
                         backgroundImage:
                             CachedNetworkImageProvider(widget.drinks[index].img)),
-                    title: Text(widget.drinks[index].titolo),
-                    trailing: Icon(Icons.arrow_forward_rounded),
+                    title: Text(widget.drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor ),),
+                    trailing:   CircleAvatar(
+                      backgroundColor: Theme.of(context).primaryColor.withRed(50),
+                      child: Icon(Icons.arrow_right_alt_outlined),)),
                   ),
-                ),
+                
               );
             }),
       ),
