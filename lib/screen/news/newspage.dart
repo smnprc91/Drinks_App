@@ -56,7 +56,7 @@ class _NewsPageState extends State<NewsPage> {
     return news.note.map((note) {
       return Card(
         color: Theme.of(context).secondaryHeaderColor,
-          elevation: 9,
+          elevation: 3,
           child: ListTile(
             title: AutoSizeText(
               note,

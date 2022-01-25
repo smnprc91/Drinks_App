@@ -54,16 +54,14 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 },
                 child: Card(
                   color:  Theme.of(context).primaryColor,
-                  elevation: 10,
+                  elevation: 3,
                   child: ListTile(
                     leading: CircleAvatar(
                         radius: 25,
                         backgroundImage:
                             CachedNetworkImageProvider(widget.drinks[index].img)),
                     title: Text(widget.drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor ),),
-                    trailing:   CircleAvatar(
-                      backgroundColor: Theme.of(context).primaryColor.withRed(50),
-                      child: Icon(Icons.arrow_right_alt_outlined),)),
+                    trailing:    Icon(Icons.arrow_right_alt_outlined,color:Theme.of(context).secondaryHeaderColor ,),),
                   ),
                 
               );

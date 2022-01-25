@@ -16,7 +16,7 @@ class _EmailSenderState extends State<EmailSender> {
   bool isHTML = false;
 
   final _recipientController = TextEditingController(
-    text: 'smnprc91@gmail.com',
+    text: 'drinkit@sidajo.xyz',
   );
 
   final _subjectController = TextEditingController(text: ' ');

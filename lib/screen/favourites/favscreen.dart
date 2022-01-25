@@ -48,18 +48,19 @@ class _FavScreenState extends State<FavScreen> {
                     child: Center(
                       child: Center(
                           child: MyCard(
-                            value: 0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AutoSizeText(
-                                                    'Hey sembra che tu non abbia ancora dei drink preferiti!',
-                                                    style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
-                                                    textAlign: TextAlign.center,
-                                                    maxLines: 3,
-                                                    minFontSize: 17,
-                                                  ),
-                            ),
-                          )),
+                        value: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AutoSizeText(
+                            'Hey sembra che tu non abbia ancora dei drink preferiti!',
+                            style: TextStyle(
+                                color: Theme.of(context).secondaryHeaderColor),
+                            textAlign: TextAlign.center,
+                            maxLines: 3,
+                            minFontSize: 17,
+                          ),
+                        ),
+                      )),
                     ),
                   ),
                 ),
@@ -87,7 +88,6 @@ class _FavScreenState extends State<FavScreen> {
                                             )));
                               },
                               child: MyCard(
-                              
                                 value: 1,
                                 child: ListTile(
                                   leading: CircleAvatar(
@@ -101,9 +101,14 @@ class _FavScreenState extends State<FavScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        AutoSizeText(drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor),),
+                                        AutoSizeText(
+                                          drinks[index].titolo,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .secondaryHeaderColor),
+                                        ),
                                         FavouriteButton(
-                                          color: Theme.of(context).primaryColor.withRed(50),
+                                          color: Theme.of(context).primaryColor,
                                           drinkid: drinks[index].drinkid,
                                           titolo: drinks[index].titolo,
                                         ),

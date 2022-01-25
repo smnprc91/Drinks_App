@@ -107,7 +107,6 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
-    
         ],
       ),
     );
@@ -121,11 +120,17 @@ class _HomePageState extends State<HomePage> {
             News news = snapshot.data;
 
             int newslist = news.note.length;
+            print('newslist');
+            print(newslist);
+            print('isup');
+            print(isup);
 
             if (isup == null) {
-              isup = news.note.length;
+              isup = newslist;
             } else if (isup!.clamp(1, newslist) == isup) {
-              isup = news.note.length;
+              isup = newslist;
+            } else if (isup! > newslist + 1) {
+              isup = newslist;
             }
 
             if (isup == newslist) {
@@ -138,7 +143,6 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     _savedList(news);
 
-                    print(news.note.first);
                     setState(() {
                       isup = 0;
                       showAlertDialog(context, news);
@@ -148,7 +152,7 @@ class _HomePageState extends State<HomePage> {
               return Container();
             }
           } else {
-            return MyCircularProgressIndicator();
+            return Center();
           }
         });
   }
