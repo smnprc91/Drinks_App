@@ -50,7 +50,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
 
       pages: [
         PageViewModel(
-          title: 'Benvenuto in DrinkIt',
+          title: 'Benvenuto su DrinkIt',
           bodyWidget: Container(
       
             child: Column(
@@ -76,7 +76,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'nato per la voglia di imparare.',
+                  'nato dalla voglia di imparare.',
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w700,
