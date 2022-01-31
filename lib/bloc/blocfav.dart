@@ -24,47 +24,42 @@ class Bloc {
 
     _savedDrinks.add(drinkId);
 
-    await prefs.setStringList('drinks', _savedDrinks.map((drink) => drink.toString()).toList());
+    await prefs.setStringList(
+        'drinks', _savedDrinks.map((drink) => drink.toString()).toList());
 
     _favdrink.sink.add(_mapIdsToDrinks());
 
     return true;
   }
 
-Future<bool> removeFavourite(int drinkId) async {
+  Future<bool> removeFavourite(int drinkId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await loadSavedData();
 
     _savedDrinks.remove(drinkId);
 
-    await prefs.setStringList('drinks', _savedDrinks.map((drink) => drink.toString()).toList());
+    await prefs.setStringList(
+        'drinks', _savedDrinks.map((drink) => drink.toString()).toList());
 
     _favdrink.sink.add(_mapIdsToDrinks());
 
     return true;
   }
 
-
-
-  
   List<Drink> _mapIdsToDrinks() {
-    return _savedDrinks.
-        where((id) {
-          return drinks.where((drink) => drink.drinkid == id).isNotEmpty;
-        }).map((id) {
-          return drinks.where((drink) => drink.drinkid == id).first;
-        })
-      .toList();
+    return _savedDrinks.where((id) {
+      return drinks.where((drink) => drink.drinkid == id).isNotEmpty;
+    }).map((id) {
+      return drinks.where((drink) => drink.drinkid == id).first;
+    }).toList();
   }
 
-  Future<Set<int>>loadSavedData() async {
+  Future<Set<int>> loadSavedData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? fetchedDrinks = prefs.getStringList('drinks');
 
     if (fetchedDrinks != null) {
-      _savedDrinks = fetchedDrinks
-          .map((drink) => int.parse(drink))
-          .toSet();
+      _savedDrinks = fetchedDrinks.map((drink) => int.parse(drink)).toSet();
     }
 
     _favdrink.sink.add(_mapIdsToDrinks());

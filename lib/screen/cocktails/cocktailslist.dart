@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
@@ -18,6 +17,9 @@ class CockTailsPage extends StatefulWidget {
 
 class _CockTailsPageState extends State<CockTailsPage> {
   @override
+  
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: false,
@@ -35,7 +37,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
   List<Drink> favdrink = [];
   list(context) {
     return Padding(
-      padding: const EdgeInsets.only(top:30.0),
+      padding: const EdgeInsets.only(top: 30.0),
       child: Container(
         child: ListView.builder(
             padding: EdgeInsets.zero,
@@ -43,6 +45,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             itemCount: widget.drinks.length,
             itemBuilder: (context, index) {
+               lezzo(index);
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -53,17 +56,24 @@ class _CockTailsPageState extends State<CockTailsPage> {
                               )));
                 },
                 child: Card(
-                  color:  Theme.of(context).primaryColor,
+                  color: Theme.of(context).primaryColor,
                   elevation: 3,
                   child: ListTile(
                     leading: CircleAvatar(
                         radius: 25,
-                        backgroundImage:
-                            CachedNetworkImageProvider(widget.drinks[index].img)),
-                    title: Text(widget.drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor ),),
-                    trailing:    Icon(Icons.arrow_right_alt_outlined,color:Theme.of(context).secondaryHeaderColor ,),),
+                        backgroundImage: CachedNetworkImageProvider(
+                            widget.drinks[index].img)),
+                    title: Text(
+                      widget.drinks[index].titolo,
+                      style: TextStyle(
+                          color: Theme.of(context).secondaryHeaderColor),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_right_alt_outlined,
+                      color: Theme.of(context).secondaryHeaderColor,
+                    ),
                   ),
-                
+                ),
               );
             }),
       ),
@@ -72,5 +82,11 @@ class _CockTailsPageState extends State<CockTailsPage> {
 
   _title(categoria) {
     return MyText(child: widget.categoria);
+  }
+
+  lezzo(index) {
+    widget.drinks.forEach((element) {
+      print(widget.drinks[index].titolo);
+    });
   }
 }

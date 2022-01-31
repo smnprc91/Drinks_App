@@ -64,7 +64,7 @@ class _DettaglioState extends State<Dettaglio> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                       child: MyCard(
-                         value: 8.0,
+                        value: 8.0,
                         child: Column(
                           children: [
                             _ingredientsTitle(),
@@ -74,7 +74,7 @@ class _DettaglioState extends State<Dettaglio> {
                       ),
                     ),
                     MyCard(
-                       value: 8.0,
+                      value: 8.0,
                       child: Column(
                         children: [
                           _stepsTitle(),
@@ -101,8 +101,9 @@ class _DettaglioState extends State<Dettaglio> {
             _img(daydrink),
             Positioned(
               child: FavouriteButton(
-                color: Theme.of(context).primaryColor,
-                  drinkid: widget.drink.drinkid, titolo: widget.drink.titolo),
+                  color: Theme.of(context).primaryColor,
+                  drinkid: widget.drink.drinkid,
+                  titolo: widget.drink.titolo),
               top: MediaQuery.of(context).size.height * 0.3,
               left: MediaQuery.of(context).size.width * 0.7,
             )
@@ -242,7 +243,4 @@ class _DettaglioState extends State<Dettaglio> {
           ));
     }).toList();
   }
-
-
-
 }

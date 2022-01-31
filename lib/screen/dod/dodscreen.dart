@@ -44,43 +44,42 @@ class _DodScreenState extends State<DodScreen> {
         child: Column(
           children: [
             _firstSectionBody(daydrink),
-           
-           Card(
-             elevation: 1,
-             color: Colors.transparent,
-             child:  Padding(
-               padding: const EdgeInsets.only(bottom:8.0),
-               child: Column(
-               children: [
-                 Padding(padding: const EdgeInsets.only(left: 5,top: 5),
-                 child: _difficulty(daydrink), ),
-                
-
-                 Padding(
-                    padding: const EdgeInsets.only(top:10.0,bottom: 15),
-                    child: MyCard(
+            Card(
+              elevation: 1,
+              color: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, top: 5),
+                      child: _difficulty(daydrink),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 15),
+                      child: MyCard(
+                        value: 8.0,
+                        child: Column(
+                          children: [
+                            _ingredientsTitle(),
+                            _buildIngredientsList(daydrink),
+                          ],
+                        ),
+                      ),
+                    ),
+                    MyCard(
                       value: 8.0,
                       child: Column(
                         children: [
-                          _ingredientsTitle(),
-                          _buildIngredientsList(daydrink),
+                          _stepsTitle(),
+                          _stepsList(daydrink),
                         ],
                       ),
                     ),
-                  ), 
-                   MyCard(
-                      value: 8.0,
-                child: Column(
-                  children: [
-                    _stepsTitle(),
-                    _stepsList(daydrink),
                   ],
                 ),
-            ),
-               ],
-           ),
-             ),
-          )
+              ),
+            )
           ],
         ),
       ),
@@ -121,7 +120,7 @@ class _DodScreenState extends State<DodScreen> {
           children: [
             Icon(
               MdiIcons.chefHat,
-             color: Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).secondaryHeaderColor,
               size: 15,
             ),
             AutoSizeText(
@@ -237,6 +236,4 @@ class _DodScreenState extends State<DodScreen> {
       ),
     );
   }
-
-  
 }
