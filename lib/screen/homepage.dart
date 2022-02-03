@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Bloc bloc = Bloc();
-  @override
+
   @override
   Widget build(BuildContext context) {
     return _futureBuilder();

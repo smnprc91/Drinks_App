@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/drink.dart';
+import 'package:progdrinks/models/ingrediente.dart';
 import 'package:progdrinks/widgets/FavouriteButton.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
@@ -22,20 +23,21 @@ class Dettaglio extends StatefulWidget {
 }
 
 class _DettaglioState extends State<Dettaglio> {
-  @override
   void initState() {
     Bloc bloc = Bloc();
     bloc.loadSavedData();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _scaffold(widget.drink);
+    return _scaffold(widget.drink, context);
   }
 
+  var lezzo = true;
   List<Drink> favdrink = [];
-  _scaffold(drink) {
+  _scaffold(drink, context) {
     return Scaffold(
         extendBodyBehindAppBar: false,
         appBar: MyAllPagesAppBar(child: _title(drink)),
@@ -69,6 +71,21 @@ class _DettaglioState extends State<Dettaglio> {
                           children: [
                             _ingredientsTitle(),
                             _buildIngredientsList(drink),
+                            //sistema funziona , fare il refactoring del codice e sistemare i button per lo swipe dei valori.
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    lezzo = true;
+                                  });
+                                },
+                                icon: Icon(Icons.ac_unit)),
+                            IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                   lezzo = false;
+                                  });
+                                },
+                                icon: Icon(Icons.ac_unit))
                           ],
                         ),
                       ),
@@ -92,13 +109,13 @@ class _DettaglioState extends State<Dettaglio> {
     ));
   }
 
-  _firstSectionBody(daydrink) {
+  _firstSectionBody(drink) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.90,
         height: MediaQuery.of(context).size.height * 0.40,
         child: Stack(
           children: [
-            _img(daydrink),
+            _img(drink),
             Positioned(
               child: FavouriteButton(
                   color: Theme.of(context).primaryColor,
@@ -111,11 +128,11 @@ class _DettaglioState extends State<Dettaglio> {
         ));
   }
 
-  _img(daydrink) {
+  _img(drink) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: CachedNetworkImage(
-        imageUrl: daydrink.img,
+        imageUrl: drink.img,
         fit: BoxFit.cover,
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.37,
@@ -123,11 +140,11 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _title(daydrink) {
-    return MyText(child: daydrink.titolo);
+  _title(drink) {
+    return MyText(child: drink.titolo);
   }
 
-  _difficulty(daydrink) {
+  _difficulty(drink) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.05,
@@ -153,7 +170,7 @@ class _DettaglioState extends State<Dettaglio> {
               width: 150,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: daydrink.difficolta,
+                  itemCount: drink.difficolta,
                   itemBuilder: (context, index) {
                     return Icon(
                       MdiIcons.asterisk,
@@ -184,10 +201,10 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _buildIngredientsList(daydrink) {
+  _buildIngredientsList(drink) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: ingredientList(daydrink),
+      children: ingredientList(drink),
     );
   }
 
@@ -198,13 +215,23 @@ class _DettaglioState extends State<Dettaglio> {
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: AutoSizeText(
-            ingrediente,
+            ingrediente.nome +
+                ingrediente.ingrid.toString() +
+                cazz(ingrediente),
             style: TextStyle(
                 color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
           ),
         ),
       );
     }).toList();
+  }
+
+  cazz(Ingrediente ingrediente) {
+    if (lezzo == true) {
+      return ingrediente.doseparti;
+    } else {
+      return ingrediente.doseml;
+    }
   }
 
   _stepsTitle() {
@@ -224,9 +251,9 @@ class _DettaglioState extends State<Dettaglio> {
     );
   }
 
-  _stepsList(daydrink) {
+  _stepsList(drink) {
     return Column(
-      children: listastep(daydrink),
+      children: listastep(drink),
     );
   }
 
@@ -244,3 +271,24 @@ class _DettaglioState extends State<Dettaglio> {
     }).toList();
   }
 }
+
+
+
+/*void ini() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dosi = prefs.getInt('list');
+  }
+
+  void ml() async {
+    int dosi = 1;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('list', dosi);
+    print(dosi);
+  }
+
+  void parti() async {
+    int dosi = 0;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('list', dosi);
+    print(dosi);
+  }*/
