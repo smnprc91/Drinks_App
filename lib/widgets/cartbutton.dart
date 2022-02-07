@@ -47,11 +47,11 @@ class _CartButtonState extends State<CartButton> {
                           ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(milliseconds: 700),
                               content: Text(
-                                  widget.nome + '  rimosso dai preferiti')))
+                                  widget.nome + '  rimosso dallo shop')))
                           : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(milliseconds: 700),
                               content: Text(
-                                  widget.nome + '  aggiunto ai preferiti')));
+                                  widget.nome + '  aggiunto allo shop')));
                     }));
           } else {
             return Center(child: CircularProgressIndicator());
