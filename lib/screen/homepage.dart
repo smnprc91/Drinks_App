@@ -1,12 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/ingrediente.dart';
 import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/screen/carousel/carouselsection.dart';
 import 'package:progdrinks/screen/dod/dodsection.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
+import 'package:progdrinks/screen/search/gazz.dart';
 import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
@@ -20,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Bloc bloc = Bloc();
-
+  BlocCart blocCart = BlocCart();
   @override
   Widget build(BuildContext context) {
     return _futureBuilder();
@@ -38,8 +41,13 @@ class _HomePageState extends State<HomePage> {
               .expand((e) => e)
               .toList();
 
-          bloc.drinks = drinks;
+          List<Ingrediente> ingredienti = drinks
+              .map((e) => e.ingredienti)
+              .expand((element) => element)
+              .toList();
 
+          bloc.drinks = drinks;
+          blocCart.ingredienti = ingredienti;
           return _scaffold(drinks, categorie);
         } else {
           return MyCircularProgressIndicator();
@@ -53,7 +61,9 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       appBar: _appBar(drinks),
       drawer: Drawers(),
-      body: bodyMainContent(categorie, drinks),
+      body: bodyMainContent(
+        categorie,
+      ),
       floatingActionButton: MyNotificationSistem(),
     );
   }
@@ -86,7 +96,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  bodyMainContent(List<Categoria> categorie, drinks) {
+  bodyMainContent(
+    List<Categoria> categorie,
+  ) {
     return MyBodyStyle(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -95,6 +107,10 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
+          IconButton(onPressed: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Gazz()));
+          }, icon: Icon(Icons.ac_unit))
         ],
       ),
     );

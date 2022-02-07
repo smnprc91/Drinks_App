@@ -3,12 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/drink.dart';
-import 'package:progdrinks/models/ingrediente.dart';
+import 'package:progdrinks/screen/detailsscreen/ingredientssection.dart';
+import 'package:progdrinks/screen/detailsscreen/stepsection.dart';
 import 'package:progdrinks/widgets/FavouriteButton.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
 class Dettaglio extends StatefulWidget {
@@ -25,7 +26,9 @@ class Dettaglio extends StatefulWidget {
 class _DettaglioState extends State<Dettaglio> {
   void initState() {
     Bloc bloc = Bloc();
+    BlocCart blocCart = BlocCart();
     bloc.loadSavedData();
+    blocCart.loadSavedDataCart();
 
     super.initState();
   }
@@ -35,7 +38,6 @@ class _DettaglioState extends State<Dettaglio> {
     return _scaffold(widget.drink, context);
   }
 
-  var lezzo = true;
   List<Drink> favdrink = [];
   _scaffold(drink, context) {
     return Scaffold(
@@ -63,42 +65,8 @@ class _DettaglioState extends State<Dettaglio> {
                       padding: const EdgeInsets.only(left: 5, top: 5),
                       child: _difficulty(drink),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 15),
-                      child: MyCard(
-                        value: 8.0,
-                        child: Column(
-                          children: [
-                            _ingredientsTitle(),
-                            _buildIngredientsList(drink),
-                            //sistema funziona , fare il refactoring del codice e sistemare i button per lo swipe dei valori.
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    lezzo = true;
-                                  });
-                                },
-                                icon: Icon(Icons.ac_unit)),
-                            IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                   lezzo = false;
-                                  });
-                                },
-                                icon: Icon(Icons.ac_unit))
-                          ],
-                        ),
-                      ),
-                    ),
-                    MyCard(
-                      value: 8.0,
-                      child: Column(
-                        children: [
-                          _stepsTitle(),
-                          _stepsList(drink),
-                        ],
-                      ),
-                    ),
+                    IngredientSection(drink: drink),
+                    StepsSection(drink: drink)
                   ],
                 ),
               ),
@@ -184,111 +152,4 @@ class _DettaglioState extends State<Dettaglio> {
       ),
     );
   }
-
-  _ingredientsTitle() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.05,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AutoSizeText('Ingredienti :',
-            style: TextStyle(
-              fontSize: 20,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.w700,
-            )),
-      ),
-    );
-  }
-
-  _buildIngredientsList(drink) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: ingredientList(drink),
-    );
-  }
-
-  List<Widget> ingredientList(Drink drink) {
-    return widget.drink.ingredienti.map((ingrediente) {
-      return Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: AutoSizeText(
-            ingrediente.nome +
-                ingrediente.ingrid.toString() +
-                cazz(ingrediente),
-            style: TextStyle(
-                color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
-          ),
-        ),
-      );
-    }).toList();
-  }
-
-  cazz(Ingrediente ingrediente) {
-    if (lezzo == true) {
-      return ingrediente.doseparti;
-    } else {
-      return ingrediente.doseml;
-    }
-  }
-
-  _stepsTitle() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.05,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AutoSizeText(
-          'Procedimento :',
-          style: TextStyle(
-              fontSize: 20,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.w700),
-        ),
-      ),
-    );
-  }
-
-  _stepsList(drink) {
-    return Column(
-      children: listastep(drink),
-    );
-  }
-
-  List<Widget> listastep(Drink drink) {
-    return widget.drink.steps.map((step) {
-      return Container(
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10.0, bottom: 4),
-            child: AutoSizeText(step,
-                style: TextStyle(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    fontSize: 15)),
-          ));
-    }).toList();
-  }
 }
-
-
-
-/*void ini() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dosi = prefs.getInt('list');
-  }
-
-  void ml() async {
-    int dosi = 1;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('list', dosi);
-    print(dosi);
-  }
-
-  void parti() async {
-    int dosi = 0;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('list', dosi);
-    print(dosi);
-  }*/

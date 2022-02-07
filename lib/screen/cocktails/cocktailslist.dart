@@ -45,7 +45,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             itemCount: widget.drinks.length,
             itemBuilder: (context, index) {
-               lezzo(index);
+             
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -84,9 +84,5 @@ class _CockTailsPageState extends State<CockTailsPage> {
     return MyText(child: widget.categoria);
   }
 
-  lezzo(index) {
-    widget.drinks.forEach((element) {
-      print(widget.drinks[index].titolo);
-    });
-  }
+ 
 }

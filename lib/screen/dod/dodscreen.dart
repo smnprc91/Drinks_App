@@ -3,10 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:progdrinks/models/drinksofday.dart';
+import 'package:progdrinks/screen/dod/dodingrsection.dart';
+import 'package:progdrinks/screen/dod/dodstepssection.dart';
 import 'package:progdrinks/services/xmldod.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-import 'package:progdrinks/widgets/mycard.dart';
+
 import 'package:progdrinks/widgets/text.dart';
 
 class DodScreen extends StatefulWidget {
@@ -55,27 +57,9 @@ class _DodScreenState extends State<DodScreen> {
                       padding: const EdgeInsets.only(left: 5, top: 5),
                       child: _difficulty(daydrink),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 15),
-                      child: MyCard(
-                        value: 8.0,
-                        child: Column(
-                          children: [
-                            _ingredientsTitle(),
-                            _buildIngredientsList(daydrink),
-                          ],
-                        ),
-                      ),
-                    ),
-                    MyCard(
-                      value: 8.0,
-                      child: Column(
-                        children: [
-                          _stepsTitle(),
-                          _stepsList(daydrink),
-                        ],
-                      ),
-                    ),
+                  
+                 DodIngredientsSection(daydrink: daydrink),
+                 DodStetsSection(daydrink: daydrink)
                   ],
                 ),
               ),
@@ -150,81 +134,7 @@ class _DodScreenState extends State<DodScreen> {
     );
   }
 
-  _ingredientsTitle() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.05,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AutoSizeText('Ingredienti :',
-            style: TextStyle(
-              fontSize: 20,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.w700,
-            )),
-      ),
-    );
-  }
-
-  _buildIngredientsList(daydrink) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: ingredientList(daydrink),
-    );
-  }
-
-  List<Widget> ingredientList(DayDrinks daydrink) {
-    return daydrink.ingredienti.map((ingrediente) {
-      return Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: AutoSizeText(
-            ingrediente,
-            style: TextStyle(
-                color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
-          ),
-        ),
-      );
-    }).toList();
-  }
-
-  _stepsTitle() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.05,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: AutoSizeText(
-          'Procedimento :',
-          style: TextStyle(
-              fontSize: 20,
-              color: Theme.of(context).secondaryHeaderColor,
-              fontWeight: FontWeight.w700),
-        ),
-      ),
-    );
-  }
-
-  _stepsList(daydrink) {
-    return Column(
-      children: listastep(daydrink),
-    );
-  }
-
-  List<Widget> listastep(DayDrinks daydrink) {
-    return daydrink.steps.map((step) {
-      return Container(
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10.0, bottom: 4),
-            child: AutoSizeText(step,
-                style: TextStyle(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    fontSize: 15)),
-          ));
-    }).toList();
-  }
+ 
 
   _loadingCircle() {
     return Container(
