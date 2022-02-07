@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-
+import 'package:progdrinks/widgets/text.dart';
 
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);
-  static const String routeName = 'contacts';
+
 
   @override
   _EmailSenderState createState() => _EmailSenderState();
@@ -16,7 +16,7 @@ class _EmailSenderState extends State<EmailSender> {
   bool isHTML = false;
 
   final _recipientController = TextEditingController(
-    text: 'smnprc91@hmail.com',
+    text: 'drinkit@sidajo.xyz',
   );
 
   final _subjectController = TextEditingController(text: ' ');
@@ -55,12 +55,14 @@ class _EmailSenderState extends State<EmailSender> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-         appBar: MyAllPagesAppBar(),
+        appBar: buildAppBar(),
         body: buildbodystyle());
   }
 
   buildAppBar() {
-    return MyAllPagesAppBar();
+    return MyAllPagesAppBar(
+      child: _title(),
+    );
   }
 
   buildbodystyle() {
@@ -84,36 +86,36 @@ class _EmailSenderState extends State<EmailSender> {
                     'Inviaci il tuo feedback o una tua ricetta compilando questo form',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontSize: 20,
                     )),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
                   controller: _recipientController,
                   decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder:  OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Colors.blueGrey, width: 2),
+                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
                       ),
                       labelText: 'Destinatario',
-                      labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
+                      labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
                   controller: _subjectController,
                   decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
+                      enabledBorder:  OutlineInputBorder(
                         borderSide:
-                            const BorderSide(color: Colors.blueGrey, width: 2),
+                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
                       ),
                       labelText: 'Il tuo nome e cognome',
-                      labelStyle: TextStyle(color: Colors.amber, fontSize: 30)),
+                      labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
                 ),
               ),
               Container(
@@ -121,20 +123,20 @@ class _EmailSenderState extends State<EmailSender> {
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: TextStyle(color:Theme.of(context).secondaryHeaderColor, fontSize: 20),
                     controller: _bodyController,
                     maxLines: null,
                     expands: true,
                     textAlignVertical: TextAlignVertical.top,
                     decoration: InputDecoration(
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Colors.blueGrey, width: 2),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).secondaryHeaderColor, width: 2),
                         ),
-                        labelText: "Dici cosa ne pensi!",
+                        labelText: "Di cosa ne pensi!",
                         hintStyle: TextStyle(color: Colors.amber, fontSize: 20),
                         labelStyle:
-                            TextStyle(color: Colors.amber, fontSize: 30)),
+                            TextStyle(color: Colors.amber, fontSize: 20)),
                   ),
                 ),
               ),
@@ -148,5 +150,9 @@ class _EmailSenderState extends State<EmailSender> {
         ),
       ],
     );
+  }
+
+  _title() {
+    return MyText(child: 'Contatti');
   }
 }

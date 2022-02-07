@@ -10,68 +10,121 @@ class FirstStartingPage extends StatefulWidget {
   @override
   _FirstStartingPageState createState() => _FirstStartingPageState();
 }
-//TODO: bisogna sistemare le schermate di introduzione
+
 class _FirstStartingPageState extends State<FirstStartingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
     _storeOnboardInfo();
-    Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+    );
   }
 
   _storeOnboardInfo() async {
-    print("Shared pref called");
+   
     int isViewed = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('onBoard', isViewed);
-    print(prefs.getInt('onBoard'));
+   
   }
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 19.0);
-
+    const primarycolotr = Color(0xff212529);
     const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-      bodyTextStyle: bodyStyle,
-      descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
+      titleTextStyle: TextStyle(
+          fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.amber),
+      titlePadding: EdgeInsets.only(top: 50),
+      descriptionPadding: EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 16.0),
+      pageColor: primarycolotr,
       imagePadding: EdgeInsets.zero,
     );
 
     return IntroductionScreen(
       key: introKey,
-      globalBackgroundColor: Colors.white,
+      globalBackgroundColor: primarycolotr,
       globalHeader: Align(
         alignment: Alignment.topRight,
       ),
 
       pages: [
         PageViewModel(
-          title: 'pagina 1',
+          title: 'Benvenuto su DrinkIt',
           bodyWidget: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
+      
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.network(
-                    'https://icare-cro.com/blog/wp-content/uploads/2017/07/benvenuto.jpg'),
-                Text('benvenuto')
+                Container(
+                   height: MediaQuery.of(context).size.height * 0.3,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Image.asset('assets/fondo.jpg'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 40.0),
+                  child: Container(),
+                ),
+                Text(
+                  'DrinkIt è un progetto indipendente,',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'nato dalla voglia di imparare.',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'Quindi aiutaci a crescere!',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
+                )
               ],
             ),
           ),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "pagina 2",
+          title: "La responsabilità prima di  tutto.",
           bodyWidget: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.network(
-                    'https://icare-cro.com/blog/wp-content/uploads/2017/07/benvenuto.jpg'),
-                Text('impara e ocndividi')
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: Image.asset('assets/dont.jpg')),
+                Text(
+                  'Metti la sicurezza al primo posto , non rischiare.',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: Text(
+                    'SE GUIDI NON BEVI',
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -84,9 +137,16 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
       skipFlex: 0,
       nextFlex: 0,
       //rtl: true, // Display as right-to-left
-      skip: const Text('Skip'),
-      next: const Icon(Icons.arrow_forward),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+      skip: const Text(
+        'Salta',
+        style: TextStyle(color: primarycolotr),
+      ),
+      next: const Icon(
+        Icons.arrow_forward,
+        color: primarycolotr,
+      ),
+      done: const Text('Finito',
+          style: TextStyle(fontWeight: FontWeight.w600, color: primarycolotr)),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: kIsWeb
@@ -94,14 +154,15 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
           : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
-        color: Color(0xFFBDBDBD),
+        color: primarycolotr,
         activeSize: Size(22.0, 10.0),
+        activeColor: Colors.amber,
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.black87,
+        color:  Color(0xffb4c4c4),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

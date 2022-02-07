@@ -1,15 +1,15 @@
-import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/text.dart';
 
-//TODO bisogna aggiornare la grafica e testare le dimensioni
+
 
 class NewsPage extends StatefulWidget {
-  static const String routeName = 'news';
+
   @override
   _NewsPageState createState() => _NewsPageState();
 }
@@ -24,7 +24,9 @@ class _NewsPageState extends State<NewsPage> {
             News news = snapshot.data;
             return Scaffold(
                 extendBodyBehindAppBar: true,
-                appBar: MyAllPagesAppBar(),
+                appBar: MyAllPagesAppBar(
+                  child: _title(),
+                ),
                 body: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -53,12 +55,18 @@ class _NewsPageState extends State<NewsPage> {
   List<Widget> buildnote(News news) {
     return news.note.map((note) {
       return Card(
-        elevation: 9,
-        child: ListTile(
-
-          title: AutoSizeText(  note, style: TextStyle(fontSize: 30, color: Colors.black),
-        ),
-      ));
+        color: Theme.of(context).secondaryHeaderColor,
+          elevation: 3,
+          child: ListTile(
+            title: AutoSizeText(
+              note,
+              style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
+            ),
+          ));
     }).toList();
+  }
+
+  _title() {
+    return MyText(child: 'News Blog');
   }
 }
