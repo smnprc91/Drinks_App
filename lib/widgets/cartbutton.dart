@@ -41,8 +41,8 @@ class _CartButtonState extends State<CartButton> {
                           ),
                     onPressed: () {
                       isFavourite
-                          ? _favouriteBloc.removeFavourite(widget.ingrid)
-                          : _favouriteBloc.addFavourite(widget.ingrid);
+                          ? _favouriteBloc.removeFavouriteing(widget.ingrid)
+                          : _favouriteBloc.addFavouriteing(widget.ingrid);
                       isFavourite
                           ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               duration: Duration(milliseconds: 700),

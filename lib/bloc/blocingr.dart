@@ -19,28 +19,28 @@ class BlocCart {
   Set<int> _savedIngrs = new Set();
   List<Ingrediente> ingredienti = [];
 
-  Future<bool> addFavourite(int ingrId) async {
+  Future<bool> addFavouriteing(int ingrId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await loadSavedDataCart();
 
     _savedIngrs.add(ingrId);
 
     await prefs.setStringList(
-        'drinks', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
+        'ingredienti', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
 
     _cartingr.sink.add(_mapIdsToIngr());
 
     return true;
   }
 
-  Future<bool> removeFavourite(int ingrId) async {
+  Future<bool> removeFavouriteing(int ingrId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await loadSavedDataCart();
 
     _savedIngrs.remove(ingrId);
 
     await prefs.setStringList(
-        'drinks', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
+        'ingredienti', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
 
     _cartingr.sink.add(_mapIdsToIngr());
 

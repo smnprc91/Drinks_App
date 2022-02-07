@@ -27,7 +27,7 @@ class _CarouselSectionState extends State<CarouselSection> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          _secondColumnSection(categorie),
+          _secondColumnSection(categorie, ),
           MyCard(
               value: .0,
               child: Column(
@@ -48,9 +48,7 @@ class _CarouselSectionState extends State<CarouselSection> {
         alignment: Alignment.centerLeft,
         child: AutoSizeText(
           'Categorie: ' +
-              _caText(
-                categorie,
-              ),
+              widget.categorie[currentImage].titolo,
           style: TextStyle(color: _colText(), fontSize: 15),
           maxLines: 1,
         ),
@@ -96,17 +94,7 @@ class _CarouselSectionState extends State<CarouselSection> {
     );
   }
 
-  _caText(
-    List<Categoria> categorie,
-  ) {
-    if (currentImage == 0) {
-      return categorie[0].titolo;
-    } else if (currentImage == 1) {
-      return categorie[1].titolo;
-    } else {
-      return categorie[2].titolo;
-    }
-  }
+  
 
   _colText() {
     if (currentImage == 0) {

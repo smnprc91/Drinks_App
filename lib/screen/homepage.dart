@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Bloc bloc = Bloc();
-  BlocCart blocCart = BlocCart();
+  BlocCart blocingr = BlocCart();
   @override
   Widget build(BuildContext context) {
     return _futureBuilder();
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               .toList();
 
           bloc.drinks = drinks;
-          blocCart.ingredienti = ingredienti;
+          blocingr.ingredienti = ingredienti;
           return _scaffold(drinks, categorie);
         } else {
           return MyCircularProgressIndicator();
