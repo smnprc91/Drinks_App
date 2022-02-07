@@ -5,8 +5,7 @@ import 'package:xml/xml.dart' as xml;
 import 'dart:async' show Future;
 
 class XmlFetchService {
-  // 'https://app.sorso360.com/xml/app-it.xml';
-  //'https://sidajo.xyz/public_www/lezzo.xml';
+
   static String baseUrl = 'https://sidajo.xyz/bo/';
 
   static Future<List<Categoria>?> fetchCatXml() async {

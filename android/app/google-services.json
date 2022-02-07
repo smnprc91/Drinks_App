@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "429107168007",
-    "project_id": "myapp-f8814",
-    "storage_bucket": "myapp-f8814.appspot.com"
+    "project_number": "298010344869",
+    "project_id": "drink-it-6e711",
+    "storage_bucket": "drink-it-6e711.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:429107168007:android:c9513a121851c09ef27ba2",
+        "mobilesdk_app_id": "1:298010344869:android:889afdd8c66aa44284bc4c",
         "android_client_info": {
-          "package_name": "com.example.progdrinks"
+          "package_name": "com.DrinkIt.name"
         }
       },
       "oauth_client": [
         {
-          "client_id": "429107168007-g9vjr86tts9kma6gm047n5o6cnm1h5fe.apps.googleusercontent.com",
+          "client_id": "298010344869-175bvulogm8mhckcqq8jlsc7cuoqq5qh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAvaDAIVbT6r3LazY9rDyI9adpUpboB_j8"
+          "current_key": "AIzaSyAvpmlL8RWn8k9CHu2Fq4jvpMWBt1gSCXA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "429107168007-g9vjr86tts9kma6gm047n5o6cnm1h5fe.apps.googleusercontent.com",
+              "client_id": "298010344869-175bvulogm8mhckcqq8jlsc7cuoqq5qh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

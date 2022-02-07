@@ -1,3 +1,4 @@
+import 'package:progdrinks/models/ingrediente.dart';
 import 'package:xml/xml.dart' as xml;
 
 class DayDrinks {
@@ -13,7 +14,7 @@ class DayDrinks {
   String titolo;
   int difficolta;
   List<String> tags;
-  List<String> ingredienti;
+  List<Ingrediente> ingredienti;
   List<String> steps;
 
 
@@ -30,11 +31,11 @@ class DayDrinks {
           .findElements('tag')
           .map((tag) => tag.text)
           .toList(),
-      node
+     node
           .findElements('ingredienti')
           .first
           .findElements('ingrediente')
-          .map((ingrediente) => ingrediente.text)
+          .map((ingrediente) => Ingrediente.createFromXml(ingrediente))
           .toList(),
       node
           .findElements('steps')
