@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/ingrediente.dart';
@@ -76,17 +77,22 @@ class _ShoppingState extends State<Shopping> {
                               child: MyCard(
                                 value: 1,
                                 child: ListTile(
+                                  leading:  CircleAvatar(
+                        radius: 25,
+                        backgroundImage: CachedNetworkImageProvider(
+                           ingredienti[index].img)),
                                   title: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(ingredienti[index].nome),
+                                      Text(ingredienti[index].nome,style: TextStyle(color: Theme.of(context).secondaryHeaderColor),),
                                       IconButton(
                                           onPressed: () {
                                             _favouriteBloc
                                                 .removeFavouriteing(ingredienti[index].ingrid);
                                           },
-                                          icon: Icon(Icons.cancel))
+                                          icon: Icon(Icons.remove_shopping_cart,color: Colors.red
+                                          ))
                                     ],
                                   ),
                                 ),
@@ -101,6 +107,6 @@ class _ShoppingState extends State<Shopping> {
   }
 
   _title() {
-    return MyText(child: 'Favoriti');
+    return MyText(child: 'Lista della spesa');
   }
 }

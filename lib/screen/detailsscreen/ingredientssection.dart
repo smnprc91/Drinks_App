@@ -71,8 +71,8 @@ class _IngredientSectionState extends State<IngredientSection> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
-                  ingrediente.nome +
-                      ingrediente.ingrid.toString() +
+                  ingrediente.nome +'    '+
+                     
                       cazz(ingrediente),
                   style: TextStyle(
                       color: Theme.of(context).secondaryHeaderColor,
