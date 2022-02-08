@@ -6,7 +6,7 @@ import 'dart:async' show Future;
 
 class XmlFetchService {
 
-  static String baseUrl = 'https://sidajo.xyz/bo/';
+  static String baseUrl = 'https://sidajo.xyz/xml/';
 
   static Future<List<Categoria>?> fetchCatXml() async {
     var lingua = 'drink-it.xml';

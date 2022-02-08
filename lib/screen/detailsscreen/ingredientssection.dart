@@ -61,7 +61,6 @@ class _IngredientSectionState extends State<IngredientSection> {
 
   List<Widget> ingredientList(Drink drink) {
     return widget.drink.ingredienti.map((ingrediente) {
-
       return Padding(
         padding: const EdgeInsets.only(left: 0.0),
         child: MyCard(
@@ -69,6 +68,7 @@ class _IngredientSectionState extends State<IngredientSection> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
                   ingrediente.nome +
@@ -81,7 +81,7 @@ class _IngredientSectionState extends State<IngredientSection> {
                 CartButton(
                     ingrid: ingrediente.ingrid,
                     nome: ingrediente.nome,
-                    color: Colors.blue)
+                    color: Theme.of(context).primaryColor)
               ],
             ),
           ),

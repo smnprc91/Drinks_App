@@ -9,7 +9,6 @@ import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/screen/carousel/carouselsection.dart';
 import 'package:progdrinks/screen/dod/dodsection.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
-import 'package:progdrinks/screen/search/gazz.dart';
 import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
@@ -107,10 +106,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
-          IconButton(onPressed: (){
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Gazz()));
-          }, icon: Icon(Icons.ac_unit))
+        
         ],
       ),
     );

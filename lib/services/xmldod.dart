@@ -5,7 +5,7 @@ import 'package:progdrinks/models/drinksofday.dart';
 
 class XmlFetchService {
 
-  static String baseUrl = 'https://sidajo.xyz/bo/';
+  static String baseUrl = 'https://sidajo.xyz/xml/';
 
   static Future<DayDrinks?> fetchDrinkdayXml() async {
     var lingua = 'app-it-dow.xml';

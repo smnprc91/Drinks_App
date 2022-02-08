@@ -28,15 +28,18 @@ class _CartButtonState extends State<CartButton> {
             return Container(
              
                 child: RawMaterialButton(
+                  
                   fillColor: widget.color,
                     shape: CircleBorder(),
                     child: isFavourite
-                        ? Icon(
-                            Icons.favorite_rounded,
+                        ? 
+                          Icon(
+                            Icons.remove_shopping_cart,
                             color: Colors.amber,
-                          )
+                          
+                        )
                         : Icon(
-                            Icons.favorite_border,
+                            Icons.add_shopping_cart,
                             color: Colors.amber,
                           ),
                     onPressed: () {

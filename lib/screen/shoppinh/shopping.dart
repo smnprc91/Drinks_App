@@ -6,14 +6,14 @@ import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
-class Gazz extends StatefulWidget {
-  const Gazz({Key? key}) : super(key: key);
+class Shopping extends StatefulWidget {
+  const Shopping({Key? key}) : super(key: key);
 
   @override
-  _GazzState createState() => _GazzState();
+  _ShoppingState createState() => _ShoppingState();
 }
 
-class _GazzState extends State<Gazz> {
+class _ShoppingState extends State<Shopping> {
   BlocCart _favouriteBloc = BlocCart();
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _GazzState extends State<Gazz> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: AutoSizeText(
-                            'Hey sembra che tu non abbia ancora dei drink preferiti!',
+                            'Hey sembra che tu non abbia niente da comprare!',
                             style: TextStyle(
                                 color: Theme.of(context).secondaryHeaderColor),
                             textAlign: TextAlign.center,
@@ -59,7 +59,6 @@ class _GazzState extends State<Gazz> {
                 ),
               );
             } else {
-            
               return Scaffold(
                   extendBodyBehindAppBar: true,
                   appBar: MyAllPagesAppBar(
@@ -81,7 +80,13 @@ class _GazzState extends State<Gazz> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(ingredienti[index].nome)
+                                      Text(ingredienti[index].nome),
+                                      IconButton(
+                                          onPressed: () {
+                                            _favouriteBloc
+                                                .removeFavouriteing(ingredienti[index].ingrid);
+                                          },
+                                          icon: Icon(Icons.cancel))
                                     ],
                                   ),
                                 ),
