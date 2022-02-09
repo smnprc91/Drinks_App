@@ -12,7 +12,7 @@ final DayDrinks daydrink;
 }
 
 class _DodIngredientsSectionState extends State<DodIngredientsSection> {
-    var lezzo = true;
+    var check = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,9 +69,9 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             child: Row(
               children: [
                 AutoSizeText(
-                  ingrediente.nome +
-                      ingrediente.ingrid.toString() +
-                      cazz(ingrediente),
+                  ingrediente.nome + '   ' +
+                     
+                      ingr(ingrediente),
                   style: TextStyle(
                       color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 15),
@@ -85,8 +85,8 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
     }).toList();
   }
 
-  cazz(Ingrediente ingrediente) {
-    if (lezzo == true) {
+  ingr(Ingrediente ingrediente) {
+    if (check == true) {
       return ingrediente.doseparti;
     } else {
       return ingrediente.doseml;
@@ -98,8 +98,8 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
       children: [
         TextButton(
             style: TextButton.styleFrom(
-              backgroundColor: lezzo == true ? Colors.teal : Colors.transparent,
-              primary: lezzo == true
+              backgroundColor: check == true ? Colors.teal : Colors.transparent,
+              primary: check == true
                   ? Colors.amber
                   : Theme.of(context).secondaryHeaderColor,
               shape: RoundedRectangleBorder(
@@ -107,15 +107,15 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             ),
             onPressed: () {
               setState(() {
-                lezzo = true;
+               check = true;
               });
             },
             child: Text('Parti')),
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:
-                  lezzo == false ? Colors.teal : Colors.transparent,
-              primary: lezzo == false
+                  check == false ? Colors.teal : Colors.transparent,
+              primary: check == false
                   ? Colors.amber
                   : Theme.of(context).secondaryHeaderColor,
               shape: RoundedRectangleBorder(
@@ -123,7 +123,7 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             ),
             onPressed: () {
               setState(() {
-                lezzo = false;
+               check = false;
               });
             },
             child: Text('ML')),
