@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocingr.dart';
@@ -98,6 +100,7 @@ class _HomePageState extends State<HomePage> {
   bodyMainContent(
     List<Categoria> categorie,
   ) {
+    
     return MyBodyStyle(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -106,7 +109,6 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
-        
         ],
       ),
     );

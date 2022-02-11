@@ -35,6 +35,7 @@ class _FavScreenState extends State<FavScreen> {
           if (risultatoDelloStream.hasData) {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
 
+
             if (drinks.length == 0) {
               return Scaffold(
                 extendBodyBehindAppBar: true,
@@ -76,6 +77,7 @@ class _FavScreenState extends State<FavScreen> {
                       child: ListView.builder(
                           itemCount: drinks.length,
                           itemBuilder: (context, index) {
+                            drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -89,6 +91,7 @@ class _FavScreenState extends State<FavScreen> {
                                 value: 1,
                                 child: ListTile(
                                   leading: CircleAvatar(
+                                      backgroundColor: Colors.transparent,        
                                       radius: 25,
                                       backgroundImage:
                                           CachedNetworkImageProvider(

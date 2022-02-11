@@ -115,7 +115,7 @@ class _IngredientSectionState extends State<IngredientSection> {
                 check = true;
               });
             },
-            child: Text('Parti')),
+            child: Text('Oz')),
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:

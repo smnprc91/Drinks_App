@@ -4,7 +4,7 @@ import 'package:progdrinks/screen/favourites/favscreen.dart';
 import 'package:progdrinks/screen/drawer/draweritem.dart';
 import 'package:progdrinks/screen/mailform/mailform.dart';
 import 'package:progdrinks/screen/news/newspage.dart';
-import 'package:progdrinks/screen/shoppinh/shopping.dart';
+import 'package:progdrinks/screen/shopping/shopping.dart';
 
 class Drawers extends StatelessWidget {
   Drawers({Key? key}) : super(key: key);

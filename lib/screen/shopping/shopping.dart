@@ -72,12 +72,14 @@ class _ShoppingState extends State<Shopping> {
                       child: ListView.builder(
                           itemCount: ingredienti.length,
                           itemBuilder: (context, index) {
+                             ingredienti.sort((a, b) => a.nome.compareTo(b.nome));
                             return GestureDetector(
                               onTap: () {},
                               child: MyCard(
                                 value: 1,
                                 child: ListTile(
                                   leading:  CircleAvatar(
+                        backgroundColor: Colors.transparent,        
                         radius: 25,
                         backgroundImage: CachedNetworkImageProvider(
                            ingredienti[index].img)),

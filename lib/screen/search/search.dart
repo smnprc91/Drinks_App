@@ -84,6 +84,7 @@ class _SearchState extends State<Search> {
                    value: 0,
                       child: ListTile(
                         leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,        
                             radius: 25,
                             backgroundImage: CachedNetworkImageProvider(
                                 widget.drinks[index].img)),

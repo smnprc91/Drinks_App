@@ -21,6 +21,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
 
   @override
   Widget build(BuildContext context) {
+     
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: MyAllPagesAppBar(
@@ -45,7 +46,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
             itemCount: widget.drinks.length,
             itemBuilder: (context, index) {
-             
+             widget.drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -60,6 +61,7 @@ class _CockTailsPageState extends State<CockTailsPage> {
                   elevation: 3,
                   child: ListTile(
                     leading: CircleAvatar(
+                        backgroundColor: Colors.transparent,        
                         radius: 25,
                         backgroundImage: CachedNetworkImageProvider(
                             widget.drinks[index].img)),

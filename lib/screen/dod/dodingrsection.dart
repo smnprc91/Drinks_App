@@ -110,7 +110,7 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
                check = true;
               });
             },
-            child: Text('Parti')),
+            child: Text('Oz')),
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:
