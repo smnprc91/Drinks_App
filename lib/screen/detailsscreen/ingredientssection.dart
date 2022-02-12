@@ -15,7 +15,7 @@ class IngredientSection extends StatefulWidget {
 
 class _IngredientSectionState extends State<IngredientSection> {
   BlocCart blocCart = BlocCart();
-  var check = true;
+  var check = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,9 +71,7 @@ class _IngredientSectionState extends State<IngredientSection> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
-                  ingrediente.nome +'    '+
-                     
-                      cazz(ingrediente),
+                  ingrediente.nome + ' :   ' + ingr(ingrediente),
                   style: TextStyle(
                       color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 15),
@@ -90,7 +88,7 @@ class _IngredientSectionState extends State<IngredientSection> {
     }).toList();
   }
 
-  cazz(Ingrediente ingrediente) {
+  ingr(Ingrediente ingrediente) {
     if (check == true) {
       return ingrediente.doseparti;
     } else {
@@ -101,21 +99,6 @@ class _IngredientSectionState extends State<IngredientSection> {
   rowBUtton(context) {
     return Row(
       children: [
-        TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: check == true ? Colors.teal : Colors.transparent,
-              primary: check == true
-                  ? Colors.amber
-                  : Theme.of(context).secondaryHeaderColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-            ),
-            onPressed: () {
-              setState(() {
-                check = true;
-              });
-            },
-            child: Text('Oz')),
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:
@@ -132,6 +115,21 @@ class _IngredientSectionState extends State<IngredientSection> {
               });
             },
             child: Text('ML')),
+        TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: check == true ? Colors.teal : Colors.transparent,
+              primary: check == true
+                  ? Colors.amber
+                  : Theme.of(context).secondaryHeaderColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+            ),
+            onPressed: () {
+              setState(() {
+                check = true;
+              });
+            },
+            child: Text('Oz')),
       ],
     );
   }

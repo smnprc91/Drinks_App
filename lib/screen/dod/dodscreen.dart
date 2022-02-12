@@ -138,7 +138,7 @@ class _DodScreenState extends State<DodScreen> {
 
   _loadingCircle() {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       child: Center(
         child: CircularProgressIndicator(
           color: Colors.amber,

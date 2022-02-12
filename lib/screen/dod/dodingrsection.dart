@@ -12,7 +12,7 @@ final DayDrinks daydrink;
 }
 
 class _DodIngredientsSectionState extends State<DodIngredientsSection> {
-    var check = true;
+    var check = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,7 +69,7 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             child: Row(
               children: [
                 AutoSizeText(
-                  ingrediente.nome + '   ' +
+                  ingrediente.nome + ' :   ' +
                      
                       ingr(ingrediente),
                   style: TextStyle(
@@ -96,21 +96,7 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
   rowBUtton(context) {
     return Row(
       children: [
-        TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: check == true ? Colors.teal : Colors.transparent,
-              primary: check == true
-                  ? Colors.amber
-                  : Theme.of(context).secondaryHeaderColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-            ),
-            onPressed: () {
-              setState(() {
-               check = true;
-              });
-            },
-            child: Text('Oz')),
+      
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:
@@ -127,6 +113,21 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
               });
             },
             child: Text('ML')),
+              TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: check == true ? Colors.teal : Colors.transparent,
+              primary: check == true
+                  ? Colors.amber
+                  : Theme.of(context).secondaryHeaderColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+            ),
+            onPressed: () {
+              setState(() {
+               check = true;
+              });
+            },
+            child: Text('Oz')),
       ],
     );
   }
