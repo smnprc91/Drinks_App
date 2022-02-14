@@ -59,7 +59,8 @@ class _HomePageState extends State<HomePage> {
 
   _scaffold(drinks, categorie) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      backgroundColor: Theme.of(context).primaryColor,
+      extendBodyBehindAppBar: false,
       appBar: _appBar(drinks),
       drawer: Drawers(),
       body: bodyMainContent(
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
 
   _appBar(drinks) {
     return AppBar(
-      elevation: 0,
+      elevation: 1,
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(color: Colors.amber),
       actions: [

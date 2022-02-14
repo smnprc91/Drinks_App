@@ -75,16 +75,9 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
+            
                 Text(
-                  'nato dalla voglia di imparare.',
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  'Quindi aiutaci a crescere!',
+                  'Aiutaci a crescere!',
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w700,
@@ -105,15 +98,6 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                 Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     child: Image.asset('assets/dont.jpg')),
-                Text(
-                  'Metti la sicurezza al primo posto , non rischiare.',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: Text(
