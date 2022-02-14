@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,6 @@ class _FavScreenState extends State<FavScreen> {
           if (risultatoDelloStream.hasData) {
             List<Drink> drinks = risultatoDelloStream.data as List<Drink>;
 
-
             if (drinks.length == 0) {
               return Scaffold(
                 extendBodyBehindAppBar: true,
@@ -65,6 +65,72 @@ class _FavScreenState extends State<FavScreen> {
                 ),
               );
             } else {
+              final options = LiveOptions(
+                delay: Duration(milliseconds: 100),
+                showItemInterval: Duration(milliseconds: 100),
+                showItemDuration: Duration(milliseconds: 200),
+                visibleFraction: 0.05,
+                reAnimateOnVisibility: false,
+              );
+              drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
+              Widget buildAnimatedItem(
+                BuildContext context,
+                int index,
+                Animation<double> animation,
+              ) {
+                return FadeTransition(
+                    opacity: Tween<double>(
+                      begin: 0,
+                      end: 1,
+                    ).animate(animation),
+                    child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: Offset(-0.5, 0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        // Paste you Widget
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Dettaglio(
+                                          drink: drinks[index],
+                                        )));
+                          },
+                          child: MyCard(
+                            value: 1,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  radius: 25,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      drinks[index].img)),
+                              title: Padding(
+                                padding: const EdgeInsets.only(left: 0.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AutoSizeText(
+                                      drinks[index].titolo,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .secondaryHeaderColor),
+                                    ),
+                                    FavouriteButton(
+                                      color: Theme.of(context).primaryColor,
+                                      drinkid: drinks[index].drinkid,
+                                      titolo: drinks[index].titolo,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )));
+              }
+
               return Scaffold(
                   extendBodyBehindAppBar: true,
                   appBar: MyAllPagesAppBar(
@@ -74,52 +140,17 @@ class _FavScreenState extends State<FavScreen> {
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       color: Theme.of(context).primaryColor,
-                      child: ListView.builder(
-                          itemCount: drinks.length,
-                          itemBuilder: (context, index) {
-                            drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Dettaglio(
-                                              drink: drinks[index],
-                                            )));
-                              },
-                              child: MyCard(
-                                value: 1,
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                      backgroundColor: Colors.transparent,        
-                                      radius: 25,
-                                      backgroundImage:
-                                          CachedNetworkImageProvider(
-                                              drinks[index].img)),
-                                  title: Padding(
-                                    padding: const EdgeInsets.only(left: 0.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AutoSizeText(
-                                          drinks[index].titolo,
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .secondaryHeaderColor),
-                                        ),
-                                        FavouriteButton(
-                                          color: Theme.of(context).primaryColor,
-                                          drinkid: drinks[index].drinkid,
-                                          titolo: drinks[index].titolo,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          })));
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 30.0),
+                        child: Container(
+                          child: LiveList.options(
+                            options: options,
+                            itemBuilder: buildAnimatedItem,
+                            scrollDirection: Axis.vertical,
+                            itemCount: drinks.length,
+                          ),
+                        ),
+                      )));
             }
           } else {
             return Text('');

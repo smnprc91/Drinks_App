@@ -16,6 +16,7 @@ class IngredientSection extends StatefulWidget {
 class _IngredientSectionState extends State<IngredientSection> {
   BlocCart blocCart = BlocCart();
   var check = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,7 +72,7 @@ class _IngredientSectionState extends State<IngredientSection> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AutoSizeText(
-                  ingrediente.nome + ' :   ' + ingr(ingrediente),
+                  ingrediente.nome + ' :  ' + ingr(ingrediente),
                   style: TextStyle(
                       color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 15),
