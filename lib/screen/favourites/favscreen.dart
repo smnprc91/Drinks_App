@@ -159,6 +159,6 @@ class _FavScreenState extends State<FavScreen> {
   }
 
   _title() {
-    return MyText(child: 'Favoriti');
+    return MyText(child: 'Preferiti');
   }
 }

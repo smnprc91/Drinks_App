@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
   // TODO: implementare nuove categorie
   // TODO: implementare una lista della spesa usando gli ingredienti stessi dei cocktails
   // TODO: sistemare l'appbundle per poter pubblicare su playstore
+  // TODO: aggiungere le reference al db
   
 
 
