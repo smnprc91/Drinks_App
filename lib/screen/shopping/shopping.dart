@@ -131,27 +131,39 @@ class _ShoppingState extends State<Shopping> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                       Container(height: MediaQuery.of(context).size.height*0.1, child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AutoSizeText('Trova il negozio più vicino a te',style: TextStyle(
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: GestureDetector(
+                              onTap: () {
+                                pippo();
+                                _launchURL();
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  AutoSizeText(
+                                    'Trova il negozio più vicino a te',
+                                    style: TextStyle(
                                         color: Theme.of(context)
-                                            .secondaryHeaderColor),),
-                        IconButton(
-                            onPressed: () {
-                              pippo();
-                              _launchURL();
-                            },
-                            
-                            icon: Icon(Icons.map_outlined,color: Colors.amber,)),
-                      ],
-                    ) ,),
-                    Container(height: MediaQuery.of(context).size.height*0.9,child: LiveList.options(
-                      options: options,
-                      itemBuilder: buildAnimatedItem,
-                      scrollDirection: Axis.vertical,
-                      itemCount: ingredienti.length,
-                    ),)
+                                            .secondaryHeaderColor),
+                                  ),
+                                  Icon(
+                                    Icons.map_outlined,
+                                    color: Colors.amber,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.9,
+                            child: LiveList.options(
+                              options: options,
+                              itemBuilder: buildAnimatedItem,
+                              scrollDirection: Axis.vertical,
+                              itemCount: ingredienti.length,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -166,11 +178,14 @@ class _ShoppingState extends State<Shopping> {
   _title() {
     return MyText(child: 'Lista della spesa');
   }
+
   void _launchURL() async {
-    String _url = 'https://www.google.it/maps/search/Alimentari/MY+Location/data=!4m5!2m4!5m2!2e1!10e2!6e6';
+    String _url =
+        'https://www.google.it/maps/search/Alimentari/MY+Location/data=!4m5!2m4!5m2!2e1!10e2!6e6';
 
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
+
   pippo() async {
     Location location = new Location();
 
@@ -196,5 +211,4 @@ class _ShoppingState extends State<Shopping> {
 
     _locationData = await location.getLocation();
   }
-
 }

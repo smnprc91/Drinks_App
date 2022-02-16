@@ -8,7 +8,6 @@ import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
 
-
 class Search extends StatefulWidget {
   Search({required this.drinks});
 
@@ -43,20 +42,21 @@ class _SearchState extends State<Search> {
               left: 10,
               right: 10),
           child: Padding(
-            padding: const EdgeInsets.only(bottom:8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: TextField(
               onChanged: (risultatoricerca) {
                 setState(() {
                   drinkcercato = risultatoricerca.toLowerCase();
                 });
               },
-              style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
+              style: TextStyle(
+                  color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
               decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
                     borderSide:
                         const BorderSide(color: Colors.blueGrey, width: 2),
                   ),
-                  labelText: "Tocca qui",
+                  labelText: "Scrivi qui",
                   hintText: 'Inserisci il nome del drink',
                   hintStyle: TextStyle(color: Colors.amber, fontSize: 15),
                   labelStyle: TextStyle(color: Colors.amber, fontSize: 15)),
@@ -68,31 +68,40 @@ class _SearchState extends State<Search> {
           padding: EdgeInsets.zero,
           itemCount: widget.drinks.length,
           itemBuilder: (context, index) {
+            widget.drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
             return widget.drinks[index].titolo
                     .toLowerCase()
                     .contains(drinkcercato)
                 ? GestureDetector(
-                  onTap: (){
-                     Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Dettaglio(
-                                        drink: widget.drinks[index],
-                                      )));
-                  },
-                  child: MyCard(
-                   value: 0,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Dettaglio(
+                                    drink: widget.drinks[index],
+                                  )));
+                    },
+                    child: MyCard(
+                      value: 0,
                       child: ListTile(
                         leading: CircleAvatar(
-                            backgroundColor: Colors.transparent,        
+                            backgroundColor: Colors.transparent,
                             radius: 25,
                             backgroundImage: CachedNetworkImageProvider(
                                 widget.drinks[index].img)),
-                        title: AutoSizeText(widget.drinks[index].titolo,style: TextStyle(color: Theme.of(context).secondaryHeaderColor,fontSize: 15),),
-                        trailing: Icon(Icons.arrow_forward_rounded,color:  Theme.of(context).secondaryHeaderColor,),
+                        title: AutoSizeText(
+                          widget.drinks[index].titolo,
+                          style: TextStyle(
+                              color: Theme.of(context).secondaryHeaderColor,
+                              fontSize: 15),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_rounded,
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
                       ),
                     ),
-                )
+                  )
                 : Container();
           },
         ))

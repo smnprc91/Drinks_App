@@ -1,10 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/favourites/favscreen.dart';
 import 'package:progdrinks/screen/drawer/draweritem.dart';
 import 'package:progdrinks/screen/mailform/mailform.dart';
 import 'package:progdrinks/screen/news/newspage.dart';
 import 'package:progdrinks/screen/shopping/shopping.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Drawers extends StatelessWidget {
   Drawers({Key? key}) : super(key: key);
@@ -16,18 +16,21 @@ class Drawers extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         color: Theme.of(context).primaryColor,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.7,
+         
+              height: MediaQuery.of(context).size.height * 1,
               child: ListView(
                 children: [
                   _buildDrawerHeader(context),
                   _homeButton(context),
                   ..._drawerItems,
+                  _receButton(context)
                 ],
               ),
             ),
-            _version(context)
+           
           ],
         ),
       ),
@@ -63,6 +66,24 @@ class Drawers extends StatelessWidget {
     );
   }
 
+  _receButton(context) {
+    return ListTile(
+      title: Text('Valuta',
+          style: TextStyle(color: Theme.of(context).secondaryHeaderColor)),
+      leading: Icon(Icons.edit, color: Theme.of(context).secondaryHeaderColor),
+      onTap: () {
+        _launchURL();
+      },
+    );
+  }
+
+  void _launchURL() async {
+    String _url =
+        'https://play.google.com/store/apps/details?id=com.DrinkIt.name';
+
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+
   final List<DrawerItem> _drawerItems = [
     DrawerItem(name: 'Preferiti', icon: Icons.favorite, routeName: FavScreen()),
     DrawerItem(
@@ -77,30 +98,4 @@ class Drawers extends StatelessWidget {
         name: 'News', icon: Icons.new_label_sharp, routeName: NewsPage()),
   ];
 
-  _version(context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.30,
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.08,
-          color: Theme.of(context).secondaryHeaderColor,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AutoSizeText(
-                    'Versione:  0.1',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

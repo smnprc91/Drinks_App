@@ -101,7 +101,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: Text(
-                    'SE GUIDI NON BEVI',
+                    'SE BEVI NON GUIDARE',
                     style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.w700,
