@@ -2,11 +2,13 @@ import 'package:auto_animated/auto_animated.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/ingrediente.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Shopping extends StatefulWidget {
   const Shopping({Key? key}) : super(key: key);
@@ -117,19 +119,41 @@ class _ShoppingState extends State<Shopping> {
               }
 
               return Scaffold(
-                  extendBodyBehindAppBar: true,
+                  extendBodyBehindAppBar: false,
                   appBar: MyAllPagesAppBar(
                     child: _title(),
                   ),
-                  body: Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).primaryColor,
-                    child: LiveList.options(
+                  body: SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      color: Theme.of(context).primaryColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                       Container(height: MediaQuery.of(context).size.height*0.1, child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AutoSizeText('Trova il negozio più vicino a te',style: TextStyle(
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor),),
+                        IconButton(
+                            onPressed: () {
+                              pippo();
+                              _launchURL();
+                            },
+                            
+                            icon: Icon(Icons.map_outlined,color: Colors.amber,)),
+                      ],
+                    ) ,),
+                    Container(height: MediaQuery.of(context).size.height*0.9,child: LiveList.options(
                       options: options,
                       itemBuilder: buildAnimatedItem,
                       scrollDirection: Axis.vertical,
                       itemCount: ingredienti.length,
+                    ),)
+                        ],
+                      ),
                     ),
                   ));
             }
@@ -142,4 +166,35 @@ class _ShoppingState extends State<Shopping> {
   _title() {
     return MyText(child: 'Lista della spesa');
   }
+  void _launchURL() async {
+    String _url = 'https://www.google.it/maps/search/Alimentari/MY+Location/data=!4m5!2m4!5m2!2e1!10e2!6e6';
+
+    if (!await launch(_url)) throw 'Could not launch $_url';
+  }
+  pippo() async {
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    _locationData = await location.getLocation();
+  }
+
 }
