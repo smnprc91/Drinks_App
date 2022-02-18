@@ -48,7 +48,7 @@ class Bloc {
 
   List<Drink> _mapIdsToDrinks() {
     return _savedDrinks.where((id) {
-      return drinks.where((drink) => drink.drinkid== id).isNotEmpty;
+      return drinks.where((drink) => drink.drinkid == id).isNotEmpty;
     }).map((id) {
       return drinks.where((drink) => drink.drinkid == id).first;
     }).toList();

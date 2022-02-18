@@ -4,7 +4,6 @@ import 'dart:async' show Future;
 import 'package:progdrinks/models/drinksofday.dart';
 
 class XmlFetchService {
-
   static String baseUrl = 'https://sidajo.xyz/xml/';
 
   static Future<DayDrinks?> fetchDrinkdayXml() async {

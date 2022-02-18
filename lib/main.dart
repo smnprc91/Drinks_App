@@ -35,12 +35,7 @@ class MyApp extends StatelessWidget {
       return HomePage();
     }
   }
-  // TODO: implementare nuove categorie
-  // TODO: implementare una lista della spesa usando gli ingredienti stessi dei cocktails
-  // TODO: sistemare l'appbundle per poter pubblicare su playstore
-  // TODO: aggiungere le reference al db
-  
-
-
 }
 
+
+// TODO: AGGIUNGERE STORIA E ORIGINE DEI COCKTAILS creare sezione birre e aggiungere il paese

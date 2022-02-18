@@ -3,7 +3,11 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 
 class FavouriteButton extends StatefulWidget {
-  const FavouriteButton({Key? key, required this.drinkid, required this.titolo,required this.color})
+  const FavouriteButton(
+      {Key? key,
+      required this.drinkid,
+      required this.titolo,
+      required this.color})
       : super(key: key);
   final int drinkid;
   final String titolo;
@@ -26,9 +30,8 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                 .where((drink) => drink.drinkid == widget.drinkid)
                 .isNotEmpty;
             return Container(
-             
                 child: RawMaterialButton(
-                  fillColor: widget.color,
+                    fillColor: widget.color,
                     shape: CircleBorder(),
                     child: isFavourite
                         ? Icon(

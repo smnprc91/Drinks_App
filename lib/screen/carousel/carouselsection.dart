@@ -8,7 +8,7 @@ import 'package:progdrinks/widgets/mycard.dart';
 
 class CarouselSection extends StatefulWidget {
   const CarouselSection({Key? key, required this.categorie}) : super(key: key);
-  final List<Categoria>categorie;
+  final List<Categoria> categorie;
   @override
   _CarouselSectionState createState() => _CarouselSectionState();
 }
@@ -27,7 +27,9 @@ class _CarouselSectionState extends State<CarouselSection> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          _secondColumnSection(categorie, ),
+          _secondColumnSection(
+            categorie,
+          ),
           MyCard(
               value: .0,
               child: Column(
@@ -47,8 +49,7 @@ class _CarouselSectionState extends State<CarouselSection> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: AutoSizeText(
-          'Categorie: ' +
-              widget.categorie[currentImage].titolo,
+          'Categorie: ' + widget.categorie[currentImage].titolo,
           style: TextStyle(color: _colText(), fontSize: 15),
           maxLines: 1,
         ),
@@ -63,15 +64,16 @@ class _CarouselSectionState extends State<CarouselSection> {
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary:  Theme.of(context).primaryColor.withRed(30),
-              
-             ),
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).primaryColor.withRed(30),
+            ),
             onPressed: () {
               _controller.previousPage();
             },
             child: Icon(
-              Icons.arrow_back_rounded,color: Colors.amber,size: 15,
+              Icons.arrow_back_rounded,
+              color: Colors.amber,
+              size: 15,
             ),
           ),
         ),
@@ -79,12 +81,13 @@ class _CarouselSectionState extends State<CarouselSection> {
           padding: const EdgeInsets.only(left: 8.0),
           child: ElevatedButton(
             child: Icon(
-              Icons.arrow_forward_rounded,color: Colors.amber,size: 15,
+              Icons.arrow_forward_rounded,
+              color: Colors.amber,
+              size: 15,
             ),
-                style: ElevatedButton.styleFrom(
-                primary:  Theme.of(context).primaryColor.withRed(30),
-              
-             ),
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).primaryColor.withRed(30),
+            ),
             onPressed: () {
               _controller.nextPage();
             },
@@ -93,8 +96,6 @@ class _CarouselSectionState extends State<CarouselSection> {
       ],
     );
   }
-
-  
 
   _colText() {
     if (currentImage == 0) {

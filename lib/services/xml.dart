@@ -5,7 +5,6 @@ import 'package:xml/xml.dart' as xml;
 import 'dart:async' show Future;
 
 class XmlFetchService {
-
   static String baseUrl = 'https://sidajo.xyz/xml/';
 
   static Future<List<Categoria>?> fetchCatXml() async {
@@ -26,11 +25,6 @@ class XmlFetchService {
         .map((categoria) => Categoria.createFromXml(categoria))
         .toList();
   }
-
-
-
-
-
 
   static Future<News?> fetchNoteXml() async {
     var lingua = 'note.xml';

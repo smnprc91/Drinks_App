@@ -57,9 +57,8 @@ class _DodScreenState extends State<DodScreen> {
                       padding: const EdgeInsets.only(left: 5, top: 5),
                       child: _difficulty(daydrink),
                     ),
-                  
-                 DodIngredientsSection(daydrink: daydrink),
-                 DodStetsSection(daydrink: daydrink)
+                    DodIngredientsSection(daydrink: daydrink),
+                    DodStetsSection(daydrink: daydrink)
                   ],
                 ),
               ),
@@ -133,8 +132,6 @@ class _DodScreenState extends State<DodScreen> {
       ),
     );
   }
-
- 
 
   _loadingCircle() {
     return Container(

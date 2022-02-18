@@ -15,7 +15,6 @@ import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/realtimenotification.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -25,10 +24,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
   }
 
- 
   Bloc bloc = Bloc();
   BlocCart blocingr = BlocCart();
   @override
@@ -115,6 +112,7 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
+          
         ],
       ),
     );

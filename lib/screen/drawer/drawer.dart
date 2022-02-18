@@ -19,7 +19,6 @@ class Drawers extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-         
               height: MediaQuery.of(context).size.height * 1,
               child: ListView(
                 children: [
@@ -30,7 +29,6 @@ class Drawers extends StatelessWidget {
                 ],
               ),
             ),
-           
           ],
         ),
       ),
@@ -97,5 +95,4 @@ class Drawers extends StatelessWidget {
     DrawerItem(
         name: 'News', icon: Icons.new_label_sharp, routeName: NewsPage()),
   ];
-
 }

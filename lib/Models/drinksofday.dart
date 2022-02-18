@@ -17,7 +17,6 @@ class DayDrinks {
   List<Ingrediente> ingredienti;
   List<String> steps;
 
-
   static DayDrinks createFromXml(xml.XmlElement node) {
     return DayDrinks(
       node.findElements('img').first.text,
@@ -31,7 +30,7 @@ class DayDrinks {
           .findElements('tag')
           .map((tag) => tag.text)
           .toList(),
-     node
+      node
           .findElements('ingredienti')
           .first
           .findElements('ingrediente')

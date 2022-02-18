@@ -22,11 +22,9 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
   }
 
   _storeOnboardInfo() async {
-   
     int isViewed = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('onBoard', isViewed);
-   
   }
 
   @override
@@ -52,12 +50,11 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
         PageViewModel(
           title: 'Benvenuto su DrinkIt',
           bodyWidget: Container(
-      
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                   height: MediaQuery.of(context).size.height * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 30.0),
                     child: Image.asset('assets/fondo.jpg'),
@@ -75,7 +72,6 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
-            
                 Text(
                   'Aiutaci a crescere!',
                   style: TextStyle(
@@ -146,7 +142,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color:  Color(0xffb4c4c4),
+        color: Color(0xffb4c4c4),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

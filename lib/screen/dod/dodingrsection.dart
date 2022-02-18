@@ -5,14 +5,15 @@ import 'package:progdrinks/models/ingrediente.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 
 class DodIngredientsSection extends StatefulWidget {
-  const DodIngredientsSection({ Key? key ,required this.daydrink }) : super(key: key);
-final DayDrinks daydrink;
+  const DodIngredientsSection({Key? key, required this.daydrink})
+      : super(key: key);
+  final DayDrinks daydrink;
   @override
   _DodIngredientsSectionState createState() => _DodIngredientsSectionState();
 }
 
 class _DodIngredientsSectionState extends State<DodIngredientsSection> {
-    var check = false;
+  var check = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,8 +51,6 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: ingredientList(widget.daydrink),
             ),
-
-        
           ],
         ),
       ),
@@ -69,14 +68,11 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             child: Row(
               children: [
                 AutoSizeText(
-                  ingrediente.nome + ' :   ' +
-                     
-                      ingr(ingrediente),
+                  ingrediente.nome + ' :   ' + ingr(ingrediente),
                   style: TextStyle(
                       color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 15),
                 ),
-              
               ],
             ),
           ),
@@ -96,7 +92,6 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
   rowBUtton(context) {
     return Row(
       children: [
-      
         TextButton(
             style: TextButton.styleFrom(
               backgroundColor:
@@ -109,11 +104,11 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             ),
             onPressed: () {
               setState(() {
-               check = false;
+                check = false;
               });
             },
             child: Text('ML')),
-              TextButton(
+        TextButton(
             style: TextButton.styleFrom(
               backgroundColor: check == true ? Colors.teal : Colors.transparent,
               primary: check == true
@@ -124,11 +119,11 @@ class _DodIngredientsSectionState extends State<DodIngredientsSection> {
             ),
             onPressed: () {
               setState(() {
-               check = true;
+                check = true;
               });
             },
             child: Text('Oz')),
       ],
     );
   }
-  }
+}

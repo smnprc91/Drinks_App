@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class MyBodyStyle extends StatefulWidget {
   const MyBodyStyle({Key? key, required this.child}) : super(key: key);
   final Widget child;
@@ -15,7 +13,8 @@ class _MyBodyStyleState extends State<MyBodyStyle> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-       color: Theme.of(context).primaryColor,
-       child: widget.child,);
+      color: Theme.of(context).primaryColor,
+      child: widget.child,
+    );
   }
 }

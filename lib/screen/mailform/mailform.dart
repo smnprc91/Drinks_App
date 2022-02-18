@@ -7,7 +7,6 @@ import 'package:progdrinks/widgets/text.dart';
 class EmailSender extends StatefulWidget {
   const EmailSender({Key? key}) : super(key: key);
 
-
   @override
   _EmailSenderState createState() => _EmailSenderState();
 }
@@ -93,12 +92,15 @@ class _EmailSenderState extends State<EmailSender> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 15),
+                  style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontSize: 15),
                   controller: _recipientController,
                   decoration: InputDecoration(
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            width: 2),
                       ),
                       labelText: 'Destinatario',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
@@ -107,12 +109,15 @@ class _EmailSenderState extends State<EmailSender> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
-                  style: TextStyle(color: Theme.of(context).secondaryHeaderColor, fontSize: 20),
+                  style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontSize: 20),
                   controller: _subjectController,
                   decoration: InputDecoration(
-                      enabledBorder:  OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme.of(context).secondaryHeaderColor, width: 2),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            width: 2),
                       ),
                       labelText: 'Il tuo nome e cognome',
                       labelStyle: TextStyle(color: Colors.amber, fontSize: 20)),
@@ -123,7 +128,9 @@ class _EmailSenderState extends State<EmailSender> {
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
-                    style: TextStyle(color:Theme.of(context).secondaryHeaderColor, fontSize: 20),
+                    style: TextStyle(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        fontSize: 20),
                     controller: _bodyController,
                     maxLines: null,
                     expands: true,
@@ -131,7 +138,8 @@ class _EmailSenderState extends State<EmailSender> {
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Theme.of(context).secondaryHeaderColor, width: 2),
+                              color: Theme.of(context).secondaryHeaderColor,
+                              width: 2),
                         ),
                         labelText: "Di cosa ne pensi!",
                         hintStyle: TextStyle(color: Colors.amber, fontSize: 20),

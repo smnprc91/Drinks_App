@@ -1,4 +1,3 @@
-
 import 'package:progdrinks/models/ingrediente.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,8 +24,8 @@ class BlocCart {
 
     _savedIngrs.add(ingrId);
 
-    await prefs.setStringList(
-        'ingredienti', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
+    await prefs.setStringList('ingredienti',
+        _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
 
     _cartingr.sink.add(_mapIdsToIngr());
 
@@ -39,8 +38,8 @@ class BlocCart {
 
     _savedIngrs.remove(ingrId);
 
-    await prefs.setStringList(
-        'ingredienti', _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
+    await prefs.setStringList('ingredienti',
+        _savedIngrs.map((ingrediente) => ingrediente.toString()).toList());
 
     _cartingr.sink.add(_mapIdsToIngr());
 
@@ -49,7 +48,9 @@ class BlocCart {
 
   List<Ingrediente> _mapIdsToIngr() {
     return _savedIngrs.where((id) {
-      return ingredienti.where((ingrediente) => ingrediente.ingrid == id).isNotEmpty;
+      return ingredienti
+          .where((ingrediente) => ingrediente.ingrid == id)
+          .isNotEmpty;
     }).map((id) {
       return ingredienti.where((ingrediente) => ingrediente.ingrid == id).first;
     }).toList();
@@ -60,7 +61,9 @@ class BlocCart {
     List<String>? fetchedIngredienti = prefs.getStringList('ingredienti');
 
     if (fetchedIngredienti != null) {
-      _savedIngrs = fetchedIngredienti.map((ingrediente) => int.parse(ingrediente)).toSet();
+      _savedIngrs = fetchedIngredienti
+          .map((ingrediente) => int.parse(ingrediente))
+          .toSet();
     }
 
     _cartingr.sink.add(_mapIdsToIngr());

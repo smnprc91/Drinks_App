@@ -22,7 +22,7 @@ class _IngredientSectionState extends State<IngredientSection> {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0, bottom: 15),
       child: MyCard(
-        value: 8.0,
+        value: .0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

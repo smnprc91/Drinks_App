@@ -23,10 +23,12 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
         );
       },
       child: Container(
+        
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.42,
         color: Colors.transparent,
         child: Stack(
+          
           children: [
             _img(),
             _positioned(),
@@ -37,16 +39,18 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
   }
 
   _img() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: Material(
-        elevation: 5,
-        child: Image.asset(
-          'assets/dod.jpg',
-          fit: BoxFit.fitHeight,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.37,
-        ),
+
+    
+    return Center(
+      child: Container(
+        color: Colors.transparent,
+        width: MediaQuery.of(context).size.width*0.9,
+       
+        child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child:  Image.asset(
+          'assets/dod.jpg',)
+      ),
       ),
     );
   }
@@ -69,7 +73,7 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
   _firstBoxDecoration() {
     return BoxDecoration(
         boxShadow: [_firstBoxShadow()],
-        color:  Theme.of(context).primaryColor.withRed(30),
+        color: Theme.of(context).primaryColor.withRed(30),
         borderRadius: new BorderRadius.only(
             topLeft: Radius.circular(40.0),
             bottomLeft: Radius.circular(40.0),

@@ -105,7 +105,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
             print(newslist);
             print('isup');
             print(isup);
-              //qui esploro tutti i casi in qui il sistema sicuramente si rompe
+            //qui esploro tutti i casi in qui il sistema sicuramente si rompe
 
             if (isup == null) {
               //se isup è null (primo avvio)
@@ -114,7 +114,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
               //quest if serve se un utente non entrando da giorni perde parecchie notifiche e quindi isup < newslist
               isup = newslist;
             } else if (isup! > newslist + 1) {
-              //questa forse è la parte più complicata  
+              //questa forse è la parte più complicata
               /*
               poniamo il caso caso che io perda i dati nell xml , quest if controlla che is up sia maggiore di newslist + 1 .
               il +1 ci serve per creare una situazione id parità ......

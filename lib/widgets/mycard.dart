@@ -16,7 +16,8 @@ class _MyCardState extends State<MyCard> {
     return Card(
       elevation: 3,
       color: Theme.of(context).primaryColor.withRed(30),
-      child: Padding(padding:  EdgeInsets.all(widget.value), child: widget.child),
+      child:
+          Padding(padding: EdgeInsets.all(widget.value), child: widget.child),
     );
   }
 }

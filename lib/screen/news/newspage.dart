@@ -6,10 +6,7 @@ import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/text.dart';
 
-
-
 class NewsPage extends StatefulWidget {
-
   @override
   _NewsPageState createState() => _NewsPageState();
 }
@@ -55,12 +52,13 @@ class _NewsPageState extends State<NewsPage> {
   List<Widget> buildnote(News news) {
     return news.note.map((note) {
       return Card(
-        color: Theme.of(context).secondaryHeaderColor,
+          color: Theme.of(context).secondaryHeaderColor,
           elevation: 3,
           child: ListTile(
             title: AutoSizeText(
               note,
-              style: TextStyle(fontSize: 15, color: Theme.of(context).primaryColor),
+              style: TextStyle(
+                  fontSize: 15, color: Theme.of(context).primaryColor),
             ),
           ));
     }).toList();

@@ -17,8 +17,6 @@ class CockTailsPage extends StatefulWidget {
 }
 
 class _CockTailsPageState extends State<CockTailsPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +35,12 @@ class _CockTailsPageState extends State<CockTailsPage> {
   List<Drink> favdrink = [];
   list(context) {
     final options = LiveOptions(
-    delay: Duration(milliseconds: 100),
-    showItemInterval: Duration(milliseconds: 100),
-    showItemDuration: Duration(milliseconds: 200),
-    visibleFraction: 0.05,
-    reAnimateOnVisibility: false,
-  );
+      delay: Duration(milliseconds: 100),
+      showItemInterval: Duration(milliseconds: 100),
+      showItemDuration: Duration(milliseconds: 200),
+      visibleFraction: 0.05,
+      reAnimateOnVisibility: false,
+    );
     widget.drinks.sort((a, b) => a.titolo.compareTo(b.titolo));
     return Padding(
       padding: const EdgeInsets.only(top: 30.0),
@@ -56,8 +54,6 @@ class _CockTailsPageState extends State<CockTailsPage> {
       ),
     );
   }
-
-
 
   Widget buildAnimatedItem(
     BuildContext context,
@@ -106,7 +102,8 @@ class _CockTailsPageState extends State<CockTailsPage> {
               ),
             )));
   }
-    _title(categoria) {
+
+  _title(categoria) {
     return MyText(child: widget.categoria);
   }
 }

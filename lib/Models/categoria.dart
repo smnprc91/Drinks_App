@@ -2,14 +2,15 @@ import 'drink.dart';
 import 'package:xml/xml.dart' as xml;
 
 class Categoria {
+  String img;
+  String titolo;
+  List<Drink> drinks;
+
   Categoria(
     this.img,
     this.titolo,
     this.drinks,
   );
-  String img;
-  String titolo;
-  List<Drink> drinks;
 
   static Categoria createFromXml(xml.XmlElement document) {
     return Categoria(

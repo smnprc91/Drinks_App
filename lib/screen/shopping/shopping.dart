@@ -191,6 +191,7 @@ class _ShoppingState extends State<Shopping> {
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
+    // ignore: unused_local_variable
     LocationData _locationData;
 
     _serviceEnabled = await location.serviceEnabled();
