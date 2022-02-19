@@ -99,11 +99,15 @@ class _DettaglioState extends State<Dettaglio> {
   _img(drink) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
-      child: CachedNetworkImage(
-        imageUrl: drink.img,
-        fit: BoxFit.cover,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.37,
+      child: Hero(
+        
+        tag: widget.drink.drinkid,
+        child: CachedNetworkImage(
+          imageUrl: drink.img,
+          fit: BoxFit.cover,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.37,
+        ),
       ),
     );
   }

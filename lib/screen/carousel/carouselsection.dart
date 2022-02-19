@@ -37,7 +37,7 @@ class _CarouselSectionState extends State<CarouselSection> {
                   _thirdColumnSection(categorie),
                 ],
               )),
-          _scrollButtonSection()
+      //    _scrollButtonSection()
         ],
       ),
     );
@@ -112,7 +112,7 @@ class _CarouselSectionState extends State<CarouselSection> {
         itemCount: categorie.length,
         carouselController: _controller,
         options: CarouselOptions(
-          autoPlay: false,
+          autoPlay: true,
           aspectRatio: 2.0,
           enlargeCenterPage: true,
           onPageChanged: (index, fn) {

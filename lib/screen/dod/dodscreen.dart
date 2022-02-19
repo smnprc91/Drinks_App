@@ -5,13 +5,13 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/screen/dod/dodingrsection.dart';
 import 'package:progdrinks/screen/dod/dodstepssection.dart';
-import 'package:progdrinks/services/xmldod.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
-
 import 'package:progdrinks/widgets/text.dart';
 
 class DodScreen extends StatefulWidget {
+  DodScreen({required this.daydrink});
+  final DayDrinks daydrink;
   @override
   _DodScreenState createState() => _DodScreenState();
 }
@@ -19,16 +19,7 @@ class DodScreen extends StatefulWidget {
 class _DodScreenState extends State<DodScreen> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: XmlFetchService.fetchDrinkdayXml(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            DayDrinks daydrink = snapshot.data;
-            return _scaffold(daydrink);
-          } else {
-            return _loadingCircle();
-          }
-        });
+    return _scaffold(widget.daydrink);
   }
 
   _scaffold(daydrink) {
@@ -39,34 +30,37 @@ class _DodScreenState extends State<DodScreen> {
   }
 
   _bodySection(daydrink) {
-    return MyBodyStyle(
-        child: Container(
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            _firstSectionBody(daydrink),
-            Card(
-              elevation: 1,
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5, top: 5),
-                      child: _difficulty(daydrink),
-                    ),
-                    DodIngredientsSection(daydrink: daydrink),
-                    DodStetsSection(daydrink: daydrink)
-                  ],
+    return Hero(
+      tag: '1',
+      child: MyBodyStyle(
+          child: Container(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              _firstSectionBody(daydrink),
+              Card(
+                elevation: 1,
+                color: Colors.transparent,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, top: 5),
+                        child: _difficulty(daydrink),
+                      ),
+                      DodIngredientsSection(daydrink: daydrink),
+                      DodStepsSection(daydrink: daydrink)
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 
   _firstSectionBody(daydrink) {
@@ -133,14 +127,5 @@ class _DodScreenState extends State<DodScreen> {
     );
   }
 
-  _loadingCircle() {
-    return Container(
-      color: Theme.of(context).primaryColor,
-      child: Center(
-        child: CircularProgressIndicator(
-          color: Colors.amber,
-        ),
-      ),
-    );
-  }
+
 }

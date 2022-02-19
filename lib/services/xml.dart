@@ -43,4 +43,6 @@ class XmlFetchService {
   }
 
   static fetchDayXml() {}
+
+  static fetchDrinkdayXml() {}
 }

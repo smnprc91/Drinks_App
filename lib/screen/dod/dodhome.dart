@@ -1,34 +1,38 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/screen/dod/dodscreen.dart';
 
-class DrinkOfDaySection extends StatefulWidget {
-  const DrinkOfDaySection({Key? key}) : super(key: key);
+class DodHome extends StatefulWidget {
+  const DodHome({Key? key, required this.daydrink}) : super(key: key);
+  final DayDrinks daydrink;
 
   @override
-  _DrinkOfDaySectionState createState() => _DrinkOfDaySectionState();
+  _DodHomeState createState() => _DodHomeState();
 }
 
-class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
+class _DodHomeState extends State<DodHome> {
   @override
   Widget build(BuildContext context) {
-    return _firstSectionBody();
+    return firstSectionBody();
   }
 
-  _firstSectionBody() {
+  firstSectionBody() {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (BuildContext context) => DodScreen()),
+          MaterialPageRoute(
+              builder: (BuildContext context) => DodScreen(
+                    daydrink: widget.daydrink,
+                  )),
         );
       },
       child: Container(
-        
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.42,
         color: Colors.transparent,
         child: Stack(
-          
           children: [
             _img(),
             _positioned(),
@@ -39,18 +43,22 @@ class _DrinkOfDaySectionState extends State<DrinkOfDaySection> {
   }
 
   _img() {
-
-    
     return Center(
       child: Container(
         color: Colors.transparent,
-        width: MediaQuery.of(context).size.width*0.9,
-       
+        width: MediaQuery.of(context).size.width * 0.9,
         child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child:  Image.asset(
-          'assets/dod.jpg',)
-      ),
+          borderRadius: BorderRadius.circular(20.0),
+          child: Hero(
+            tag: '1',
+            child: CachedNetworkImage(
+              imageUrl: widget.daydrink.img,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.37,
+            ),
+          ),
+        ),
       ),
     );
   }

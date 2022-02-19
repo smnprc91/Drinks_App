@@ -84,11 +84,14 @@ class _CockTailsPageState extends State<CockTailsPage> {
                 color: Theme.of(context).primaryColor,
                 elevation: 3,
                 child: ListTile(
-                  leading: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      radius: 25,
-                      backgroundImage:
-                          CachedNetworkImageProvider(widget.drinks[index].img)),
+                  leading: Hero(
+                    tag: widget.drinks[index].drinkid,
+                    child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 25,
+                        backgroundImage:
+                            CachedNetworkImageProvider(widget.drinks[index].img)),
+                  ),
                   title: Text(
                     widget.drinks[index].titolo,
                     style: TextStyle(

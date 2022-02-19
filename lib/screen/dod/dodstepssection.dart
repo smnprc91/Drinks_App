@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 
-class DodStetsSection extends StatefulWidget {
-  const DodStetsSection({Key? key, required this.daydrink}) : super(key: key);
+class DodStepsSection extends StatefulWidget {
+  const DodStepsSection({Key? key, required this.daydrink}) : super(key: key);
   final DayDrinks daydrink;
   @override
-  _DodStetsSectionState createState() => _DodStetsSectionState();
+  _DodStepsSectionState createState() => _DodStepsSectionState();
 }
 
-class _DodStetsSectionState extends State<DodStetsSection> {
+class _DodStepsSectionState extends State<DodStepsSection> {
   @override
   Widget build(BuildContext context) {
     return MyCard(

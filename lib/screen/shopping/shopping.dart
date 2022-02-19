@@ -123,49 +123,46 @@ class _ShoppingState extends State<Shopping> {
                   appBar: MyAllPagesAppBar(
                     child: _title(),
                   ),
-                  body: SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      color: Theme.of(context).primaryColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            child: GestureDetector(
-                              onTap: () {
-                                pippo();
-                                _launchURL();
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  AutoSizeText(
-                                    'Trova il negozio più vicino a te',
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .secondaryHeaderColor),
-                                  ),
-                                  Icon(
-                                    Icons.map_outlined,
-                                    color: Colors.amber,
-                                  )
-                                ],
-                              ),
+                  body: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    color: Theme.of(context).primaryColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          child: GestureDetector(
+                            onTap: () {
+                              pippo();
+                              _launchURL();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AutoSizeText(
+                                  'Trova il negozio più vicino a te',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor),
+                                ),
+                                Icon(
+                                  Icons.map_outlined,
+                                  color: Colors.amber,
+                                )
+                              ],
                             ),
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.9,
-                            child: LiveList.options(
-                              options: options,
-                              itemBuilder: buildAnimatedItem,
-                              scrollDirection: Axis.vertical,
-                              itemCount: ingredienti.length,
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: LiveList.options(
+                            options: options,
+                            itemBuilder: buildAnimatedItem,
+                            scrollDirection: Axis.vertical,
+                            itemCount: ingredienti.length,
+                          ),
+                        )
+                      ],
                     ),
                   ));
             }

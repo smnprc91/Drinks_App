@@ -4,10 +4,11 @@ import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/models/ingrediente.dart';
 import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/screen/carousel/carouselsection.dart';
-import 'package:progdrinks/screen/dod/dodsection.dart';
+import 'package:progdrinks/screen/dod/dodhome.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
 import 'package:progdrinks/screen/search/search.dart';
 import 'package:progdrinks/services/xml.dart';
@@ -16,6 +17,8 @@ import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/realtimenotification.dart';
 
 class HomePage extends StatefulWidget {
+  HomePage({required this.daydrink});
+  final DayDrinks daydrink;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -108,11 +111,10 @@ class _HomePageState extends State<HomePage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrinkOfDaySection(),
+        DodHome(daydrink: widget.daydrink,),
           CarouselSection(
             categorie: categorie,
           ),
-          
         ],
       ),
     );
