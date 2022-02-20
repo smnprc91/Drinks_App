@@ -4,6 +4,7 @@ import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
+import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/text.dart';
 
 class NewsPage extends StatefulWidget {
@@ -41,10 +42,7 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ))));
           } else {
-            return Container(
-              color: Colors.white,
-              child: Center(child: CircularProgressIndicator()),
-            );
+            return MyCircularProgressIndicator();
           }
         });
   }

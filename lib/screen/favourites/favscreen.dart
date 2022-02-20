@@ -14,8 +14,6 @@ class FavScreen extends StatefulWidget {
   const FavScreen({
     Key? key,
   }) : super(key: key);
-  static const String routeName = 'favourites';
-
   @override
   _FavScreenState createState() => _FavScreenState();
 }

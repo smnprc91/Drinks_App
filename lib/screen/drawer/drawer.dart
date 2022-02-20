@@ -86,7 +86,7 @@ class Drawers extends StatelessWidget {
     DrawerItem(name: 'Preferiti', icon: Icons.favorite, routeName: FavScreen()),
     DrawerItem(
         name: 'Lista spesa',
-        icon: Icons.add_shopping_cart,
+        icon: Icons.shopping_cart,
         routeName: Shopping()),
     DrawerItem(
         name: 'Contattaci',

@@ -15,6 +15,7 @@ import 'package:progdrinks/services/xml.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/realtimenotification.dart';
+import 'package:progdrinks/widgets/text.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({required this.daydrink});
@@ -81,6 +82,8 @@ class _HomePageState extends State<HomePage> {
       elevation: 1,
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(color: Colors.amber),
+      centerTitle: true,
+      title: MyText(child: 'Drink It'),
       actions: [
         _searchButton(drinks),
       ],

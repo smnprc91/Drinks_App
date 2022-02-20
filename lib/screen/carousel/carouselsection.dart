@@ -31,7 +31,7 @@ class _CarouselSectionState extends State<CarouselSection> {
             categorie,
           ),
           MyCard(
-              value: .0,
+              value: 0,
               child: Column(
                 children: [
                   _thirdColumnSection(categorie),
@@ -57,7 +57,7 @@ class _CarouselSectionState extends State<CarouselSection> {
     );
   }
 
-  _scrollButtonSection() {
+  /*_scrollButtonSection() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -95,7 +95,7 @@ class _CarouselSectionState extends State<CarouselSection> {
         ),
       ],
     );
-  }
+  } */
 
   _colText() {
     if (currentImage == 0) {
@@ -109,7 +109,7 @@ class _CarouselSectionState extends State<CarouselSection> {
 
   _thirdColumnSection(categorie) {
     return CarouselSlider.builder(
-        itemCount: categorie.length,
+        itemCount: widget.categorie.length,
         carouselController: _controller,
         options: CarouselOptions(
           autoPlay: true,
@@ -137,14 +137,14 @@ class _CarouselSectionState extends State<CarouselSection> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => CockTailsPage(
-                                      drinks: categorie[index].drinks,
-                                      categoria: categorie[index].titolo,
+                                      drinks: widget.categorie[index].drinks,
+                                      categoria: widget.categorie[index].titolo,
                                     )));
                       },
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
                         width: 1000.0,
-                        imageUrl: categorie[index].img,
+                        imageUrl: widget.categorie[index].img,
                       ))),
             ),
           );
