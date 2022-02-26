@@ -101,10 +101,10 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
             News news = snapshot.data;
 
             int newslist = news.note.length;
-            print('newslist');
+           /* print('newslist');
             print(newslist);
             print('isup');
-            print(isup);
+            print(isup); */
             //qui esploro tutti i casi in qui il sistema sicuramente si rompe
 
             if (isup == null) {
