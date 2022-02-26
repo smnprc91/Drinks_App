@@ -1,12 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
-import 'package:progdrinks/bloc/blocingr.dart';
-import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
+import 'package:progdrinks/bloc/blocingr.dart';
 import 'package:progdrinks/models/categoria.dart';
+import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/models/ingrediente.dart';
-import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/screen/carousel/carouselsection.dart';
 import 'package:progdrinks/screen/dod/dodhome.dart';
 import 'package:progdrinks/screen/drawer/drawer.dart';
@@ -17,9 +16,10 @@ import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/realtimenotification.dart';
 import 'package:progdrinks/widgets/text.dart';
 
+import '../services/xmldod.dart';
+
 class HomePage extends StatefulWidget {
-  HomePage({required this.daydrink});
-  final DayDrinks daydrink;
+ 
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -34,12 +34,12 @@ class _HomePageState extends State<HomePage> {
 
   _futureBuilder() {
     return FutureBuilder(
-         // per  chiamare molti fetch     future: Future.wait([XmlFetchService.fetchCatXml(),XmlFetchService.fetchNoteXml()]),
-      future: XmlFetchService.fetchCatXml(),
-      builder: ((BuildContext context, AsyncSnapshot snapshot) {
+       
+      future:  Future.wait([XmlFetchService.fetchCatXml(),XmlFetchServiceDod.fetchDrinkdayXml()]),
+      builder: ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
-          List<Categoria> categorie = snapshot.data as List<Categoria>;
-
+          List<Categoria> categorie = snapshot.data![0];
+         DayDrinks daydrink = snapshot.data![1];
           List<Drink> drinks = categorie
               .map((Categoria c) => c.drinks)
               .expand((e) => e)
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
           bloc.drinks = drinks;
           blocingr.ingredienti = ingredienti;
-          return _scaffold(drinks, categorie);
+          return _scaffold(drinks, categorie,daydrink);
         } else {
           return MyCircularProgressIndicator();
         }
@@ -60,14 +60,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _scaffold(drinks, categorie) {
+  _scaffold(drinks, categorie, dayDrink) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       extendBodyBehindAppBar: false,
       appBar: _appBar(drinks),
       drawer: Drawers(),
       body: bodyMainContent(
-        categorie,
+        categorie,dayDrink
       ),
       floatingActionButton: MyNotificationSistem(),
     );
@@ -104,15 +104,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   bodyMainContent(
-    List<Categoria> categorie,
+    List<Categoria> categorie,daydrink
   ) {
     return MyBodyStyle(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DodHome(
-            daydrink: widget.daydrink,
-          ),
+        DodHome(
+            daydrink: daydrink,
+          ), 
           CarouselSection(
             categorie: categorie,
           ),
@@ -121,18 +121,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> buildnote(News news) {
-    return news.note.map((note) {
-      return Card(
-          color: Theme.of(context).secondaryHeaderColor,
-          elevation: 9,
-          child: ListTile(
-            title: AutoSizeText(
-              note,
-              style: TextStyle(
-                  fontSize: 15, color: Theme.of(context).primaryColor),
-            ),
-          ));
-    }).toList();
-  }
 }
