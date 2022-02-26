@@ -25,11 +25,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Bloc bloc = Bloc();
   BlocCart blocingr = BlocCart();
   @override
@@ -39,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   _futureBuilder() {
     return FutureBuilder(
+         // per  chiamare molti fetch     future: Future.wait([XmlFetchService.fetchCatXml(),XmlFetchService.fetchNoteXml()]),
       future: XmlFetchService.fetchCatXml(),
       builder: ((BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
@@ -114,7 +110,9 @@ class _HomePageState extends State<HomePage> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-        DodHome(daydrink: widget.daydrink,),
+          DodHome(
+            daydrink: widget.daydrink,
+          ),
           CarouselSection(
             categorie: categorie,
           ),

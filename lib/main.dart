@@ -49,5 +49,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-// TODO: AGGIUNGERE STORIA E ORIGINE DEI COCKTAILS creare sezione birre e aggiungere il paese
