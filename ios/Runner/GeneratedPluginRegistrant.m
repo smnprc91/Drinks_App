@@ -24,6 +24,12 @@
 @import flutter_email_sender;
 #endif
 
+#if __has_include(<flutter_inappwebview/InAppWebViewFlutterPlugin.h>)
+#import <flutter_inappwebview/InAppWebViewFlutterPlugin.h>
+#else
+@import flutter_inappwebview;
+#endif
+
 #if __has_include(<location/LocationPlugin.h>)
 #import <location/LocationPlugin.h>
 #else
@@ -60,6 +66,7 @@
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
   [FlutterEmailSenderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterEmailSenderPlugin"]];
+  [InAppWebViewFlutterPlugin registerWithRegistrar:[registry registrarForPlugin:@"InAppWebViewFlutterPlugin"]];
   [LocationPlugin registerWithRegistrar:[registry registrarForPlugin:@"LocationPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];

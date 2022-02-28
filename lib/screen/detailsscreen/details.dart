@@ -8,6 +8,7 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/ingredientssection.dart';
 import 'package:progdrinks/screen/detailsscreen/stepsection.dart';
 import 'package:progdrinks/widgets/FavouriteButton.dart';
+import 'package:progdrinks/widgets/myVideoPlayer.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/text.dart';
@@ -41,9 +42,10 @@ class _DettaglioState extends State<Dettaglio> {
   List<Drink> favdrink = [];
   _scaffold(drink, context) {
     return Scaffold(
-        extendBodyBehindAppBar: false,
-        appBar: MyAllPagesAppBar(child: _title(drink)),
-        body: _bodySection(drink));
+      extendBodyBehindAppBar: false,
+      appBar: MyAllPagesAppBar(child: _title(drink)),
+      body: _bodySection(drink),
+    );
   }
 
   _bodySection(drink) {
@@ -54,6 +56,7 @@ class _DettaglioState extends State<Dettaglio> {
         child: Column(
           children: [
             _firstSectionBody(drink),
+            _myVideoTutorial(drink),
             Card(
               elevation: 1,
               color: Colors.transparent,
@@ -100,7 +103,6 @@ class _DettaglioState extends State<Dettaglio> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20.0),
       child: Hero(
-        
         tag: widget.drink.drinkid,
         child: CachedNetworkImage(
           imageUrl: drink.img,
@@ -142,7 +144,7 @@ class _DettaglioState extends State<Dettaglio> {
               width: 150,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: drink.difficolta,
+                  itemCount: widget.drink.difficolta,
                   itemBuilder: (context, index) {
                     return Icon(
                       MdiIcons.asterisk,
@@ -155,5 +157,33 @@ class _DettaglioState extends State<Dettaglio> {
         ),
       ),
     );
+  }
+
+  _myVideoTutorial(drink) {
+    if (widget.drink.vid != '.') {
+      return Padding(
+        padding: const EdgeInsets.only(left:80.0,right: 80),
+        child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.teal,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text('Guarda il video',style: TextStyle(color: Colors.amber),), Icon(Icons.play_arrow,color: Colors.amber,)],),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyVideoPlayer(
+                            id: widget.drink.vid,
+                          )));
+            }),
+      );
+    }
+    if (widget.drink.vid == '.') {
+      return Container();
+    }
   }
 }

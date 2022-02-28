@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:progdrinks/bloc/blocfav.dart';
 import 'package:progdrinks/bloc/blocingr.dart';
@@ -15,11 +14,9 @@ import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/mycircular.dart';
 import 'package:progdrinks/widgets/realtimenotification.dart';
 import 'package:progdrinks/widgets/text.dart';
-
 import '../services/xmldod.dart';
 
 class HomePage extends StatefulWidget {
- 
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,6 +24,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Bloc bloc = Bloc();
   BlocCart blocingr = BlocCart();
+
+ 
   @override
   Widget build(BuildContext context) {
     return _futureBuilder();
@@ -34,12 +33,14 @@ class _HomePageState extends State<HomePage> {
 
   _futureBuilder() {
     return FutureBuilder(
-       
-      future:  Future.wait([XmlFetchService.fetchCatXml(),XmlFetchServiceDod.fetchDrinkdayXml()]),
+      future: Future.wait([
+        XmlFetchService.fetchCatXml(),
+        XmlFetchServiceDod.fetchDrinkdayXml()
+      ]),
       builder: ((BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
           List<Categoria> categorie = snapshot.data![0];
-         DayDrinks daydrink = snapshot.data![1];
+          DayDrinks daydrink = snapshot.data![1];
           List<Drink> drinks = categorie
               .map((Categoria c) => c.drinks)
               .expand((e) => e)
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
 
           bloc.drinks = drinks;
           blocingr.ingredienti = ingredienti;
-          return _scaffold(drinks, categorie,daydrink);
+          return _scaffold(drinks, categorie, daydrink);
         } else {
           return MyCircularProgressIndicator();
         }
@@ -66,9 +67,7 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: false,
       appBar: _appBar(drinks),
       drawer: Drawers(),
-      body: bodyMainContent(
-        categorie,dayDrink
-      ),
+      body: bodyMainContent(categorie, dayDrink),
       floatingActionButton: MyNotificationSistem(),
     );
   }
@@ -103,16 +102,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  bodyMainContent(
-    List<Categoria> categorie,daydrink
-  ) {
+  bodyMainContent(List<Categoria> categorie, daydrink) {
     return MyBodyStyle(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-        DodHome(
+          DodHome(
             daydrink: daydrink,
-          ), 
+          ),
           CarouselSection(
             categorie: categorie,
           ),
@@ -120,5 +117,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }
