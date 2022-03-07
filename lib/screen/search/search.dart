@@ -25,8 +25,27 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: false,
-        appBar: MyAllPagesAppBar(
-          child: _title(),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          elevation: 0,
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.amber),
+          title: _title(),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  _showAlertDialog(context);
+                },
+                child: Icon(
+                  Icons.filter_list,
+                  color: Colors.amber,
+                  size: 20,
+                ),
+              ),
+            ),
+          ],
         ),
         body: MyBodyStyle(
           child: buildbodystyle(),
@@ -37,23 +56,6 @@ class _SearchState extends State<Search> {
     return Container(
         child: Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton.icon(
-            label: Text(
-              'Filtri',
-              style: TextStyle(color: Colors.amber),
-            ),
-            icon: Icon(
-              Icons.filter_list,
-              color: Colors.amber,
-              size: 15,
-            ),
-            onPressed: () {
-              _showAlertDialog(context);
-            },
-          ),
-        ),
         Padding(
           padding: EdgeInsets.only(top: 10, left: 10, right: 10),
           child: Padding(
@@ -181,14 +183,16 @@ class _SearchState extends State<Search> {
   }
 
   _showAlertDialog(context) {
-    bool? check1;
-    bool? check2;
+    Color color1;
+    Color color2;
     if (control == true) {
-      check1 = true;
-      check2 = false;
+      color1 = Theme.of(context).secondaryHeaderColor;
+
+      color2 = Colors.transparent;
     } else {
-      check1 = false;
-      check2 = true;
+      color1 = Colors.transparent;
+
+      color2 = Theme.of(context).secondaryHeaderColor;
     }
     showDialog(
         context: context,
@@ -204,41 +208,40 @@ class _SearchState extends State<Search> {
                       borderRadius: BorderRadius.all(
                         Radius.circular(20),
                       )),
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       title(context),
                       GestureDetector(
                         onTap: () {
                           setState(() {
                             control = true;
-                            check1 = true;
-                            check2 = false;
+                            color1 = Colors.amber;
+
+                            color2 = Colors.transparent;
                             Navigator.pop(context);
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: MyCard(
                             value: 0,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: Text(
                                     'Tutti',
-                                    style: TextStyle(color: Colors.amber),
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor),
                                   ),
-                                  Checkbox(
-                                    value: check1,
-                                    onChanged: (bool? value) {},
-                                  )
-                                ],
-                              ),
-                            ),
+                                  trailing: Icon(
+                                    Icons.check,
+                                    color: color1,
+                                  ),
+                                )),
                           ),
                         ),
                       ),
@@ -247,28 +250,28 @@ class _SearchState extends State<Search> {
                           Navigator.pop(context);
                           setState(() {
                             control = false;
-                            check1 = false;
-                            check2 = true;
+
+                            color1 = Colors.transparent;
+
+                            color2 = Colors.amber;
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: MyCard(
                             value: 0,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Solo video',
-                                      style: TextStyle(color: Colors.amber)),
-                                  Checkbox(
-                                    value: check2,
-                                    onChanged: (bool? value) {},
-                                  )
-                                ],
-                              ),
-                            ),
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: Text('Solo video',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .secondaryHeaderColor)),
+                                  trailing: Icon(
+                                    Icons.check,
+                                    color: color2,
+                                  ),
+                                )),
                           ),
                         ),
                       ),
@@ -281,7 +284,7 @@ class _SearchState extends State<Search> {
 
   title(context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(left: 25.0, top: 5),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
