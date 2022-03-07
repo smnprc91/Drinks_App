@@ -128,6 +128,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
 
             if (isup == newslist) {
               return FloatingActionButton(
+                
                   backgroundColor: Theme.of(context).primaryColor.withRed(30),
                   child: Icon(
                     Icons.notifications,
