@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/news.dart';
 import 'package:progdrinks/services/xml.dart';
@@ -89,7 +90,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
 
   void ini() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isup = prefs.getInt('list');
+     isup = prefs.getInt('list');
   }
 
   @override
@@ -101,7 +102,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
             News news = snapshot.data;
 
             int newslist = news.note.length;
-           /* print('newslist');
+            /* print('newslist');
             print(newslist);
             print('isup');
             print(isup); */
@@ -128,7 +129,6 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
 
             if (isup == newslist) {
               return FloatingActionButton(
-                
                   backgroundColor: Theme.of(context).primaryColor.withRed(30),
                   child: Icon(
                     Icons.notifications,
@@ -138,7 +138,8 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
                     _savedList(news);
                     setState(() {
                       isup = 0;
-                      showAlertDialog(context, news);
+                   
+                      wut(context, news);
                     });
                   });
             } else {
@@ -157,32 +158,86 @@ void _savedList(News news) async {
   await prefs.setInt('list', isup);
 }
 
-showAlertDialog(BuildContext context, news) {
-  // Create button
-  Widget okButton = RawMaterialButton(
-    child: Text("OK"),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  );
-
-  // Create AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Hey ci sono novità!"),
-    content: Text(news.note.first),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+wut(context, news) {
+  showGeneralDialog(
+      barrierLabel: "Label",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: Duration(milliseconds: 700),
+      context: context,
+      pageBuilder: (context, anim1, anim2) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: 300,
+            margin: EdgeInsets.only(bottom: 50, left: 12, right: 12),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(40),
+              border: Border.all(
+                color: Colors.teal,
+              ),
+            ),
+            child: SizedBox.expand(
+                child: Material(
+              color: Colors.transparent,
+              child: Column(children: [
+                Expanded(
+                  child: Container(
+                      child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: AutoSizeText(
+                        ' Hey ci sono novità!',
+                        style: TextStyle(color: Colors.amber, fontSize: 20),
+                      ),
+                    ),
+                  )),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AutoSizeText(news.note.first,
+                              style: TextStyle(
+                                  color: Theme.of(context).secondaryHeaderColor,
+                                  fontSize: 20)),
+                        )),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          color: Colors.amber,
+                        )),
+                  ),
+                )
+              ]),
+            )),
+          ),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position:
+              Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+          child: child,
+        );
+      });
 }
+
+
 
 /* isup è lla variabile di controllo che di default è null 
 isup alla fine del ciclo di if e alla pressione del bottone andrà a salvare i dati nelle shared prefference

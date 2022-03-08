@@ -8,10 +8,10 @@ import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/ingredientssection.dart';
 import 'package:progdrinks/screen/detailsscreen/stepsection.dart';
 import 'package:progdrinks/widgets/FavouriteButton.dart';
-import 'package:progdrinks/widgets/myVideoPlayer.dart';
 import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/text.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Dettaglio extends StatefulWidget {
   const Dettaglio({
@@ -36,6 +36,7 @@ class _DettaglioState extends State<Dettaglio> {
 
   @override
   Widget build(BuildContext context) {
+    
     return _scaffold(widget.drink, context);
   }
 
@@ -162,7 +163,7 @@ class _DettaglioState extends State<Dettaglio> {
   _myVideoTutorial(drink) {
     if (widget.drink.vid != '.') {
       return Padding(
-        padding: const EdgeInsets.only(left:80.0,right: 80),
+        padding: const EdgeInsets.only(left: 80.0, right: 80),
         child: TextButton(
             style: TextButton.styleFrom(
               backgroundColor: Colors.teal,
@@ -171,19 +172,69 @@ class _DettaglioState extends State<Dettaglio> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('Guarda il video',style: TextStyle(color: Colors.amber),), Icon(Icons.play_arrow,color: Colors.amber,)],),
+              children: [
+                Text(
+                  'Guarda il video',
+                  style: TextStyle(color: Colors.amber),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.amber,
+                )
+              ],
+            ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MyVideoPlayer(
-                            id: widget.drink.vid,
-                          )));
+              wut(context);
             }),
       );
     }
     if (widget.drink.vid == '.') {
       return Container();
     }
+  }
+
+  wut(
+    context,
+  ) {
+    
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: widget.drink.vid,
+    flags: YoutubePlayerFlags(
+      hideThumbnail: false,
+      disableDragSeek: true,
+      captionLanguage: 'it',
+      autoPlay: true,
+      mute: false,
+    ),
+  );
+    showGeneralDialog(
+        barrierLabel: "Label",
+        barrierDismissible: true,
+        barrierColor: Colors.black.withOpacity(0.8),
+        transitionDuration: Duration(milliseconds: 700),
+        context: context,
+        pageBuilder: (context, anim1, anim2) {
+          return Center(
+            child: RotatedBox(
+              quarterTurns: 3,
+              child: Container(
+                color: Colors.amber,
+               
+                width: MediaQuery.of(context).size.height*0.65,
+                child: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: false,
+                ),
+              ),
+            ),
+          );
+        },
+        transitionBuilder: (context, anim1, anim2, child) {
+          return SlideTransition(
+            position:
+                Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+            child: child,
+          );
+        });
   }
 }

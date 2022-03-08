@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   Bloc bloc = Bloc();
   BlocCart blocingr = BlocCart();
 
- 
   @override
   Widget build(BuildContext context) {
     return _futureBuilder();
@@ -113,8 +112,58 @@ class _HomePageState extends State<HomePage> {
           CarouselSection(
             categorie: categorie,
           ),
+        //  videogallery(),
         ],
       ),
+    );
+  }
+
+  videogallery() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GestureDetector(
+        onTap: () {
+          /**Navigator.push(context,
+              MaterialPageRoute(builder: (context) => VideoGallery())); */
+          wut();
+        },
+        child: Icon(
+          Icons.search_sharp,
+          size: 30,
+          color: Colors.amber,
+        ),
+      ),
+    );
+  }
+
+  wut() {
+    return showGeneralDialog(
+      barrierLabel: "Label",
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: Duration(milliseconds: 700),
+      context: context,
+      pageBuilder: (context, anim1, anim2) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: 300,
+            child: SizedBox.expand(child: FlutterLogo()),
+            margin: EdgeInsets.only(bottom: 50, left: 12, right: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position:
+              Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+          child: child,
+        );
+      },
     );
   }
 }
