@@ -116,8 +116,8 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
             } else if (isup! > newslist + 1) {
               //questa forse è la parte più complicata
               /*
-              poniamo il caso caso che io perda i dati nell xml , quest if controlla che is up sia maggiore di newslist + 1 .
-              il +1 ci serve per creare una situazione id parità ......
+              poniamo il caso caso che io perda i dati nell xml , quest if controlla che isup sia maggiore di newslist + 1 .
+              il +1 ci serve per creare una situazione di parità ......
 
               se abbiamo newslist =5
               e isup =6

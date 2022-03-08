@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:progdrinks/models/drink.dart';
 import 'package:progdrinks/screen/detailsscreen/details.dart';
-import 'package:progdrinks/widgets/myallpagesappbar.dart';
 import 'package:progdrinks/widgets/mybodystyle.dart';
 import 'package:progdrinks/widgets/mycard.dart';
 import 'package:progdrinks/widgets/text.dart';
@@ -32,19 +31,7 @@ class _SearchState extends State<Search> {
           iconTheme: IconThemeData(color: Colors.amber),
           title: _title(),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  _showAlertDialog(context);
-                },
-                child: Icon(
-                  Icons.filter_list,
-                  color: Colors.amber,
-                  size: 20,
-                ),
-              ),
-            ),
+            filterButton(),
           ],
         ),
         body: MyBodyStyle(
@@ -183,17 +170,11 @@ class _SearchState extends State<Search> {
   }
 
   _showAlertDialog(context) {
+    // ignore: unused_local_variable
     Color color1;
+    // ignore: unused_local_variable
     Color color2;
-    if (control == true) {
-      color1 = Theme.of(context).secondaryHeaderColor;
 
-      color2 = Colors.transparent;
-    } else {
-      color1 = Colors.transparent;
-
-      color2 = Theme.of(context).secondaryHeaderColor;
-    }
     showDialog(
         context: context,
         builder: (context) => Center(
@@ -211,7 +192,7 @@ class _SearchState extends State<Search> {
                   height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       title(context),
                       GestureDetector(
@@ -225,7 +206,7 @@ class _SearchState extends State<Search> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(top: 4.0),
                           child: MyCard(
                             value: 0,
                             child: Padding(
@@ -239,7 +220,9 @@ class _SearchState extends State<Search> {
                                   ),
                                   trailing: Icon(
                                     Icons.check,
-                                    color: color1,
+                                    color: control
+                                        ? Theme.of(context).secondaryHeaderColor
+                                        : Colors.transparent,
                                   ),
                                 )),
                           ),
@@ -257,7 +240,7 @@ class _SearchState extends State<Search> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(top: 4.0),
                           child: MyCard(
                             value: 0,
                             child: Padding(
@@ -269,7 +252,10 @@ class _SearchState extends State<Search> {
                                               .secondaryHeaderColor)),
                                   trailing: Icon(
                                     Icons.check,
-                                    color: color2,
+                                    color: control
+                                        ? Colors.transparent
+                                        : Theme.of(context)
+                                            .secondaryHeaderColor,
                                   ),
                                 )),
                           ),
@@ -284,13 +270,38 @@ class _SearchState extends State<Search> {
 
   title(context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25.0, top: 5),
+      padding: const EdgeInsets.only(left: 25.0, top: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
           'Filtra per :',
           style: TextStyle(fontSize: 15, color: Colors.amber),
         ),
+      ),
+    );
+  }
+
+  filterButton() {
+    return GestureDetector(
+      onTap: (() {
+        _showAlertDialog(context);
+      }),
+      child: Row(
+        children: [
+          Center(
+              child: AutoSizeText(
+            'Filtri   ',
+            style: TextStyle(color: Colors.amber),
+          )),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(
+              Icons.filter_list,
+              color: Colors.amber,
+              size: 20,
+            ),
+          ),
+        ],
       ),
     );
   }
