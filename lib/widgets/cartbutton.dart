@@ -28,7 +28,7 @@ class _CartButtonState extends State<CartButton> {
                 .isNotEmpty;
             return Container(
          
-              height: MediaQuery.of(context).size.height*0.03,
+              height: MediaQuery.of(context).size.height*0.05,
                 child: RawMaterialButton(
                   
                     fillColor: widget.color,
