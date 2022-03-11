@@ -129,6 +129,7 @@ class _MyNotificationSistemState extends State<MyNotificationSistem> {
 
             if (isup == newslist) {
               return FloatingActionButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(100)),side: BorderSide(color: Colors.teal, width: 2.0)),
                   backgroundColor: Theme.of(context).primaryColor.withRed(30),
                   child: Icon(
                     Icons.notifications,

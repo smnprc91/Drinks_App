@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:progdrinks/screen/favourites/favscreen.dart';
 import 'package:progdrinks/screen/drawer/draweritem.dart';
+import 'package:progdrinks/screen/info.dart';
 import 'package:progdrinks/screen/mailform/mailform.dart';
 import 'package:progdrinks/screen/news/newspage.dart';
 import 'package:progdrinks/screen/shopping/shopping.dart';
@@ -93,6 +94,10 @@ class Drawers extends StatelessWidget {
         icon: Icons.contact_phone,
         routeName: EmailSender()),
     DrawerItem(
+
         name: 'News', icon: Icons.new_label_sharp, routeName: NewsPage()),
+    DrawerItem(name: 'Info', icon: Icons.info, routeName: Info()),
+  
+  
   ];
 }
