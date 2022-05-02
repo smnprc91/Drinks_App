@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:progdrinks/models/drinksofday.dart';
 import 'package:progdrinks/screen/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstStartingPage extends StatefulWidget {
-  const FirstStartingPage({Key? key, required this.daydrink}) : super(key: key);
-  final DayDrinks daydrink;
+  const FirstStartingPage({Key? key, }) : super(key: key);
+  
 
   @override
   _FirstStartingPageState createState() => _FirstStartingPageState();
@@ -21,7 +20,7 @@ class _FirstStartingPageState extends State<FirstStartingPage> {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (BuildContext context) => HomePage(
-                daydrink: widget.daydrink,
+              
               )),
     );
   }
